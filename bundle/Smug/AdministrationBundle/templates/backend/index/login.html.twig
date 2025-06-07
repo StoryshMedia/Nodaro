@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+		{% block head %}
+			{{ include('@SmugAdministration/backend/base/head.html.twig') }}
+		{% endblock %}
+    </head>
+
+    <body class="bg-dark">
+        <noscript class="noscript-main">
+			<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+				<div class="flex">
+					<div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                        <div>
+                            <p class="font-bold">Achtung</p>
+                            <p class="text-sm">Storysh kann nur richtig genutzt werden, wenn Du JavaScript in Deinem Browser aktiviert hast.</p>
+                        </div>
+                    </div>
+                </div>
+            </noscript>
+            <div class="main-section antialiased relative font-nunito text-sm font-normal">
+                <div class="flex h-screen">
+                    <!-- Left Pane -->
+                    <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+                        <div class="w-full h-full bg-cover" style="background-image: url('{{data.image}}');">
+                        
+                        </div>
+                    </div>
+                    <!-- Right Pane -->
+                    <div class="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
+                        <div id="administration-login"></div>
+                        {{ encore_entry_script_tags('administrationLogin') }}
+                    </div>
+                </div>
+            </div>
+		</div>
+    </body>
+</html>

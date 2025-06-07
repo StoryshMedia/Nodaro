@@ -1,0 +1,25 @@
+{
+    "apps": {
+        "label": "APPS",
+        "zone": "apps",
+        "key": "apps",
+        "parent": "",
+        "icon": "IconMenuApps",
+        "path": "",
+        "position": 0,
+        "type": 0,
+        "children": []
+    },
+    "settings": {
+        "label": "SETTINGS",
+        "zone": "settings",
+        "key": "settings",
+        "parent": "",
+        "icon": "IconSettings",
+        "path": "",
+        "position": 1,
+        "type": 0,
+        "children": []
+    }
+}
+  

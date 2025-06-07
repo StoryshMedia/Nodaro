@@ -1,0 +1,57 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    container.dumper.inline_factories: true
+    locale: 'de'
+    timezone: 'Europe/Berlin'
+    DATABASE_HOST: 89.22.121.109
+    DATABASE_PORT: 3306
+    DATABASE_NAME: 
+    DATABASE_USER: 
+    DATABASE_PASSWORD: 
+    #app_locales: de|en
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $templateDirectory:  '%kernel.project_dir%/templates/'
+            #$locales: '%app_locales%'
+            #$defaultLocale: '%locale%'
+    smug.coookie_authenticator:
+        class: Smug\Core\Security\JwtCookieAuthenticator
+        parent: lexik_jwt_authentication.security.jwt_authenticator
+    security.token_storage:
+        class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+        public: true
+    webpack_encore.tag_renderer:
+        class: Symfony\WebpackEncoreBundle\Asset\TagRenderer
+        public: true
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Smug\Core\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Smug\Core\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+    Smug\Core\Twig\:
+        resource: '../src/Twig'
+        tags: ['controller.service_arguments']
+    Smug\Core\Command\:
+        resource: '../src/Command'
+        tags: ['controller.service_arguments']
+    Smug\Core\Routing\RouteLoader:
+        tags: [routing.loader]
+
+    Doctrine\Persistence\ObjectManager: '@doctrine.orm.default_entity_manager'
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

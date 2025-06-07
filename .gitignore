@@ -1,0 +1,23 @@
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+/public/build
+/public/_uploads
+/public/bundles/*
+/public/site/*
+bundle/Smug/PublicationBundle/src/Command/Vlb/data/*
+bundle/Smug/FrontendBundle/src/Command/Base/sitemap/*
+/public/Resources/Data/*
+package-lock.json
+./shell/*
+/shell/*
+/var/*
+/vendor/*
+
+./yarn.lock
+./composer.lock
+composer.lock
+./yarn-error.log

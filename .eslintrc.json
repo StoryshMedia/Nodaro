@@ -1,0 +1,42 @@
+{
+  "plugins": [
+      "vue"
+  ],
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "parser": "babel-eslint"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/recommended"
+  ],
+  "globals": {
+    "_": true
+  },
+  "rules": {
+        "vue/no-v-html": "off",
+        "vue/no-use-v-if-with-v-for": "off",
+        "vue/no-mutating-props": "off",
+        "vue/no-parsing-error": "off",
+        "vue/require-v-for-key": "off",
+        "vue/valid-v-for": "off",
+        "vue/no-multiple-template-root": "off",
+        "vue/component-name-in-template-casing": "off",
+        "vue/component-definition-name-casing": "off",
+        "vue/valid-v-slot": "off",
+        "no-case-declarations": "off",
+        "no-useless-escape": "off",
+        "no-undef": "off",
+        "no-inner-declarations": "off",
+        "vue/require-valid-default-prop": "off",
+        "no-unused-vars": "off",
+        "template-curly-spacing": ["error", "never"],
+        "indent": ["error", 2]
+  }
+}

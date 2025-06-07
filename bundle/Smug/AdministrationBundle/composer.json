@@ -1,0 +1,26 @@
+{
+    "name": "smug/administration-bundle",
+    "version": "0.1.0",
+    "type": "symfony-bundle",
+    "description": "Nodaro Admin Panel",
+    "license": "MIT",
+    "require": {
+        "nodaro/core": "~0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smug\\AdministrationBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Smug\\AdministrationBundle\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alex Voß",
+            "email": "alex@storysh-media.de"
+        }
+    ]
+}

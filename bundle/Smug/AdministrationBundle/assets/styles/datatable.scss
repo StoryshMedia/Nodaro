@@ -1,0 +1,83 @@
+@import '@bhplugin/vue3-datatable/dist/style.css';
+
+.datatable > div {
+    @apply text-black;
+}
+
+.datatable .bh-table-responsive {
+    @apply rounded-none;
+}
+
+.datatable .bh-table-responsive table thead tr th {
+    @apply font-bold;
+}
+
+.datatable .bh-pagination {
+    @apply font-medium;
+}
+
+.datatable .bh-pagination .bh-page-item {
+    @apply w-auto h-9 bg-white-light text-dark border-white-light;
+}
+.datatable .bh-pagination .bh-page-item:hover {
+    @apply bg-primary text-white;
+}
+
+.datatable .bh-pagination .bh-page-item.bh-active {
+    @apply bg-primary text-white;
+}
+
+.datatable .bh-pagination select {
+    @apply rounded-md border border-dark bg-white pl-2 pr-4 py-1.5 text-sm font-semibold text-black focus:border-primary focus:ring-transparent;
+}
+
+.datatable.invoice-table .bh-pagination {
+    @apply px-5;
+}
+
+.datatable .bh-filter div button {
+    @apply block;
+}
+
+.datatable .bh-table-responsive input[type='checkbox'] + div {
+    @apply rounded border-2 border-dark bg-transparent text-primary;
+}
+
+.datatable .bh-table-responsive input[type='checkbox']:checked + div,
+.datatable .bh-table-responsive input[type='checkbox']:indeterminate + div {
+    @apply bg-primary border-primary;
+}
+
+.datatable .bh-table-responsive table th.bh-sticky,
+.datatable .bh-table-responsive table td.bh-sticky {
+    @apply bg-gray;
+}
+
+.datatable .bh-filter-menu {
+    @apply min-w-max;
+}
+
+.next-prev-pagination .bh-pagination > div {
+    @apply flex-col justify-center;
+}
+
+.next-prev-pagination .bh-pagination .bh-pagination-number {
+    @apply ml-0;
+}
+
+.next-prev-pagination .bh-pagination .bh-page-item {
+    @apply rounded-md px-5 py-2 bg-transparent border-primary text-primary;
+}
+
+.datatable .bh-table-responsive table.bh-table-bordered tbody tr td,
+.datatable .bh-table-responsive table.bh-table-bordered thead tr th {
+    @apply border-white-light;
+}
+
+.datatable .bh-table-responsive table.bh-table-hover tbody tr:hover {
+    @apply bg-white-light;
+}
+
+.datatable .bh-table-responsive table.bh-table-striped tbody tr:nth-child(odd) {
+    @apply bg-white-light;
+}

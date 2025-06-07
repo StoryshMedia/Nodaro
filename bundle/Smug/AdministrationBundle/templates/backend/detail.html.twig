@@ -1,0 +1,30 @@
+{% extends '@SmugAdministration/backend/base.html.twig' %}
+
+{% block body %}
+    <!--  BEGIN CONTENT AREA  -->
+    <div class="p-6 animation">
+        <div class="panel">
+            <div id="administration-tabs"
+                data-config=" {{ view.config | json_encode() }}"
+                data-edit="1"
+                data-tabs=" {{ view.tabs | json_encode() }}"></div>
+            {{ smug_encore_entry_script_tags('administrationTabs') }}
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+{% endblock %}
+
+{% block additionalJavascript %}
+    <div id="administration-main"></div>
+    {{ smug_encore_entry_script_tags('administrationMain') }}
+
+    {% if view.config.additionalJavascripts is defined %}
+        {% for script in view.config.additionalJavascripts %}
+            {{ smug_encore_entry_script_tags(script) }}
+        {% endfor %}
+    {% endif %}
+
+    {{ smug_encore_entry_link_tags('smug-frontendbundle-quill') }}
+{% endblock %}
+
+

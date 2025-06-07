@@ -1,0 +1,21 @@
+{
+    "name": "smug/system-bundle",
+    "version": "0.1.0",
+    "type": "symfony-bundle",
+    "description": "Nodaro system relevant models",
+    "license": "MIT",
+    "require": {
+        "nodaro/core": "~0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smug\\SystemBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alex Voß",
+            "email": "alex@storysh-media.de"
+        }
+    ]
+}

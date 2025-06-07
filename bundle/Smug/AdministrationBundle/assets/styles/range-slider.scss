@@ -1,0 +1,19 @@
+.range-slider .simple-range-slider .simple-range-slider-bg-bar {
+    @apply h-2 border rounded border-dark;
+}
+
+.range-slider .simple-range-slider-anchor {
+    @apply w-6 h-5 rounded shadow;
+}
+
+.range-slider .simple-range-slider-popover-arrow {
+    @apply hidden;
+}
+
+.range-slider .simple-range-slider-popover {
+    @apply mb-0.5 p-1 border border-dark shadow-none;
+}
+
+.range-slider .simple-range-slider-handle {
+    @apply shadow-none rounded-sm;
+}

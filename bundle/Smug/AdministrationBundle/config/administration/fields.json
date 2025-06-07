@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Editor"
+    },
+    {
+        "name": "Number"
+    },
+    {
+        "name": "Password"
+    },
+    {
+        "name": "Email"
+    },
+    {
+        "name": "Textarea"
+    },
+    {
+        "name": "Text",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\TextField"
+    },
+    {
+        "name": "FileUpload"
+    },
+    {
+        "name": "ApiSelection"
+    },
+    {
+        "name": "MediaCenter"
+    },
+    {
+        "name": "PluginFields"
+    },
+    {
+        "name": "Datepicker",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\DatepickerField"
+    },
+    {
+        "name": "SelectList"
+    },
+    {
+        "name": "Content"
+    },
+    {
+        "name": "JsonOutputArray"
+    },
+    {
+        "name": "Infobox"
+    },
+    {
+        "name": "Accordion"
+    },
+    {
+        "name": "Checkbox",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\CheckboxField"
+    },
+    {
+        "name": "Card"
+    },
+    {
+        "name": "Table"
+    },
+    {
+        "name": "Multiple"
+    },
+    {
+        "name": "Messages"
+    },
+    {
+        "name": "Colorpicker"
+    },
+    {
+        "name": "Column",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\ColumnField"
+    },
+    {
+        "name": "Button",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\ButtonField"
+    },
+    {
+        "name": "Avatar",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\AvatarField"
+    },
+    {
+        "name": "Selectbox",
+        "class": "Smug\\AdministrationBundle\\Service\\Components\\Factories\\View\\Field\\SelectboxField"
+    },
+    {
+        "name": "SearchSelect"
+    },
+    {
+        "name": "AdvancedAssociation"
+    },
+    {
+        "name": "Output"
+    },
+    {
+        "name": "ImageGallery"
+    },
+    {
+        "name": "Seo"
+    }
+]

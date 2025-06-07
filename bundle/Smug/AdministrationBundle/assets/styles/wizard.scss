@@ -1,0 +1,50 @@
+.vue-form-wizard.text-only .wizard-nav li .stepTitle {
+  @apply absolute top-1/2 -translate-y-1/2 mt-0;
+}
+.vue-form-wizard .wizard-nav li .stepTitle {
+  @apply  mt-2;
+}
+.vue-form-wizard.text-only .wizard-nav li .stepTitle.active {
+  @apply text-white;
+}
+.vue-form-wizard .wizard-nav li .stepTitle.active {
+  @apply text-primary;
+}
+.vue-form-wizard.text-only .wizard-nav-pills > li > a {
+  @apply mb-2;
+}
+.vue-form-wizard.text-only .wizard-nav li .wizard-icon {
+  @apply hidden;
+}
+.vue-form-wizard .wizard-icon-circle.tab_shape {
+  @apply rounded-full overflow-hidden ;
+}
+.vue-form-wizard.pills .wizard-navigation .wizard-progress-with-circle {
+  @apply h-0;
+}
+.vue-form-wizard .wizard-tab-content {
+  @apply min-h-0 p-0 my-5 -top-1 relative;
+}
+.vue-form-wizard {
+  @apply pb-0;
+}
+.vue-form-wizard .wizard-btn {
+  @apply py-2 px-5 border rounded-md min-w-0 shadow-lg;
+}
+.vue-form-wizard .wizard-btn:hover {
+  @apply shadow-none;
+}
+.vue-form-wizard .wizard-card-footer {
+  @apply px-0;
+}
+.vue-form-wizard.circle .wizard-icon-circle,
+.vue-form-wizard.square .wizard-icon-circle {
+  @apply w-16 h-16 border-dark;
+}
+.vue-form-wizard .wizard-navigation .wizard-progress-with-circle {
+  top: -30px;
+}
+.vue-form-wizard.circle .wizard-nav-pills,
+.vue-form-wizard.square .wizard-nav-pills {
+  @apply -top-1;
+}

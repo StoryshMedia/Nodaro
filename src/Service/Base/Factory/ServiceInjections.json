@@ -1,0 +1,33 @@
+{
+  "Smug\\Core\\Service\\Base\\Service\\ListBaseService": [
+    "doctrine.orm.default_entity_manager",
+    "kernel"
+  ],
+  "Smug\\Core\\Service\\Base\\Service\\UpdateBaseService": [
+    "doctrine.orm.default_entity_manager",
+    "kernel"
+  ],
+  "Smug\\Core\\Service\\Base\\Service\\AddBaseService": [
+    "doctrine.orm.default_entity_manager",
+    "kernel"
+  ],
+  "Smug\\Core\\Service\\Import\\Dnb\\PublicationBaseService": [
+    "doctrine.orm.default_entity_manager",
+    "kernel"
+  ],
+  "Smug\\Core\\Service\\Base\\Service\\BaseService": [
+    "doctrine.orm.default_entity_manager",
+    "kernel"
+  ],
+  "Smug\\Core\\Context\\Context": [
+    "kernel",
+    "doctrine.orm.default_entity_manager"
+  ],
+  "Smug\\Core\\Service\\Base\\Mail\\SendMail": [
+    "swiftmailer.mailer.default",
+    "kernel"
+  ],
+  "Smug\\Core\\DatabaseSetter\\Base\\BaseSetter": [
+    "doctrine.orm.default_entity_manager"
+  ]
+}

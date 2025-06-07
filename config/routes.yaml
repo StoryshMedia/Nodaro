@@ -1,0 +1,19 @@
+app_route:
+    resource: .
+    type: advanced_extra
+
+fos_user_security_login:
+  path: /login
+  controller: Smug\FrontendBundle\Controller\Api\Frontend\Login\LoginController::loginAction
+
+fe_fos_user_security_login:
+  path: /fe/login
+  controller: Smug\FrontendBundle\Controller\Api\Frontend\Login\LoginController::feLoginAction
+
+api_login_check:
+  path: /be/api/login_check
+  methods: [POST]
+
+fe_api_login_check:
+  path: /fe/api/login_check
+  methods: [POST]
