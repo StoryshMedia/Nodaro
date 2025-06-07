@@ -8,14 +8,6 @@ use MailerSend\Helpers\Builder\EmailParams;
 
 class MailerSendService
 {
-    const API_KEY = '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';
-
-    const SEND_IN_BLUE_SEND_EMAIL_API_URL = 'https://api.sendinblue.com/v3/smtp/email';
-
-    /**
-     * @param array $data
-     * @return bool|string
-     */
     public static function send(array $data)
     {
         $mailersend = new MailerSend(['api_key' => self::API_KEY]);

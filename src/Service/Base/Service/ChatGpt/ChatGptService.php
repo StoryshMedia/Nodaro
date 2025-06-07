@@ -2,13 +2,9 @@
 
 namespace Smug\Core\Service\Base\Service\ChatGpt;
 
-/**
- * Class ChatGptService
- * @package Smug\Core\Service\Base\Service\ChatGpt
- */
 class ChatGptService
 {
-    const API_KEY = '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';
+    const API_KEY = '';
 
     const textURL = "https://api.openai.com/v1/completions";
     const imageURL =  "https://api.openai.com/v1/images/generations";
