@@ -1,0 +1,39 @@
+<template>
+  <div>
+    <button
+      type="button"
+      class="mx-auto btn w-8 h-8 p-0 rounded-full border-danger text-danger hover:bg-danger hover:text-white transition-all duration-300"
+      @click="emitClick()"
+    >
+      <icon :icon-string="config.icon" />
+    </button>
+    <p class="pt-2">
+      {{ $t(config.label) }}
+    </p>
+  </div>
+</template>
+  
+<script>
+import { defineAsyncComponent } from "vue";
+const Icon = defineAsyncComponent(() =>
+  import("../../../../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+);
+  
+export default {
+  name: "Danger",
+  components: {
+    Icon
+  },
+  props: {
+    config:{
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    emitClick() {
+      this.$emit('clicked', this.config);
+    }
+  }
+}
+</script>

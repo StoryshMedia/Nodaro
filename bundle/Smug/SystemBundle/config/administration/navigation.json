@@ -1,0 +1,47 @@
+{
+    "settingMain": {
+        "label": "SETTINGS",
+        "zone": "",
+        "key": "settingMain",
+        "parent": "",
+        "icon": "IconSettings",
+        "path": "",
+        "position": 0,
+        "type": 0,
+        "children": []
+    },
+    "systemSettingHeader": {
+        "label": "SYSTEM_SETTINGS",
+        "zone": "",
+        "key": "systemSettingHeader",
+        "parent": "settingMain",
+        "icon": "IconSettings",
+        "path": "smug/system/settings/detail",
+        "position": 0,
+        "type": 2,
+        "children": []
+    },
+    "backendUsers": {
+        "label": "USERS",
+        "class": "Smug\\SystemBundle\\Entity\\User\\User",
+        "key": "backendUsers",
+        "parent": "settingMain",
+        "path": "smug/system/user/list",
+        "icon": "",
+        "position": 1,
+        "type": 2,
+        "children": []
+    },
+    "media": {
+        "label": "MEDIA",
+        "class": "Smug\\Core\\Entity\\Media\\Media",
+        "key": "media",
+        "parent": "settingMain",
+        "path": "smug/core/media/detail",
+        "icon": "",
+        "position": 2,
+        "type": 2,
+        "children": []
+    }
+}
+  

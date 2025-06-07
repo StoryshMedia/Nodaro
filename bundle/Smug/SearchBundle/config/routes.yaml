@@ -1,0 +1,3 @@
+smug_search_bundle.routes:
+  type: annotation
+  resource: '../src/Controller'

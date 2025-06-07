@@ -1,0 +1,112 @@
+security:
+    session_fixation_strategy: none
+
+    password_hashers:
+        # a hasher used in the past for some users
+        legacy:
+            algorithm: sha256
+            encode_as_base64: false
+            iterations: 1
+
+        Smug\ContestBundle\Entity\Contest\Responsible:
+            # the new hasher, along with its options
+            algorithm: sodium
+            migrate_from:
+                - bcrypt # uses the "bcrypt" hasher with the default options
+                - legacy # uses the "legacy" hasher configured above
+
+        Smug\FrontendUserBundle\Entity\FrontendUser\FrontendUser:
+            # the new hasher, along with its options
+            algorithm: sodium
+            migrate_from:
+                - bcrypt # uses the "bcrypt" hasher with the default options
+                - legacy # uses the "legacy" hasher configured above
+
+        Smug\Core\Entity\Generated\SmugSystemBundleEntityUserUser:
+            # the new hasher, along with its options
+            algorithm: sodium
+            migrate_from:
+                - bcrypt # uses the "bcrypt" hasher with the default options
+                - legacy # uses the "legacy" hasher configured above
+
+    providers:
+        entity_provider:
+            id: Smug\AdministrationBundle\Security\UserProvider
+        fe_entity_provider:
+            id: Smug\FrontendUserBundle\Security\FeUserProvider
+        responsible_entity_provider:
+            id: Smug\ContestBundle\Security\ResponsibleProvider
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    firewalls:
+        responsible_login:
+            pattern:  ^/responsible_login
+            lazy: true
+            jwt: ~
+            provider: 'responsible_entity_provider'
+            json_login:
+                check_path: responsible_login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        fe_login:
+            pattern:  ^/fe_login
+            lazy: true
+            jwt: ~
+            provider: 'fe_entity_provider'
+            json_login:
+                check_path: fe_login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        login:
+            pattern:  ^/be_login
+            provider: 'entity_provider'
+            lazy: true
+            jwt: ~
+            json_login:
+                check_path: be_login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        fe_account:
+            pattern: ^/fe/api/account
+            provider: fe_entity_provider
+            stateless: true
+            jwt: ~
+        school:
+            pattern:  ^/fe/api/school
+            provider: responsible_entity_provider
+            stateless: true
+            jwt: ~
+            logout:
+                path: responsible_logout
+                invalidate_session: true
+        frontend:
+            pattern:  ^/fe/api
+            provider: fe_entity_provider
+            stateless: true
+            jwt: ~
+            logout:
+                path: fe_logout
+                invalidate_session: true
+        api:
+            pattern:   ^/be/api
+            provider: entity_provider
+            stateless: true
+            jwt: ~
+            logout:
+                path: be_logout
+                invalidate_session: true
+        main:
+            stateless: true
+            provider: fe_entity_provider
+            jwt:
+                authenticator: smug.coookie_authenticator
+
+    access_control:
+        - { path: ^/be/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/fe/api, roles: PUBLIC_ACCESS }
+        - { path: ^/be/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/be/custom, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/fe/api/account, roles: IS_AUTHENTICATED_FULLY }

@@ -1,0 +1,9 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    cache: '%kernel.cache_dir%/twig'
+    strict_variables: '%kernel.debug%'
+    paths:
+        '%kernel.project_dir%/templates/_email/system': systemEmail
+        '%kernel.project_dir%/bundle/Smug/AdministrationBundle/templates': SmugAdministration
+    form_themes: ['']

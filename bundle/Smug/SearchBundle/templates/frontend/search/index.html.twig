@@ -1,0 +1,45 @@
+{% extends '@SmugFrontend/frontend/base.html.twig' %}
+
+{% block body %}
+    <div id="header">
+        {% block header %}
+            {{ include('@SmugFrontend/frontend/index/header.html.twig') }}
+        {% endblock %}
+    </div>
+    <div class="min-h-screen">
+        <section class="lg:pb-40 lg:pt-56 py-32 relative h-75vh">
+            <img class="absolute inset-0 h-full w-full object-cover"
+                src="https://storysh.de/site/img/cooperationHeroImage.webp"
+                alt="build your website">
+            <div class="absolute inset-0 hero--overlay"></div>
+            <div class="container h-full mx-auto px-6">
+                <div class="h-full flex justify-center items-center">
+                    <div class="lg:w-2/3 text-center relative">
+                        <div class="space-y-6 mb-10">
+                            <h1 class="text-white text-7xl leading-tight capitalize font-bold">
+                                {{ 'SEARCH_RESULTS_FOR' | trans }} "{{ data.term }}"
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0">
+                <img src="https://res.cloudinary.com/daiyj7fxl/image/upload/v1677745724/components/bg-pattern-light_sadr33.png"
+                    alt="bg-pattern">
+            </div>
+        </section>
+        <div
+            class="space-y-16 lg:space-y-36"
+        >
+            <div class="container article-wrapper mx-auto relative z-30 pt-16 lg:pt-0">
+                <div id="searchList" class="min-h-screen">
+                </div>
+                {{ encore_entry_script_tags('searchList') }}
+            </div>
+            
+            <article class="relative z-10">
+                {{ include('@SmugFrontend/frontend/index/components/forms/newsletter-registration-form.html.twig') }}
+            </article>
+        </div>
+    </div>
+{% endblock %}

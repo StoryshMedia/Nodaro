@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        public: true
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    security.token_storage:
+        class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+        public: true
+    
+    Smug\SystemBundle\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    
+    Smug\SystemBundle\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Smug\SystemBundle\Subscriber\:
+        resource: '../src/Subscriber'
+        tags: ['controller.service_arguments']
+
+    Doctrine\Persistence\ObjectManager: '@doctrine.orm.default_entity_manager'

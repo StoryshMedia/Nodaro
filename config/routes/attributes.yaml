@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../../src/Controller/
+        namespace: Smug\Core\Controller
+    type: attribute
+
+kernel:
+    resource: Smug\Core\Kernel
+    type: attribute

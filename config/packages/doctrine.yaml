@@ -1,0 +1,37 @@
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        server_version: '10.6.11'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+        url: '%env(resolve:DATABASE_URL)%'
+        types:
+            uuid: Ramsey\Uuid\Doctrine\UuidType
+            stringfield: Smug\Core\Entity\Base\Field\StringField
+            slugField: Smug\Core\Entity\Base\Field\SlugField
+            scriptField: Smug\Core\Entity\Base\Field\ScriptField
+            htmlField: Smug\Core\Entity\Base\Field\HtmlField
+            jsonField: Smug\Core\Entity\Base\Field\JsonField
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        dql:
+             numeric_functions:
+                 acos: Smug\Core\Service\Base\Query\Doctrine\Extensions\MySql\Acos
+                 cos: Smug\Core\Service\Base\Query\Doctrine\Extensions\MySql\Cos
+                 sin: Smug\Core\Service\Base\Query\Doctrine\Extensions\MySql\Sin
+                 pi: Smug\Core\Service\Base\Query\Doctrine\Extensions\MySql\Pi
+                 radians: Smug\Core\Service\Base\Query\Doctrine\Extensions\MySql\Radians
+             string_functions:
+                 rand: Smug\Core\Service\Base\Query\Doctrine\Extensions\MySql\Rand
+        mappings:
+            Smug\Core:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'Smug\Core\Entity'
+                alias: Core

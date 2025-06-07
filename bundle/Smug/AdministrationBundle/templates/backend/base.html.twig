@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+		{% block head %}
+			{{ include('@SmugAdministration/backend/base/head.html.twig') }}
+		{% endblock %}
+    </head>
+
+    <body>
+        <noscript class="noscript-main">
+			<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+				<div class="flex">
+					<div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+					<div>
+						<p class="font-bold">Achtung</p>
+						<p class="text-sm">Storysh kann nur richtig genutzt werden, wenn Du JavaScript in Deinem Browser aktiviert hast.</p>
+					</div>
+				</div>
+			</div>
+		</noscript>
+		<div id="main-section" class="main-section antialiased relative font-nunito text-sm font-normal">
+    		<div class="relative">
+				<div class="main-container text-black min-h-screen navbar-sticky">
+					{% block sidebar %}
+						<!--  BEGIN SIDEBAR  -->
+							{{ include('@SmugAdministration/backend/base/sidebar.html.twig') }}
+						<!--  END SIDEBAR  -->
+					{% endblock %}
+
+					<div class="main-content flex flex-col min-h-screen">
+						{% block header %}
+							<!--  BEGIN HEADER  -->
+								{{ include('@SmugAdministration/backend/base/header.html.twig')                  }}
+							<!--  END HEADER  -->
+						{% endblock %}
+
+						<!--  BEGIN CONTENT AREA  -->
+							{% block body %}
+							{% endblock %}
+						<!--  END CONTENT AREA  -->
+
+						{% block footer %}
+							<!--  BEGIN FOOTER  -->
+								{{ include('@SmugAdministration/backend/base/footer.html.twig') }}
+							<!--  END FOOTER  -->
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% block additionalJavascript %}
+		{% endblock %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+		<script src="{{ asset('Resources/js/lazyLoad/lazyload.min.js') }}"></script>
+		<script>
+			(function () {
+				const LL = new LazyLoad();
+				const config = { childList: true, subtree: true };
+
+				const callback = (mutationList, observer) => {
+					LL.update();
+				};
+
+				const observer = new MutationObserver(callback);
+				observer.observe(document, config);
+			})();
+		</script>
+    </body>
+</html>
