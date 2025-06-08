@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import ApiService from '../../../../../services/api/api.service';
-import ValueService from '../../../../../services/value/value.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
+import ValueService from '@SmugAdministrationServices/value/value.service';
 
 export default {
   name: "ApiSelection",

@@ -24,8 +24,8 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import ApiService from '../../../services/api/api.service';
-import ConditionService from '../../../services/condition/condition.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
+import ConditionService from '@SmugAdministrationServices/condition/condition.service';
 const FieldWrapper = defineAsyncComponent(() =>
   import("./FieldWrapper.vue" /* webpackChunkName: "field-wrapper" */)
 );

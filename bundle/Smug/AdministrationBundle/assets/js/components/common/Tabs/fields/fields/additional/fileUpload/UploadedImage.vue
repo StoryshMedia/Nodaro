@@ -97,7 +97,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import TextService from '../../../../../../../services/text/text.service';
+import TextService from '@SmugAdministrationServices/text/text.service';
   
 export default defineComponent({
   name: 'UploadedImage',

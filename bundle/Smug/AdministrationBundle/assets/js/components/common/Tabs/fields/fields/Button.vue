@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ApiService from '../../../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 
 export default {
   name: "Button",

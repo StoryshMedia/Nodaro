@@ -52,12 +52,12 @@
 </template>
 
 <script>
-import ApiService from '../../../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 import { TransitionGroup } from "vue";
 import VueCollapsible from 'vue-height-collapsible/vue3';
 import { defineAsyncComponent } from "vue";
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const DetailFolder = defineAsyncComponent(() =>
   import("./additional/mediaCenter/DetailFolder.vue" /* webpackChunkName: "administration-media-center-detail-folder" */)

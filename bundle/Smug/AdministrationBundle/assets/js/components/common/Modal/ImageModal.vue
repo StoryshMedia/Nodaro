@@ -83,13 +83,13 @@
 import { defineAsyncComponent } from "vue";
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay } from '@headlessui/vue';
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const Confirm = defineAsyncComponent(() =>
   import("./Confirm.vue" /* webpackChunkName: "administration-modal-confirm" */)
 );
-import ImageService from '../../../services/image/image.service';
-import ApiService from '../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
+import ImageService from '@SmugAdministrationServices/image/image.service';
 
 export default {
   name: "ImageModal",

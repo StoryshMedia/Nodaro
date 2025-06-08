@@ -464,8 +464,8 @@
 import { defineAsyncComponent } from "vue";
 import { defineComponent } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
-import ItemService from '../../../../../services/item/item.service';
-import ApiService from '../../../../../services/api/api.service';
+import ItemService from '@SmugAdministrationServices/item/item.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 const ContentItem = defineAsyncComponent(() =>
   import("./additional/content/ContentItem.vue" /* webpackChunkName: "administration-content-editor-item" */)
 );
@@ -491,7 +491,7 @@ const ElementConfiguration = defineAsyncComponent(() =>
   import("./additional/content/ElementConfiguration.vue" /* webpackChunkName: "administration-content-editor-element-configuration" */)
 );
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const Field = defineAsyncComponent(() =>
   import("../Field.vue" /* webpackChunkName: "field" */)

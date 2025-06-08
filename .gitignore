@@ -8,8 +8,6 @@
 /public/_uploads
 /public/bundles/*
 /public/site/*
-bundle/Smug/PublicationBundle/src/Command/Vlb/data/*
-bundle/Smug/FrontendBundle/src/Command/Base/sitemap/*
 /public/Resources/Data/*
 package-lock.json
 ./shell/*

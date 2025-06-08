@@ -11,12 +11,12 @@
           >
             <img
               class="w-8 -ml-1 inline"
-              src="/assets/images/logo.svg"
+              src="/administration/img/logo/logo-navigation.svg"
               alt=""
             >
             <span
-              class="text-2xl ml-1.5 font-semibold align-middle hidden md:inline transition-all duration-300"
-            >VRISTO</span>
+              class="text-2xl ml-3 font-semibold align-middle hidden md:inline transition-all duration-300"
+            >Nodaro</span>
           </a>
 
           <a
@@ -77,7 +77,7 @@
 import { defineAsyncComponent } from "vue";
 
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vueIcon.vue" /* webpackChunkName: "icon" */)
 );
 const Search = defineAsyncComponent(() =>
   import("./additional/header/Search.vue" /* webpackChunkName: "administration-header-search" */)

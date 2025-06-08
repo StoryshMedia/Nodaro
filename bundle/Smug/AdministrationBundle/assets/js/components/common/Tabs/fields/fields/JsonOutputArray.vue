@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import TextService from "../../../../../services/text/text.service";
+import TextService from '@SmugAdministrationServices/text/text.service';
 
 export default {
   name: "JsonOutputArray",

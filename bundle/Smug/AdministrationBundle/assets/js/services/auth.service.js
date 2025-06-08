@@ -1,8 +1,8 @@
 import axios from 'axios';
-const API_URL = 'https://storysh.de/be_login';
-// const API_URL = 'http://symfony.localhost/be_login';
 class AuthService {
   login(user) {
+    const API_URL = process.env.apiURL + '/be_login';
+
     return axios
       .post(API_URL, user)
       .then(response => {

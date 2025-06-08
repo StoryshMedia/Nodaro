@@ -143,13 +143,13 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import ImageService from '../../../../../../../services/image/image.service';
-import ApiService from '../../../../../../../services/api/api.service';
-import LinkService from '../../../../../../../services/link/link.service';
-import DateService from '../../../../../../../services/date/date.service';
-import ConditionService from '../../../../../../../services/condition/condition.service';
+import ImageService from '@SmugAdministrationServices/image/image.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
+import LinkService from '@SmugAdministrationServices/link/link.service';
+import DateService from '@SmugAdministrationServices/date/date.service';
+import ConditionService from '@SmugAdministrationServices/condition/condition.service';
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const Files = defineAsyncComponent(() =>
   import("./Files.vue" /* webpackChunkName: "message-files" */)

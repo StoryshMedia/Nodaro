@@ -2,12 +2,12 @@
 
 namespace Smug\AdministrationBundle\Controller\Backend\Api\Security;
 
-use Smug\FrontendBundle\Controller\Frontend\Api\Base\FeBaseController;
+use Smug\Core\Controller\Backend\Api\Base\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class SecurityController extends FeBaseController
+class SecurityController extends BaseController
 {
     #[Route('/be_login', name: 'be_login')]
     public function login(Request $request): JsonResponse

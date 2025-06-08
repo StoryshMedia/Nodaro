@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ValueService from '../../../../../services/value/value.service';
+import ValueService from '@SmugAdministrationServices/value/value.service';
 
 export default {
   name: "Output",

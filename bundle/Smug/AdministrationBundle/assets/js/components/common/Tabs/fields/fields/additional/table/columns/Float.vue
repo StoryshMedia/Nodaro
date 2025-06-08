@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NumberService from '../../../../../../../../services/number/number.service';
+import NumberService from '@SmugAdministrationServices/number/number.service';
 
 export default {
   name: "Float",

@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import ApiService from '../../../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
+import ImageService from '@SmugAdministrationServices/image/image.service';
 import { defineAsyncComponent } from "vue";
 const ButtonControls = defineAsyncComponent(() =>
   import("./additional/button/ButtonControls.vue" /* webpackChunkName: "administration-button-controls" */)
 );
-import ImageService from '../../../../../services/image/image.service';
 
 export default {
   name: "ImageGallery",

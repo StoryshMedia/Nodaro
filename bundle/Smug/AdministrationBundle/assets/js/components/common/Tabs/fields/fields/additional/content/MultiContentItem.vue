@@ -79,12 +79,12 @@
 <script>
 import { defineComponent } from 'vue';
 import { defineAsyncComponent } from "vue";
-import ItemService from '../../../../../../../services/item/item.service';
+import ItemService from '@SmugAdministrationServices/item/item.service';
 const ContentItem = defineAsyncComponent(() =>
   import("./ContentItem.vue" /* webpackChunkName: "administration-content-editor-item" */)
 );
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const Loading = defineAsyncComponent(() =>
   import("../../../../../Main/Loading.vue" /* webpackChunkName: "loading" */)

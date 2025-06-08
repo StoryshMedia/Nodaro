@@ -118,7 +118,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { defineAsyncComponent } from "vue";
-import ApiService from '../../../../../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 const Field = defineAsyncComponent(() =>
   import("../../../Field.vue" /* webpackChunkName: "field" */)
 );

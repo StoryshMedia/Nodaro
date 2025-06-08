@@ -86,7 +86,7 @@ const NavigationLink = defineAsyncComponent(() =>
   import("./NavigationLink.vue" /* webpackChunkName: "navigation-link" */)
 );
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const VueCollapsible = defineAsyncComponent(() =>
   import("vue-height-collapsible/vue3" /* webpackChunkName: "vue-collapsible" */)

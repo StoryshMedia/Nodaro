@@ -30,6 +30,31 @@ class FrontendBuildCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $assets = [];
+        $finder = new Finder();
+        $finder->files()->in($this->kernel->getProjectDir() . "/bundle")->name(['frontendAliases.json']);
+
+        $output->writeln('Done');
+        $output->writeln('Collecting Webpack Package Aliases');
+        $output->writeln('#####################');
+
+        foreach ($finder as $file) {
+            if ($file === '.' || $file === '..' ||  !stristr($file->getFilename(), 'json')) {
+                continue;
+            }
+
+            $assets = DataHandler::mergeArray(
+                $assets,
+                DataHandler::getJsonDecode(DataHandler::getFile($file->getRealPath()))
+            );
+        }
+
+        $output->writeln('Done');
+        $output->writeln('Writing Webpack Package Aliases');
+        $output->writeln('#####################');
+
+        DataHandler::writeFile(__DIR__ . '/webpack-aliases.json', DataHandler::getJsonEncode($assets));
+
         $output->writeln('Searching asset files');
         $output->writeln('#####################');
 

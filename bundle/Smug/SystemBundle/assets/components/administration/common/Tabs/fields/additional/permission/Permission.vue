@@ -187,7 +187,7 @@
 import { defineAsyncComponent } from "vue";
 import VueCollapsible from 'vue-height-collapsible/vue3';
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const PermissionDetails = defineAsyncComponent(() =>
   import("./PermissionDetails.vue" /* webpackChunkName: "permission-details" */)
