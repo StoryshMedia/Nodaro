@@ -334,11 +334,10 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import TextService from "../../../services/text/text.service";
-import DateService from "../../../services/date/date.service";
-import ApiService from '../../../services/api/api.service';
+import TextService from '@SmugAdministrationServices/text/text.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const NotAllowed = defineAsyncComponent(() =>
   import("../Main/NotAllowed.vue" /* webpackChunkName: "not-allowed" */)

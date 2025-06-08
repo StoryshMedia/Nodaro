@@ -118,12 +118,12 @@
 </template>
 
 <script>
-import ApiService from '../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 import { defineAsyncComponent } from "vue";
 
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay, TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const TabContent = defineAsyncComponent(() =>
   import("../Tabs/TabContent.vue" /* webpackChunkName: "administration-tab-content" */)

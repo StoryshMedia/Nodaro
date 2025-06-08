@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import ApiService from '../../../../../../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 import { defineAsyncComponent } from "vue";
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const DataModal = defineAsyncComponent(() =>
   import("../../../../../../Modal/DataModal.vue" /* webpackChunkName: "administration-modal-dialog" */)

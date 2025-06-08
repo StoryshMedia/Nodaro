@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\KernelInterface;
 use \Exception;
 use Smug\AdministrationBundle\Service\Components\Factories\View\View;
+use Smug\AdministrationBundle\Trait\DispatchDataTrait;
+use Smug\AdministrationBundle\Trait\RequestParameterTrait;
 use Smug\Core\Context\Context;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,6 +23,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class BaseController extends AbstractController
 {
+    use DispatchDataTrait;
+    use RequestParameterTrait;
+
     const READ_RIGHTS = '';
 
     const EDIT_RIGHTS = '';

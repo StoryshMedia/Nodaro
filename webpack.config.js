@@ -4,8 +4,13 @@ const path = require('path');
 
 var modules = require('./src/Command/Frontend/webpack-modules.json');
 var styles = require('./src/Command/Frontend/webpack-styles.json');
+var aliases = require('./src/Command/Frontend/webpack-aliases.json');
 
 const TerserPlugin = require('terser-webpack-plugin');
+let aliasesMappings = {
+    '@core': path.resolve(__dirname, 'assets'),
+    'Bundle': path.resolve(__dirname, './bundle')
+};
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 //     .BundleAnalyzerPlugin;
 
@@ -16,6 +21,19 @@ for (let i =0; i < modules.length; i++) {
 for (let i = 0; i < styles.length; i++) {
     Encore.addStyleEntry(styles[i]['style'], styles[i]['path']);
 }
+
+for (let i = 0; i < aliases.length; i++) {
+    let aliasKey = aliases[i]['alias'];
+    let newAlias = {};
+
+    newAlias[aliasKey] = path.resolve(__dirname, aliases[i]['path']);
+    
+    aliasesMappings = {
+        ...aliasesMappings,
+        ...newAlias
+    };
+}
+
 
 Encore
     // directory where compiled assets will be stored
@@ -122,8 +140,6 @@ config.experiments = {
     topLevelAwait: true
 };
 config.output.pathinfo = false;
-config.resolve.alias = {
-    'Bundle': path.resolve(__dirname, './bundle')
-};
+config.resolve.alias = aliasesMappings;
 
 module.exports = config;

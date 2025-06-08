@@ -129,11 +129,11 @@
   </TransitionRoot>
 </template>
 <script>
-import ApiService from '../../../../../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay } from '@headlessui/vue';
 import { defineComponent, defineAsyncComponent } from 'vue';
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 
 export default defineComponent({

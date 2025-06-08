@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ValueService from '../../../../../services/value/value.service';
+import ValueService from '@SmugAdministrationServices/value/value.service';
 import flatPickr from 'vue-flatpickr-component';
 import { German } from "flatpickr/dist/l10n/de.js";
 flatpickr.localize(German);

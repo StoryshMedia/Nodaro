@@ -98,8 +98,8 @@
 </template>
   
 <script>
-import ApiService from '../../../../../../services/api/api.service';
-import ImageService from "../../../../../../services/image/image.service";
+import ApiService from '@SmugAdministrationServices/api/api.service';
+import ImageService from '@SmugAdministrationServices/image/image.service';
 
 export default {
   name: "User",

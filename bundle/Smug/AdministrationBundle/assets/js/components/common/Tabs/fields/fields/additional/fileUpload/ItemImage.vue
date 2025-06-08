@@ -101,8 +101,8 @@
 </template>
 <script>
 import { defineComponent, defineAsyncComponent } from 'vue';
-import TextService from '../../../../../../../services/text/text.service';
-import ImageService from '../../../../../../../services/image/image.service';
+import TextService from '@SmugAdministrationServices/text/text.service';
+import ImageService from '@SmugAdministrationServices/image/image.service';
 const ImageModal = defineAsyncComponent(() =>
   import("../../../../../Modal/ImageModal.vue" /* webpackChunkName: "administration-image-modal" */)
 );

@@ -16,11 +16,11 @@
               class="main-logo flex items-center shrink-0"
             >
               <img
-                class="w-8 ml-[5px] flex-none"
-                src="/assets/images/logo.svg"
+                class="w-8 ml-3 flex-none"
+                src="/administration/img/logo/logo-navigation.svg"
                 alt=""
               >
-              <span class="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline">VRISTO</span>
+              <span class="text-2xl ml-3 font-semibold align-middle lg:inline">Nodaro</span>
             </a>
             <a
               href="javascript:;"
@@ -54,13 +54,13 @@
   
 <script>
 import { defineAsyncComponent } from "vue";
-import ApiService from '../../../services/api/api.service';
+import ApiService from '@SmugAdministrationServices/api/api.service';
 
 const NavigationItem = defineAsyncComponent(() =>
   import("./NavigationItem.vue" /* webpackChunkName: "navigation-item" */)
 );
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 
 export default {

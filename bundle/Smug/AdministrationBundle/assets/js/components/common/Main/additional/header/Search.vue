@@ -47,7 +47,7 @@
 import { defineAsyncComponent } from "vue";
 
 const Icon = defineAsyncComponent(() =>
-  import("../../../../../../../../FrontendBundle/assets/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 
 export default {
