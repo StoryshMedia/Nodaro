@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <div 
       v-for="(field, fieldindex) in fieldValue"
       :key="fieldindex"
@@ -22,7 +22,7 @@
         />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
