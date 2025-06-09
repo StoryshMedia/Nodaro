@@ -10,8 +10,6 @@
 /public/site/*
 /public/Resources/Data/*
 package-lock.json
-./shell/*
-/shell/*
 /var/*
 /vendor/*
 
