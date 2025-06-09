@@ -1,0 +1,6 @@
+[
+    {
+        "path": "bundle/Smug/SystemBundle/assets",
+        "alias": "@SmugSystem"
+    }
+]

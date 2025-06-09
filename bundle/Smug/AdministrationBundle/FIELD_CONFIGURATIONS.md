@@ -2,6 +2,7 @@
 
 ## Fields
 
+- [General Configuration](#general-configuration)
 - [AdvancedAssociation](#advancedassociation)
 - [Button](#button)
 - [Card](#card)
@@ -18,6 +19,19 @@
 - [SearchSelect](#searchselect)
 - [Selectbox](#selectbox)
 
+## General Configuration
+
+All fields have this basic structure and can be controlled via the following basic config
+
+```
+[
+    'type' => 'COMPONENT_TYPE',
+    'placeholder' => 'SOME_HEADLINE',
+    'config' => [
+        'disabled' => false
+    ]
+]
+```
 
 ## AdvancedAssociation
 

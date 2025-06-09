@@ -1,5 +1,20 @@
 <h1 align="center">Nodaro - Administration Bundle</h1>
 
+## 🧭 Administration Bundle
+The Administration Bundle is the central module for managing and controlling Norado through a dedicated backend. It provides a modular and extensible foundation for administrative features that can be used consistently across the entire system.
+
+## 🔑 Core Features
+ - User & Role Management: Manage users, access permissions, and roles.
+ - Module-Based Navigation: Dynamically configurable page structure for integrating additional bundles or modules.
+ - Configuration Management: Maintain global system settings (e.g. email, API keys, branding).
+
+## ⚙️ Technical Specifications
+ - Compatible with Symfony 6
+ - UI built with Twig & Vue 3, styled using Tailwind CSS
+ - REST interfaces for asynchronous interactions
+ - Role-Based Access Control
+ - Flexible extensibility through events and dependency injection
+
 ## Available webpack alias
 
 You can use the assets from this Bundle by using the alias `@SmugAdministraionBundle`
