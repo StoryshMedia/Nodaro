@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import ImageService from '@SmugAdministrationServices/image/image.service';
+
 export default {
   name: "Avatar",
   components: {
@@ -44,7 +46,7 @@ export default {
   },
   methods: {
     getSrc() {
-      return process.env.frontendURL + '/' + this.fieldValue.path + this.fieldValue.file + '.' + this.fieldValue.extension;
+      return ImageService.getImagePath(this.fieldValue);
     }
   }
 }
