@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ValueService from 'SmugAdministration/js/services/value/value.service';
+import ValueService from '@SmugAdministration/js/services/value/value.service';
 
 export default {
   name: "Textarea",

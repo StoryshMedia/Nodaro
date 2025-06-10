@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import ApiService from 'SmugAdministration/js/services/api/api.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
 import { defineAsyncComponent } from 'vue';
 const DragList = defineAsyncComponent(() =>
   import("../list/DragList.vue" /* webpackChunkName: "administration-list-drag-list" */)

@@ -54,7 +54,7 @@
   
 <script>
 import { defineAsyncComponent } from "vue";
-import ApiService from 'SmugAdministration/js/services/api/api.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
 
 const NavigationItem = defineAsyncComponent(() =>
   import("./NavigationItem.vue" /* webpackChunkName: "navigation-item" */)

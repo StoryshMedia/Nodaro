@@ -2,7 +2,7 @@ var Encore = require('@symfony/webpack-encore');
 var dotenv = require('dotenv');
 const path = require('path');
 
-var modules = require('./src/Command/Frontend/webpack-modules.json');
+var modules = require('./src/Command/Webpack/webpack-modules.json');
 var styles = require('./src/Command/Frontend/webpack-styles.json');
 var aliases = require('./src/Command/Frontend/webpack-aliases.json');
 

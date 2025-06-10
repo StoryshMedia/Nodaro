@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import ApiService from 'SmugAdministration/js/services/api/api.service';
-import ImageService from 'SmugAdministration/js/services/image/image.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
+import ImageService from '@SmugAdministration/js/services/image/image.service';
 import { defineAsyncComponent } from "vue";
 const ButtonControls = defineAsyncComponent(() =>
   import("./additional/button/ButtonControls.vue" /* webpackChunkName: "administration-button-controls" */)

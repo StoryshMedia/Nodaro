@@ -79,7 +79,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { defineAsyncComponent } from "vue";
-import ItemService from 'SmugAdministration/js/services/item/item.service';
+import ItemService from '@SmugAdministration/js/services/item/item.service';
 const ContentItem = defineAsyncComponent(() =>
   import("./ContentItem.vue" /* webpackChunkName: "administration-content-editor-item" */)
 );

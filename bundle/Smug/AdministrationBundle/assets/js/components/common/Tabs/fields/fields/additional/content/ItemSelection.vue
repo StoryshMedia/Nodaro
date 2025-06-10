@@ -143,7 +143,7 @@
   </TransitionRoot>
 </template>
 <script>
-import ApiService from 'SmugAdministration/js/services/api/api.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay, TabGroup, TabList, Tab } from '@headlessui/vue';
 import { defineComponent, defineAsyncComponent } from 'vue';
 const Icon = defineAsyncComponent(() =>

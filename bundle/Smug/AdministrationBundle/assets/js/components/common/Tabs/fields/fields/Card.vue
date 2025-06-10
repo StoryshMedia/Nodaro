@@ -153,10 +153,10 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import ImageService from 'SmugAdministration/js/services/image/image.service';
-import TextService from 'SmugAdministration/js/services/text/text.service';
-import ConditionService from 'SmugAdministration/js/services/condition/condition.service';
-import ValueService from 'SmugAdministration/js/services/value/value.service';
+import ImageService from '@SmugAdministration/js/services/image/image.service';
+import TextService from '@SmugAdministration/js/services/text/text.service';
+import ConditionService from '@SmugAdministration/js/services/condition/condition.service';
+import ValueService from '@SmugAdministration/js/services/value/value.service';
 const Icon = defineAsyncComponent(() =>
   import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );

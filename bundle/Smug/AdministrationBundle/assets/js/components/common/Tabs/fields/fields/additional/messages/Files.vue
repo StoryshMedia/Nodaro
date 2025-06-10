@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ImageService from 'SmugAdministration/js/services/image/image.service';
+import ImageService from '@SmugAdministration/js/services/image/image.service';
 
 export default {
   name: "Files",

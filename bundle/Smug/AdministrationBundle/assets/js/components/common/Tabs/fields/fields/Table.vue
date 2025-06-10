@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import ApiService from 'SmugAdministration/js/services/api/api.service';
-import ValueService from 'SmugAdministration/js/services/value/value.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
+import ValueService from '@SmugAdministration/js/services/value/value.service';
 import { defineAsyncComponent } from "vue";
 const TableRow = defineAsyncComponent(() =>
   import("./additional/table/row/TableRow.vue" /* webpackChunkName: "administration-table-row" */)
