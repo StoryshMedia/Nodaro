@@ -1,0 +1,17 @@
+{% extends '@SmugFrontend/frontend/base.html.twig' %}
+
+{% block head %}
+    {{ include('@SmugFrontend/frontend/index/head.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen">
+        {% for item in contentItems %}
+            {% if isMultiItem(item) is same as(false) %}
+                {{ include(item.module.module.template.frontend.templatePath, item.variables) }}
+            {% else %}
+                {{ include(item.module.module.template.frontend.templatePath, item) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

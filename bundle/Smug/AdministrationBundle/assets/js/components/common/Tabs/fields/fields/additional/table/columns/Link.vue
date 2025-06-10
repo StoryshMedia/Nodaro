@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TextService from '@SmugAdministrationServices/text/text.service';
+import TextService from '@SmugAdministration/js/services/text/text.service';
 
 export default {
   name: "String",

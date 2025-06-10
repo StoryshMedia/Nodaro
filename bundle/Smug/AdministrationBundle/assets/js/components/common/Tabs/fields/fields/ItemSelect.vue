@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import ApiService from '@SmugAdministrationServices/api/api.service';
-import ValueService from '@SmugAdministrationServices/value/value.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
+import ValueService from '@SmugAdministration/js/services/value/value.service';
 
 export default {
   name: "ItemSelect",

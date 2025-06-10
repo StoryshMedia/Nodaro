@@ -1,0 +1,39 @@
+<section class="p-10 md:py-20 px-0 md:p-10 md:px-0">
+    <section class="relative px-10 md:p-0 transform duration-500 ">
+        <div class="md:h-full lg:min-h-72 xl:min-h-100">
+            {% if image.value is defined and image.value is not empty %}
+                {% set imageValue = getImage(image.value) %}
+                <img
+                    {% if id is defined %} {{ adminConfig(_context, 'image', id, loop.index) }} {% endif %}
+                    class="w-full h-full xl:max-w-6xl"
+                    srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
+                    sizes="(max-width: 600px) 480px,
+                            800px"
+                    src="{{ imageValue.desktop.detail.src }}"
+                    alt="{{ imageValue.desktop.detail.file }}" />
+            {% else %}
+                <img
+                {% if id is defined %} {{ adminConfig(_context, 'image', id, loop.index) }} {% endif %}
+                src="/Resources/elements/fallback/images/preview.webp"
+                class="w-full h-full xl:max-w-6xl" />
+            {% endif %}
+        </div>
+
+        <div class="content bg-white p-2 pt-8 md:p-12 pb-12 lg:max-w-lg w-full lg:absolute top-48 right-5">
+            <h2 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id, loop.index) }} {% endif %}>
+                {{ headline.value }}
+            </h2>
+            <div class="{{ caption.classes }}" {% if id is defined %} {{ adminConfig(_context, 'caption', id, loop.index) }} {% endif %}>
+                {{ caption.value | raw }}
+            </div>
+            <a
+                href="{{ button.settings.link.value }}"
+                title="{{ button.value }}"
+                class="mt-2 md:mt-5 p-3 px-5 bg-black text-white font-bold text-sm hover:bg-primary"
+                {% if id is defined %} {{ adminConfig(_context, 'button', id, loop.index) }} {% endif %}
+            >
+                {{ button.value }}
+            </a>
+        </div>
+    </section>
+</section>

@@ -1,0 +1,31 @@
+<div class="py-16 px-4 sm:px-8 {% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    <div class="block text-center lg:flex lg:text-left justify-between items-center">
+        <a
+            href="/"
+            class="font-bold text-dark hover:text-primary font-sans text-2xl"
+        >Nodaro</a>
+    </div>
+    <div class="border-t mt-4 border-black border-opacity-5 transition-colors">
+        <div class="py-4 px-8block text-center lg:text-left lg:flex justify-between items-center">
+            <nav class="-mx-4">
+                <nav
+                    aria-label="primary"
+                    class="relative z-20 flex-col flex-grow pb-4 justify-center lg:pb-0 lg:flex lg:justify-end lg:flex-row"
+                >
+                    {% for link in pluginSettings.links %}
+                        <div class="relative group">
+                            <a
+                                class="lg:flex lg:flex-row block w-full lg:w-auto font-medium  px-4 py-4 text-base text-center lg:text-left border-b-2 border-kelp-800 lg:border-b-0"
+                                href="{{link.slug}}"
+                                title="{{ link.title }}"
+                            >
+                                <span>{{ link.title }}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </nav>
+            </nav>
+            <p class="font-medium text-gray-400 text-sm mt-4 lg:mt-0" {% if id is defined %} {{ adminConfig(_context, 'copyright', id) }} {% endif %}>{{ copyright.value | raw }}</p>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@
   
 <script>
 import { defineAsyncComponent } from "vue";
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
 const ScreenLock = defineAsyncComponent(() =>
   import("./additional/lock/ScreenLock.vue" /* webpackChunkName: "administration-screen-lock" */)
 );

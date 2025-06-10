@@ -1,0 +1,35 @@
+<div style="font-family:arial; font-size:12px; background: #ffffff; color: #111317;">
+    {% mjml %}
+        <mjml>
+            <mj-body>
+                {% block header %}
+                    {{ include('@systemEmail/_global/html/header.html.twig') }}
+                {% endblock %}
+
+                <mj-section>
+                    <mj-column>
+                        <mj-text font-size="13px" color="{{ data.company.branding.primaryColor }}" line-height="16px" font-family="helvetica">
+                            <strong>{{ data.author.name }} </strong> hat Dich in seinem folgenden Kommentar erwähnt.
+                        </mj-text>
+                    </mj-column>
+                </mj-section>
+
+                <mj-section>
+                    <mj-column>
+                        <mj-text font-size="13px" color="{{ data.company.branding.primaryColor }}" line-height="16px" font-family="helvetica">
+                            {{ data.message | raw }}
+                        </mj-text>
+                    </mj-column>
+                </mj-section>
+
+                <mj-section>
+                    <mj-column>
+                        <mj-button href="{{ data.link }}" font-family="Helvetica" color="white">
+                            SEE IT
+                        </mj-button>
+                    </mj-column>
+                </mj-section>
+            </mj-body>
+        </mjml>
+    {% endmjml %}
+</div>

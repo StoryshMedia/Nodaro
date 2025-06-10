@@ -93,27 +93,27 @@ class SmugGetImage extends AbstractExtension
         $number = rand(1, 26);
 
         if ($returnOriginal) {
-            return 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' . $number . '.webp';
+            return '/site/img/author/list/preview/authorListPreview-' . $number . '.webp';
         }
 
         return [
             'mobile' => [
                 'list' => [
-                    'src' => 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
+                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
                     'file' => 'authorListPreview-' . $number
                 ],
                 'detail' => [
-                    'src' => 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
+                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
                     'file' => 'authorListPreview-' . $number
                 ]
             ],
             'desktop' => [
                 'list' => [
-                    'src' => 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
+                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
                     'file' => 'authorListPreview-' . $number
                 ],
                 'detail' => [
-                    'src' => 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
+                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
                     'file' => 'authorListPreview-' . $number
                 ]
             ]

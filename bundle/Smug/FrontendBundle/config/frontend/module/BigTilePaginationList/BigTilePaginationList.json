@@ -1,0 +1,73 @@
+{
+    "title": "Liste mit Paginierung (große Kacheln)",
+    "identifier": "SmugBigTilePaginationList",
+    "type": "plugin",
+    "category": "Lists",
+    "description": {
+        "de": "Paginierte Liste mit großen Kacheln",
+        "en": "Paginated list with big tiles"
+    },
+    "settings": {
+        "plugin": {
+            "fields": [
+                {
+                    "placeholder": "CORE_SECTION",
+                    "identifier": "core",
+                    "default": "",
+                    "type": "CoreSelect"
+                },
+                {
+                    "placeholder": "ITEM_LIMIT",
+                    "identifier": "itemLimit",
+                    "default": 9,
+                    "type": "Number"
+                },
+                {
+                    "placeholder": "SHOW_FILTERS",
+                    "identifier": "showFilters",
+                    "default": true,
+                    "type": "Checkbox"
+                },
+                {
+                    "placeholder": "SHOW_SEARCH",
+                    "identifier": "showSearch",
+                    "default": false,
+                    "type": "Checkbox"
+                },
+                {
+                    "placeholder": "SHOW_ALPHABETICAL",
+                    "identifier": "showAlphabetical",
+                    "default": true,
+                    "type": "Checkbox"
+                },
+                {
+                    "placeholder": "DETAIL_PAGE",
+                    "identifier": "detailPage",
+                    "default": "/",
+                    "type": "LinkField"
+                }
+            ]
+        },
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/BigTilePaginationList/index.html.twig"
+            }
+        },
+        "scripts": [
+            "bigTilePaginationList"
+        ],
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Welcome to Our Awesome Website",
+                "type": "Text",
+                "classes": ["text-5xl", "font-bold", "leading-tight", "mb-4"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

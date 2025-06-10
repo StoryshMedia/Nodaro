@@ -1,0 +1,22 @@
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+<meta http-equiv="Cache-control" content="public">
+{% if seo.seoKeywords is defined %}
+    <meta name="keywords" content="{{ seo.seoKeywords }}">
+{% endif %}
+{% if seo.seoDescription is defined %}
+    <meta name="description" content="{{ seo.seoDescription }}">
+{% endif %}
+{% if seo.noIndex is defined and seo.noIndex is same as(true) %}
+    <meta name="robots" content="noindex,{% if seo.noFollow is defined and seo.noFollow is same as(true) %}nofollow{% else %}follow{% endif %}">
+{% else %}
+    <meta name="robots" content="index,{% if seo.noFollow is defined and seo.noFollow is same as(true) %}nofollow{% else %}follow{% endif %}">
+{% endif %}
+{% if seo.image is defined %}
+    <meta itemprop="image" content="{{ seo.image }}" />
+{% endif %}
+{% if seo.canonicalLink is defined and seo.canonicalLink is not empty %}
+    <link rel="canonical" href="{{seo.canonicalLink}}" />
+{% else %}
+    <link rel="canonical" href="{{app.request.uri}}" />
+{% endif %}

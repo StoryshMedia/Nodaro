@@ -1,0 +1,7 @@
+<div {% if additionalClasses is defined %}class="{{ additionalClasses }}"{% endif %}>
+    <h1 class="text-2xl pl-2 my-2 mx-2 border-l-4 font-sans font-bold border-primary" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+        {{ headline.value }}
+    </h1>
+    <div id="simple-list-{% if id is defined %}{{ id }}{% endif %}" {% if id is defined %} {{ adminConfig(_context, '', id) }} {% endif %} data-props="{{ pluginSettingsJson }}" {% if id is defined %} data-frontendId="{{ id }}" {% endif %} {% if id is defined %}class="administration--plugin-overlay"{% endif %}></div>
+    {{ smug_encore_entry_script_tags('simpleList', null, '_default', [], true) }}
+</div>

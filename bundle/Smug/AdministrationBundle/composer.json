@@ -7,14 +7,14 @@
     "require": {
         "nodaro/core": "~0.1"
     },
+    "extra": {
+        "symfony": {
+            "bundle": true
+        }
+    },
     "autoload": {
         "psr-4": {
             "Smug\\AdministrationBundle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Smug\\AdministrationBundle\\Tests\\": "tests/"
         }
     },
     "authors": [

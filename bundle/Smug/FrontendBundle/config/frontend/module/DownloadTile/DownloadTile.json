@@ -1,0 +1,71 @@
+{
+    "title": "Download Linkkachel (mit Bild)",
+    "identifier": "SmugDownloadTile",
+    "type": "plugin",
+    "category": "Lists",
+    "description": {
+        "de": "Kachel mit Bild und einem Download",
+        "en": "Tile with an image and a download link"
+    },
+    "settings": {
+        "plugin": {
+            "fields": [
+                {
+                    "identifier": "image",
+                    "placeholder": "IMAGE",
+                    "type": "FileUpload",
+                    "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                    "config": {
+                        "mini": true,
+                        "multiple": false,
+                        "valueType": "file",
+                        "contentEditable": false
+                    }
+                },
+                {
+                    "identifier": "file",
+                    "placeholder": "FILE",
+                    "type": "FileUpload",
+                    "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                    "config": {
+                        "mini": true,
+                        "multiple": false,
+                        "valueType": "file",
+                        "contentEditable": false
+                    }
+                },
+                {
+                    "identifier": "label",
+                    "placeholder": "LABEL",
+                    "default": "Lorem ipsum dolor",
+                    "type": "Text",
+                    "classes": ["text-black", "text-left", "transition-colors", "mb-4", "lg:mb-8", "px-3", "md:px-0"],
+                    "config": {
+                        "valueType": "string",
+                        "contentEditable": true
+                    }
+                }
+            ]
+        },
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/DownloadTile/index.html.twig"
+            }
+        },
+        "scripts": [
+        ],
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-black", "text-left", "transition-colors", "mb-4", "lg:mb-8", "px-3", "md:px-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

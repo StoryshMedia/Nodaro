@@ -1,0 +1,18 @@
+<article class="{% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    <div class="col-span-12 sm:col-span-3">
+        <div class="text-center sm:text-left mb-14 timeline--header">
+            {% if headline.value is not empty %}
+                <h3 class="{{ headline.classes }}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+                    {{ headline.value }}
+                </h3>
+            {% endif %}
+        </div>
+    </div>
+    <div class="relative col-span-12 px-4 space-y-6 sm:col-span-9">
+        <div class="col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 timeline--wrapper">
+            {% for tab in tabs %}
+                {{ include('@SmugFrontend/frontend/modules/Timeline/partials/bulletpoint.html.twig', tab) }}
+            {% endfor %}
+        </div>
+    </div>
+</article>

@@ -1,0 +1,125 @@
+<header class="font-sans tracking-wide">
+    <nav class="shadow-md w-full py-5 px-6 md:px-12 z-50 bg-white backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                
+                <a
+                    href="/"
+                    class="font-bold hover:text-primary font-sans text-2xl mr-8"
+                ><span class="text-2xl font-serif font-bold text-gray-800">Nodaro</span></a>
+            </div>
+            
+            <div class="hidden lg:flex space-x-8">
+                {% if menu is defined %}
+                    {% for site in menu %}
+                        {% if site.children is empty %}
+                            <a href="{{site.slug}}" class="relative group text-dark transition-colors duration-300">
+                                <span class="relative">
+                                    {{site.title}}
+                                    <span class="absolute bottom-0 left-0 w-0 h-px bg-floral-pink group-hover:w-full transition-all duration-300"></span>
+                                </span>
+                            </a>
+                        {% else %}
+                            <div class="group relative">
+                                <a href="javascript:void(0)" class="relative text-dark transition-colors duration-300">
+                                    <span class="relative">
+                                        {{site.title}}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" class="ml-1 inline-block text-primary"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                            d="M12 16a1 1 0 0 1-.71-.29l-6-6a1 1 0 0 1 1.42-1.42l5.29 5.3 5.29-5.29a1 1 0 0 1 1.41 1.41l-6 6a1 1 0 0 1-.7.29z"
+                                            data-name="16" fill="#FF6F00" />
+                                        </svg>
+                                        <span class="absolute bottom-0 left-0 w-0 h-px bg-floral-pink group-hover:w-full transition-all duration-300"></span>
+                                    </span>
+                                </a>
+                                <ul
+                                    class='lg:absolute lg:text-black lg:top-10 lg:left-0 lg:z-50 block space-y-2 shadow-lg lg:bg-white max-h-0 overflow-hidden lg:w-64 group-hover:opacity-100 group-hover:max-h-100vh px-6 group-hover:pb-4 group-hover:pt-4 transition-all duration-300 list-none py-0'
+                                >
+                                    {% for child in site.children %}
+                                        <li class='border-b py-3'>
+                                            <a 
+                                                href='{{child.slug}}'
+                                                class='text-gray-800 text-lg flex items-center'
+                                            >
+                                                {{child.title}}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                {% if pluginSettings.showSearch is same as(true) %}
+                    <div class='px-4 py-2.5 rounded max-lg:hidden'>
+                        <div id="navigation-search-{% if id is defined %}{{ id }}{% endif %}" {% if id is defined %}class="administration--plugin-overlay"{% endif %} data-props="{{ searchWindowData | json_encode() }}"></div>
+                        {{ smug_encore_entry_script_tags('navigationSearch', null, '_default', [], true) }}
+                    </div>
+                {% endif %}
+
+                {% if pluginSettings.showAccount is same as(true) %}
+                    <div class="ml-auto space-x-8">
+                        <div id="navigation-login-{% if id is defined %}{{ id }}{% endif %}" {% if id is defined %}class="administration--plugin-overlay"{% endif %} data-props="{{ loginWindowData | json_encode() }}" data-loggedIn="{{ isLoggedIn(_context) }}"></div>
+                        {{ smug_encore_entry_script_tags('navigationLogin', null, '_default', [], true) }}
+                    </div>
+                {% endif %}
+
+
+                <button id="mobile-navigation-toggle" class="lg:hidden flex flex-col space-y-1.5">
+                    <span class="w-6 h-0.5 bg-dark"></span>
+                    <span class="w-6 h-0.5 bg-dark"></span>
+                    <span class="w-6 h-0.5 bg-dark"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobile-navigation" class="block lg:hidden h-0 overflow-hidden px-3">
+        {% if menu is defined %}
+            {% for site in menu %}
+                {% if site.children is empty %}
+                    <a href="{{site.slug}}" class="w-full py-3 group text-dark text-lg block transition-colors duration-300">
+                        <span class="relative">
+                            {{site.title}}
+                            <span class="absolute bottom-0 left-0 w-0 h-px bg-floral-pink group-hover:w-full transition-all duration-300"></span>
+                        </span>
+                    </a>
+                {% else %}
+                    <a href="javascript:void(0)" class="mobile-navigation-sub-menu-toggle py-3 block text-dark text-lg transition-colors w-full duration-300">
+                        <span class="relative">
+                            {{site.title}}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" class="ml-1 inline-block text-primary"
+                                viewBox="0 0 24 24">
+                                <path
+                                d="M12 16a1 1 0 0 1-.71-.29l-6-6a1 1 0 0 1 1.42-1.42l5.29 5.3 5.29-5.29a1 1 0 0 1 1.41 1.41l-6 6a1 1 0 0 1-.7.29z"
+                                data-name="16" fill="#FF6F00" />
+                            </svg>
+                            <span class="absolute bottom-0 left-0 w-0 h-px bg-floral-pink group-hover:w-full transition-all duration-300"></span>
+                        </span>
+                    </a>
+                    <ul
+                        class='mobile-navigation-sub-menu block h-0 space-y-2 overflow-hidden px-6 transition-all duration-300 list-none'
+                    >
+                        {% for child in site.children %}
+                            <li class='px-5 py-1'>
+                                <a 
+                                    href='{{child.slug}}'
+                                    class='text-dark text-lg flex items-center'
+                                >
+                                    {{child.title}}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</header>
+
+{{ smug_encore_entry_script_tags('simpleNavigationFunctions', null, '_default', [], true) }}

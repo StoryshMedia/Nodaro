@@ -1,0 +1,69 @@
+{
+    "title": "Hero Bild mit Textoverlay",
+    "identifier": "SmugHeroSection",
+    "type": "contentElement",
+    "category": "Header",
+    "description": {
+        "de": "Hero Bild Mit Text-Overlay und einem Call-to-Action-Button",
+        "en": "Hero image With text overlay and a call-to-action button"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/HeroSection/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "button",
+                "placeholder": "TEASER_CTA",
+                "type": "Text",
+                "default": "Action",
+                "classes": ["bg-yellow-400", "text-gray-900", "hover:bg-yellow-300", "py-2", "px-6", "rounded-full", "text-lg", "font-semibold", "transition", "duration-300", "ease-in-out", "transform", "hover:scale-105", "hover:shadow-lg"],
+                "settings": {
+                    "link": {
+                        "type": "linkField",
+                        "placeholder": "LINK_TARGET",
+                        "value": "#"
+                    }
+                },
+                "config": {
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            },
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Welcome to Our Awesome Website",
+                "type": "Text",
+                "classes": ["text-5xl", "font-bold", "leading-tight", "mb-4"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "caption",
+                "placeholder": "CAPTION",
+                "default": "Discover amazing features and services that await you.",
+                "type": "Editor",
+                "classes": ["text-lg", "text-gray-300", "mb-8"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "title": "Kleines Hero Bild mit Textbox Overlay",
+    "identifier": "SmugHeroHeadlineWithImage",
+    "type": "contentElement",
+    "category": "Header",
+    "description": {
+        "de": "Nicht vollflächiges Hero Bild mir einer überlappenden Textbox",
+        "en": "Not full-surface hero image with an overlapping text box"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/HeroHeadlineWithImage/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            },
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Welcome to Our Awesome Website",
+                "type": "Text",
+                "classes": ["text-5xl", "font-bold", "leading-tight", "mb-4"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "caption",
+                "placeholder": "CAPTION",
+                "default": "Discover amazing features and services that await you.",
+                "type": "Editor",
+                "classes": ["text-lg", "text-gray-300", "mb-8"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "title": "Item Teaser (Listenansicht)",
+    "identifier": "SmugItemTeaser",
+    "type": "plugin",
+    "category": "Plugins",
+    "description": {
+        "de": "Item Teaser zur Darstellung von ausgewählten Datensätzen in Listenansicht",
+        "en": "Item teaser for displaying selected data records in list view"
+    },
+    "settings": {
+        "plugin": {
+        },
+        "tabs": [
+            {
+                "fields": [
+                    {
+                        "placeholder": "ITEM_SELECT",
+                        "identifier": "item",
+                        "default": "{}",
+                        "type": "ItemSelect"
+                    },
+                    {
+                        "placeholder": "TEMPLATE",
+                        "identifier": "template",
+                        "default": "",
+                        "type": "Selectbox",
+                        "config": {
+                            "getCall": "/be/api/custom/item/teaser/template"
+                        }
+                    },
+                    {
+                        "placeholder": "DETAIL_PAGE",
+                        "identifier": "detailPage",
+                        "default": "/",
+                        "type": "LinkField"
+                    }
+                ]
+            }
+        ],
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/ItemTeaser/index.html.twig"
+            }
+        },
+        "scripts": [
+        ],
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-3xl", "font-semibold", "pb-12"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

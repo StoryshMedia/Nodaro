@@ -33,8 +33,7 @@ class WebpackModuleBuildCommand extends Command
         $output->writeln('Searching asset files');
         $output->writeln('#####################');
 
-        $assets = [
-        ];
+        $assets = [];
 
         $finder = new Finder();
         $finder->files()->in($this->kernel->getProjectDir() . "/bundle")->name(['*.js']);
@@ -49,7 +48,7 @@ class WebpackModuleBuildCommand extends Command
             }
             if (!DataHandler::isStringInString($file->getRelativePath(), 'modules')) {
                 continue;
-            }[]
+            }
 
             $assets[] = [
                 'path' => $this->kernel->getProjectDir() . "/bundle/" . $file->getRelativePath() . '/' . $file->getFileName(),

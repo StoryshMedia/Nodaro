@@ -1,0 +1,46 @@
+<div style="font-family:arial; font-size:12px; background: #ffffff; color: #111317;">
+    {% mjml %}
+        <mjml>
+            <mj-body>
+                {% block header %}
+                    {{ include('@systemEmail/_global/html/header.html.twig') }}
+                {% endblock %}
+
+                <mj-section>
+                    <mj-column>
+                        <mj-text font-size="13px" font-family="helvetica">
+                            Bei einem Seitenaufruf kam es zu einem Fehler, weil keine Daten gefunden werden konnten.
+                        </mj-text>
+                    </mj-column>
+                </mj-section>
+
+                <mj-section>
+                    <mj-column>
+                        <mj-text font-size="13px" font-weight="bold" font-family="helvetica">
+                            Wo
+                        </mj-text>
+                        <mj-text font-size="13px" line-height="16px" font-family="helvetica">
+                            {{ data.mode }}
+                        </mj-text>
+                        <mj-text font-size="13px" font-weight="bold" font-family="helvetica">
+                            Slug der Seite
+                        </mj-text>
+                        <mj-text font-size="13px" font-family="helvetica">
+                            {{ data.slug }}
+                        </mj-text>
+                        <mj-text font-size="13px" font-weight="bold" font-family="helvetica">
+                            Verlinkung
+                        </mj-text>
+                        <mj-text font-size="13px" font-family="helvetica">
+                            {{ data.href }}
+                        </mj-text>
+                    </mj-column>
+                </mj-section>
+
+                {% block footer %}
+                    {{ include('@systemEmail/_global/html/footer.html.twig') }}
+                {% endblock %}
+            </mj-body>
+        </mjml>
+    {% endmjml %}
+</div>

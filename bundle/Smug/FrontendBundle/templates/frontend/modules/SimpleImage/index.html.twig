@@ -1,0 +1,18 @@
+<div class="{% if additionalClasses is defined %}{{ additionalClasses }}{% endif %} w-full h-full">
+    {% if image.value is defined and image.value is not empty %}
+        {% set imageValue = getImage(image.value) %}
+        <img
+            {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+            class="max-w-full max-h-full mx-auto"
+            srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
+            sizes="(max-width: 600px) 480px,
+                    800px"
+            src="{{ imageValue.desktop.detail.src }}"
+            alt="{{ imageValue.desktop.detail.file }}" />
+    {% else %}
+        <img
+            {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+            src="{{ getFallbackImage() }}"
+            class="max-w-full max-h-full mx-auto" />
+    {% endif %}
+</div>

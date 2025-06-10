@@ -1,0 +1,44 @@
+{
+    "website": {
+        "label": "WEBSITE",
+        "key": "website",
+        "parent": "",
+        "icon": "IconGlobe",
+        "position": 2,
+        "path": "",
+        "type": 0,
+        "children": []
+    },
+    "websiteSettingHeader": {
+        "label": "WEBSITE_SETTINGS",
+        "zone": "",
+        "key": "websiteSettingHeader",
+        "parent": "websites",
+        "icon": "IconSettings",
+        "path": "smug/frontend/settings/detail",
+        "position": 0,
+        "type": 2,
+        "children": []
+    },
+    "websites": {
+        "label": "SITES",
+        "key": "websites",
+        "parent": "website",
+        "icon": "",
+        "path": "",
+        "position": 0,
+        "type": 1,
+        "children": []
+    },
+    "domain": {
+        "label": "DOMAINS",
+        "key": "domain",
+        "parent": "websites",
+        "icon": "",
+        "path": "smug/frontend/domain/list",
+        "position": 0,
+        "type": 2,
+        "children": []
+    }
+}
+  

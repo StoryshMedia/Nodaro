@@ -1,0 +1,30 @@
+{
+    "title": "Einfaches Bild",
+    "identifier": "SmugSimpleImage",
+    "type": "contentElement",
+    "category": "Images",
+    "description": {
+        "de": "Einfache Darstellung eines Bildes",
+        "en": "Simple display of an image"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/SimpleImage/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["mx-auto", "lazy", "shadow-xl", "group-hover:shadow-2xl", "rounded-xl"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            }
+        ]
+    }
+}

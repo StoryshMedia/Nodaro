@@ -1,0 +1,30 @@
+{
+    "title": "Einfache Überschrift",
+    "identifier": "SmugSimpleHeadline",
+    "type": "contentElement",
+    "category": "Header",
+    "description": {
+        "de": "Darstellung einer einfachen Seitenüberschrift",
+        "en": "Display of a simple page heading"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/SimpleHeadline/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-black", "text-left", "transition-colors", "my-8", "md:my-10"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

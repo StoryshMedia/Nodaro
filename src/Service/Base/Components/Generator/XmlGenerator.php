@@ -5,10 +5,6 @@ namespace Smug\Core\Service\Base\Components\Generator;
 use Smug\Core\Service\Base\Components\Handler\TimeHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\TimeProvider;
 
-/**
- * Class EpubGenerator
- * @package Smug\Core\Service\Base\Components\Generator
- */
 class XmlGenerator
 {
     /**
@@ -56,7 +52,7 @@ class XmlGenerator
     {
         $url = '<sitemap>';
 
-        $url .= '<loc>https://storysh.de' . $slug . '</loc>';
+        $url .= '<loc>' . $slug . '</loc>';
 
         $url .= '</sitemap>';
         

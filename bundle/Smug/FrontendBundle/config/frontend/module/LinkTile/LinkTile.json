@@ -1,0 +1,82 @@
+{
+    "title": "Interne Linkkachel (einfach)",
+    "identifier": "SmugInternLinkTile",
+    "type": "plugin",
+    "category": "Lists",
+    "description": {
+        "de": "Kachel für eine interne Verlinkung",
+        "en": "Tile for an internal link"
+    },
+    "settings": {
+        "plugin": {
+            "fields": [
+                {
+                    "placeholder": "AREA_SELECTION",
+                    "identifier": "area",
+                    "default": "",
+                    "type": "Selectbox"
+                },
+                {
+                    "placeholder": "ITEM_SELECTION",
+                    "identifier": "item",
+                    "default": "",
+                    "type": "SearchSelect",
+                    "config": {
+                        "multiple": false,
+                        "setModel": true,
+                        "additionalParameterIdentifier": "area",
+                        "searchCall": "/be/api/custom/search/"
+                    }
+                },
+                {
+                    "placeholder": "DETAIL_PAGE",
+                    "identifier": "detailPage",
+                    "default": "/",
+                    "type": "LinkField",
+                    "config": {
+                        "allDomains": true
+                    }
+                },
+                {
+                    "placeholder": "OPEN_IN_NEW_TAB",
+                    "identifier": "openInNewTab",
+                    "default": true,
+                    "type": "Checkbox"
+                },
+                {
+                    "identifier": "image",
+                    "placeholder": "IMAGE",
+                    "description": "INTERNAL_LINK_TILE_DESCRIPTION",
+                    "type": "FileUpload",
+                    "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                    "config": {
+                        "mini": true,
+                        "multiple": false,
+                        "valueType": "file",
+                        "contentEditable": false
+                    }
+                }
+            ]
+        },
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/InternLinkTile/index.html.twig"
+            }
+        },
+        "scripts": [
+        ],
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-black", "text-left", "transition-colors", "mb-4", "lg:mb-8", "px-3", "md:px-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,4 @@
+<div {% if additionalClasses is defined %}class="{{ additionalClasses }}"{% endif %}>
+    <div id="medium-tile-pagination-list-{% if id is defined %}{{ id }}{% endif %}" {% if id is defined %} {{ adminConfig(_context, '', id) }} {% endif %} data-props=" {{ pluginSettingsJson }} " {% if id is defined %} data-frontendId="{{ id }}" {% endif %} {% if id is defined %}class="administration--plugin-overlay"{% endif %}></div>
+    {{ smug_encore_entry_script_tags('mediumTilePaginationList', null, '_default', [], true) }}
+</div>

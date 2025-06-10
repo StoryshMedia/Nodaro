@@ -1,0 +1,58 @@
+{
+    "title": "Einfache Seitennavigation",
+    "identifier": "SmugSimpleNavigation",
+    "type": "plugin",
+    "category": "Structure",
+    "description": {
+        "de": "Darstellung einer einfachen Seitennavigation",
+        "en": "Display of a simple page navigation"
+    },
+    "settings": {
+        "plugin": {
+            "fields": [
+                {
+                    "placeholder": "START",
+                    "identifier": "startingSite",
+                    "default": "",
+                    "description": "SITE_START_DESCRIPTION",
+                    "type": "SiteSelect"
+                },
+                {
+                    "placeholder": "SHOW_SEARCH",
+                    "identifier": "showSearch",
+                    "default": true,
+                    "description": "SEARCH_EXTENSION_NEEDED",
+                    "type": "Checkbox"
+                },
+                {
+                    "placeholder": "SHOW_ACCOUNT",
+                    "identifier": "showAccount",
+                    "default": true,
+                    "description": "FRONTEND_USER_EXTENSION_NEEDED",
+                    "type": "Checkbox"
+                }
+            ]
+        },
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/SimpleNavigation/index.html.twig"
+            }
+        },
+        "scripts": [
+            "navigationSearch"
+        ],
+        "fields": [
+            {
+                "identifier": "logo",
+                "placeholder": "lOGO",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            }
+        ]
+    }
+}

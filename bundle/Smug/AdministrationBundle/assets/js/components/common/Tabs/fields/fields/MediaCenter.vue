@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from '@SmugAdministration/js/services/api/api.service';
 import { TransitionGroup } from "vue";
 import VueCollapsible from 'vue-height-collapsible/vue3';
 import { defineAsyncComponent } from "vue";

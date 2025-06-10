@@ -1,0 +1,50 @@
+<div {% if additionalClasses is defined %}class="{{ additionalClasses }}"{% endif %}>
+    <h3 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+        {{ headline.value }}
+    </h3>
+    <div
+        class="h-72 lg:h-96 xl:h-72 mt-5"
+    >
+        {% if entry is defined and entry is not empty %}
+            <article
+                class="flex w-full h-full relative flex-col post-card rounded-md shadow-md hover:shadow-2xl"
+            >
+                {% set imageValue = getImage(entry.images) %}
+                <div
+                    class="group overlay overflow-hidden transition-all relative flex-initial rounded-md h-full background overlay-black" 
+                    style="flex: 0 0 auto; background-image: url('{{imageValue.desktop.detail.src}}')"
+                    itemscope=""
+                    itemtype="BlogPosting"
+                >
+                    <meta
+                        itemprop="name"
+                        content="{{entry.title}} {% if entry.subTitle is defined %}{{entry.subTitle}}{% endif %}"
+                    >
+                    <a 
+                        href="{{pluginSettings.detailPage}}{{entry.slug}}"
+                        title="{{entry.title}} {% if entry.subTitle is defined %}{{entry.subTitle}}{% endif %}"
+                        target="_blank"
+                    >
+                        <div class="h-full w-full backdrop-filter backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"></div>
+                        <div class="px-8 py-4 absolute bottom-0 right-0 left-0 flex-auto overlay-content">
+                            <h6>
+                                <p
+                                    class="line-clamp-3 font-serif font-bold mt-2 block text-xl text-white group-hover:text-primary"
+                                >
+                                    {{entry.title}} 
+                                </p>
+                            </h6>
+                            {% if entry.subTitle is defined %}
+                                <p
+                                    class="text-white font-medium transition-all line-clamp-2 text-sm"
+                                >
+                                    {{entry.subTitle}}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+            </article>
+        {% endif %}
+    </div>
+</div>

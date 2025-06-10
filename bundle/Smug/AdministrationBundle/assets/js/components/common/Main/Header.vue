@@ -77,7 +77,7 @@
 import { defineAsyncComponent } from "vue";
 
 const Icon = defineAsyncComponent(() =>
-  import("@core/js/icons/Icon.vueIcon.vue" /* webpackChunkName: "icon" */)
+  import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
 const Search = defineAsyncComponent(() =>
   import("./additional/header/Search.vue" /* webpackChunkName: "administration-header-search" */)

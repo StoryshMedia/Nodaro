@@ -9,10 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * Class SendMail
- * @package Smug\Core\Service\Base\Mail
- */
 class SendMail extends AbstractController
 {
     /** @var ContainerInterface $container */
@@ -21,36 +17,27 @@ class SendMail extends AbstractController
     /** @var LoggerInterface $logger */
     protected LoggerInterface $logger;
 
-    /**
-     * @param KernelInterface $kernel
-     * @param LoggerInterface $logger
-     */
     public function __construct(KernelInterface $kernel, LoggerInterface $logger)
     {
         $this->logger = $logger;
     	$this->container = $kernel->getContainer();
     }
 	
-	/**
-	 * @param $template
-	 * @param array $mailData
-	 * @param array $data
-	 * @param array|null $attachment
-	 * @return bool
-	 */
-    public function sendHtmlMail($template, array $mailData, array $data, array $attachment = null): bool
+    public function sendHtmlMail($template, array $mailData, array $data, ?array $attachment = null): bool
     {
         $recipients = DataHandler::doesKeyExists('recipient', $mailData) ? [$mailData['recipient']] : $mailData['recipients'];
         $attachmentList = [];
 
+        $senderName = (!DataHandler::isEmpty($mailData['senderName'])) ? $mailData['senderName'] : 'Sender';
+
         $sendInBlueData = [
             'sender' => [
-                'name' => (!empty($mailData['senderName'])) ? $mailData['senderName'] : 'Storysh',
+                'name' => $senderName,
                 'email' => $mailData['from']
             ],
             'recipients' => $recipients,
             'subject' => $mailData['subject'],
-            'preview' => (!empty($mailData['preview'])) ? $mailData['preview'] : 'Informationen von Deinem Storysh Team',
+            'preview' => (!DataHandler::isEmpty($mailData['preview'])) ? $mailData['preview'] : 'Informationen von ' . $senderName,
             'body' => $this->render(
                 $template,
                 $data

@@ -3,16 +3,6 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    container.dumper.inline_factories: true
-    locale: 'de'
-    timezone: 'Europe/Berlin'
-    DATABASE_HOST: 89.22.121.109
-    DATABASE_PORT: 3306
-    DATABASE_NAME: Storysh
-    DATABASE_USER: storysh
-    DATABASE_PASSWORD: web%deV1!CoreyT.8
-    #app_locales: de|en
 
 services:
     # default configuration for services in *this* file

@@ -1,0 +1,7 @@
+<header class="border-b border-black border-opacity-5 {% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    {% if headline.value is not empty %}
+        <h1 class="{{ headline.classes }}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+            {{ headline.value }}
+        </h1>
+    {% endif %}
+</header>
