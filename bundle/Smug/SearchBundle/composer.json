@@ -1,0 +1,21 @@
+{
+    "name": "smug/search-bundle",
+    "version": "1.0.0",
+    "type": "symfony-bundle",
+    "description": "Frontend Suche",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smug\\SearchBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alex Voß",
+            "email": "alex@storysh-media.de"
+        }
+    ]
+}
