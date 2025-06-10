@@ -1,0 +1,11 @@
+{% if script.template is not empty%}
+    {{ include(script.template.frontend.templatePath, _context) }}
+{% endif %}
+
+{% if script.externalSrc is not empty%}
+    <script src="{{script.externalSrc}}" async></script>
+{% endif %}
+
+{% if script.plainScript is not empty%}
+    {{script.plainScript | raw}}
+{% endif %}

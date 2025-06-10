@@ -1,0 +1,29 @@
+.blog--headline {
+    @apply text-primary;
+    @apply text-2xl;
+    @apply border-b-2;
+  
+    border-color: #ff6f00;
+  }
+  
+  .blog--content ul {
+    @apply pl-12;
+    @apply py-3;
+    list-style-type: disc;
+  }
+  
+  .blog--content.isEasy p {
+    line-height: 3.5rem;
+  }
+  .blog--content.isEasy ul li {
+    line-height: 3.5rem;
+  }
+  .text--difficulty.green {
+    background-color: rgb(132 204 22);
+  }
+  .text--difficulty.red {
+    background-color: rgb(173, 26, 34);
+  }
+  .text--difficulty.yellow {
+    background-color: rgb(251 191 36);
+  }

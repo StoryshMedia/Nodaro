@@ -1,0 +1,17 @@
+{
+    "title": "Cookie Consent",
+    "identifier": "SmugCookieConsent",
+    "description": {
+        "de": "Ein Basis Cookiebanner",
+        "en": "A basic cookie banner"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/scripts/CookieConsent/index.html.twig"
+            }
+        },
+        "plainScript": "",
+        "externalSrc": ""
+    }
+}

@@ -1,0 +1,23 @@
+{{ encore_entry_link_tags('smug-frontendbundle-carousel') }}
+<div class="hero-carousel-slider-wrapper {% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    <button class="hero-carousel-slide-arrow bg-dark text-white hover:text-primary" id="hero-carousel-slide-arrow-prev">
+        <div class="my-auto">
+            {{ include('@SmugFrontend/frontend/shared/icons/icon-next.html.twig') }}
+        </div>
+    </button>
+  
+    <button class="hero-carousel-slide-arrow bg-dark text-white hover:text-primary" id="hero-carousel-slide-arrow-next">
+        <div class="my-auto">
+            {{ include('@SmugFrontend/frontend/shared/icons/icon-next.html.twig') }}
+        </div>
+    </button>
+
+    <ul class="hero-carousel-slides-container" id="hero-carousel-slides-container">
+        {% for tab in tabs %}
+            <li class="hero-carousel-slide">
+                {{ include('@SmugFrontend/frontend/modules/HeroCarousel/partials/tab.html.twig', tab) }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{{ smug_encore_entry_script_tags('heroCarousel', null, '_default', [], true) }}

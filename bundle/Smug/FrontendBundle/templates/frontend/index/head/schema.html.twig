@@ -1,0 +1,16 @@
+<meta name="application-name" content="Storysh" />
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Storysh">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+{% if seo.seoData is defined and seo.seoData is not empty %}    
+    <script type="application/ld+json">
+        {{ seo.seoData | raw }}
+    </script>
+{% endif %}
+{% if breadcrumb is defined %}
+    <script type="application/ld+json">
+        {{ breadcrumb | raw }}
+    </script>
+{% endif %}

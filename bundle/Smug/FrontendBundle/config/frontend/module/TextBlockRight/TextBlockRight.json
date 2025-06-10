@@ -1,0 +1,41 @@
+{
+    "title": "Textblock am rechten Seitenrand",
+    "identifier": "SmugTextBlockRight",
+    "type": "contentElement",
+    "category": "Text",
+    "description": {
+        "de": "Darstellung eines Textblocks am rechten Seitenrand",
+        "en": "Display of a text block on the right-hand side of the page"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/TextBlockRight/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-black", "text-left", "transition-colors", "mb-4", "lg:mb-8", "px-3", "md:px-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "caption",
+                "placeholder": "CAPTION",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, molestiae! Quidem est esse numquam odio deleniti, beatae, magni dolores provident quaerat totam eos, aperiam architecto eius quis quibusdam fugiat dicta.",
+                "type": "Editor",
+                "classes": ["text-gray-600", "text-left", "transition-colors", "font-medium", "text-md", "mb-8", "px-3", "md:px-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

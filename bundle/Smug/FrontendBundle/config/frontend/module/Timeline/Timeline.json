@@ -1,0 +1,59 @@
+{
+    "title": "Timeline mit Bulletpoints",
+    "identifier": "SmugTimeline",
+    "type": "contentElement",
+    "category": "Text",
+    "description": {
+        "de": "Darstelung einer Timeline mit Bulletpoints",
+        "en": "Display of a timeline with bullet points"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/Timeline/index.html.twig"
+            }
+        },
+        "tabs": [
+            {
+                "fields": [
+                    {
+                        "identifier": "headline",
+                        "placeholder": "HEADLINE",
+                        "default": "Welcome to Our Awesome Website",
+                        "type": "Text",
+                        "classes": ["text-xl", "font-semibold", "tracking-wide"],
+                        "config": {
+                            "valueType": "string",
+                            "contentEditable": true
+                        }
+                    },
+                    {
+                        "identifier": "caption",
+                        "placeholder": "CAPTION",
+                        "default": "Discover amazing features and services that await you.",
+                        "type": "Editor",
+                        "classes": ["mt-3"],
+                        "config": {
+                            "valueType": "string",
+                            "contentEditable": true
+                        }
+                    }
+                ]
+            }
+        ],
+        "scripts": [],
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-3xl", "font-semibold", "pb-12"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

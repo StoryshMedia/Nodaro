@@ -1,0 +1,20 @@
+{
+    "title": "Zweispaltiges Raster",
+    "identifier": "SmugTwoColumnGrid",
+    "type": "contentElement",
+    "multi": true,
+    "category": "Structure",
+    "description": {
+        "de": "Zweispaltiges Raster zur Darstellung von weiteren Elementen",
+        "en": "Two-column grid for displaying additional elements"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/TwoColumnGrid/index.html.twig"
+            }
+        },
+        "fields": [
+        ]
+    }
+}

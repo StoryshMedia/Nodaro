@@ -1,0 +1,11 @@
+<footer class="bg-white transition-all z-30 relative">
+    {% for script in scripts.footerTop %}
+        {{ include('@SmugFrontend/frontend/index/script/script.html.twig', script) }}
+    {% endfor %}
+
+    
+
+    {% for script in scripts.footerBottom %}
+        {{ include('@SmugFrontend/frontend/index/script/script.html.twig', script) }}
+    {% endfor %}
+</footer>

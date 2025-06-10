@@ -1,0 +1,76 @@
+{
+    "title": "Teaser Element with Image on the right",
+    "identifier": "SmugTeaserImageRight",
+    "type": "contentElement",
+    "category": "Text",
+    "description": {
+        "de": "Teaser Element mit einer Text Blid Kombination mit einem Bild auf der rechten Seite",
+        "en": "Teaser element with a text blid combination with an image on the right side"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/TeaserImageRight/index.html.twig"
+            },
+            "classes": [
+                {
+                    "identifier": "box",
+                    "title": "TEXT_BOX",
+                    "value": "post-card p-4 lg:p-8 md:text-left shadow-lg col-span-12 md:col-span-6 order-first lg:order-first bg-white text-dark overlap--tile left--tile min-h-24 z-20"
+                }
+            ]
+        },
+        "fields": [
+            {
+                "identifier": "button",
+                "placeholder": "TEASER_CTA",
+                "type": "Text",
+                "default": "Action",
+                "classes": ["block", "flex", "mt-8", "lg:mt-12", "outline-link", "outline-link-primary", "text-primary", "hover:text-dark"],
+                "settings": {
+                    "link": {
+                        "type": "linkField",
+                        "placeholder": "LINK_TARGET",
+                        "value": "#"
+                    }
+                },
+                "config": {
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            },
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+                "type": "Text",
+                "classes": ["text-black", "text-left", "transition-colors", "mb-4", "lg:mb-8", "px-3", "md:px-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "caption",
+                "placeholder": "CAPTION",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, molestiae! Quidem est esse numquam odio deleniti, beatae, magni dolores provident quaerat totam eos, aperiam architecto eius quis quibusdam fugiat dicta.",
+                "type": "Editor",
+                "classes": ["text-gray-600", "text-left", "transition-colors", "font-medium", "text-md", "mb-8", "px-3", "md:px-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

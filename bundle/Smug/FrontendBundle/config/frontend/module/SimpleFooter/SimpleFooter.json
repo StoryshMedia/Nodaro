@@ -1,0 +1,54 @@
+{
+    "title": "Einfacher Footer",
+    "identifier": "SmugSimpleFooter",
+    "type": "plugin",
+    "category": "Structure",
+    "description": {
+        "de": "Darstellung eines einfachen Footers",
+        "en": "Display of a simple page footer"
+    },
+    "settings": {
+        "plugin": {
+            "fields": [
+                {
+                    "placeholder": "LINKS",
+                    "identifier": "links",
+                    "default": "[]",
+                    "description": "FOOTER_LINKS_DESCRIPTION",
+                    "type": "LinkList"
+                },
+                {
+                    "identifier": "facebookLink",
+                    "placeholder": "FACEBOOK_LINK",
+                    "type": "Text",
+                    "default": ""
+                },
+                {
+                    "identifier": "instagramLink",
+                    "placeholder": "INSTAGRAM_LINK",
+                    "type": "Text",
+                    "default": ""
+                }
+            ]
+        },
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/SimpleFooter/index.html.twig"
+            }
+        },
+        "scripts": [],
+        "fields": [
+            {
+                "identifier": "copyright",
+                "placeholder": "COPYRIGHT",
+                "default": "PRODUCT NAME &copy; 2025",
+                "type": "Text",
+                "classes": ["font-medium", "text-gray-400", "text-sm", "mt-4", "lg:mt-0"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,35 @@
+<div {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %} class="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden {% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+  <div class="absolute inset-0">
+    {% if image.value is defined and image.value is not empty %}
+        {% set imageValue = getImage(image.value) %}
+        <img
+            class="w-full h-full"
+            srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
+            sizes="(max-width: 600px) 480px,
+                    800px"
+            src="{{ imageValue.desktop.detail.src }}"
+            alt="{{ imageValue.desktop.detail.file }}" />
+    {% else %}
+        <img class="w-full h-full" />
+    {% endif %}
+
+    <div class="absolute inset-0 w-full h-full bg-black opacity-50"></div>
+  </div>
+  
+  <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
+    <h1 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+        {{ headline.value }}
+    </h1>
+    <div class="{{ caption.classes }}" {% if id is defined %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
+        {{ caption.value | raw }}
+    </div>
+    <a
+        href="{{ button.settings.link.value }}"
+        title="{{ button.value }}"
+        class="{{ button.classes }} p-1"
+        {% if id is defined %} {{ adminConfig(_context, 'button', id) }} {% endif %}
+    >
+        <span class="flex">{{ button.value }}<span>
+    </a>
+  </div>
+</div>

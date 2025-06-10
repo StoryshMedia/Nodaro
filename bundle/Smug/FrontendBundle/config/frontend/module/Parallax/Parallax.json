@@ -1,0 +1,30 @@
+{
+    "title": "Vollflächiger Parallax",
+    "identifier": "SmugParallaxFull",
+    "type": "contentElement",
+    "category": "Images",
+    "description": {
+        "de": "Vollflächiges Bild mit Parallax Effekt",
+        "en": "Full-surface image with parallax effect"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/Parallax/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            }
+        ]
+    }
+}

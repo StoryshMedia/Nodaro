@@ -1,0 +1,56 @@
+{
+    "title": "Header Bild und Text nebeneinander",
+    "identifier": "SmugHeaderImageText",
+    "type": "contentElement",
+    "category": "Header",
+    "description": {
+        "de": "Header Bild und Text nebeneinander",
+        "en": "Header image and text next to each other"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/HeaderImageText/index.html.twig"
+            }
+        },
+        "tabs": [
+        ],
+        "scripts": [
+        ],
+        "fields": [
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            },
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Welcome to Our Awesome Website",
+                "type": "Text",
+                "classes": ["text-black", "transition-colors", "mb-8"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "caption",
+                "placeholder": "CAPTION",
+                "default": "Discover amazing features and services that await you.",
+                "type": "Editor",
+                "classes": ["prose", "lg:text-xl", "w-2/3"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

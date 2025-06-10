@@ -1,0 +1,9 @@
+<div class="grid grid-cols-1 md:grid-cols-{{ children|length }} {% if variables.additionalClasses is defined %}{{ variables.additionalClasses }}{% endif %}">
+    {% for column in children %}
+        <div>
+            {% for child in column %}
+                {{ include(child.module.module.template.frontend.templatePath, child.variables) }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,16 @@
+<article class="{% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    <div class="md:grid md:justify-items-end">
+        <div
+            class="md:w-8/12 px-5"
+        >
+            {% if headline.value is not empty %}
+                <h2 class="{{ headline.classes }}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+                    {{ headline.value }}
+                </h2>
+            {% endif %}
+            <div class="{{ caption.classes }}" {% if id is defined %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
+                {{ caption.value | raw }}
+            </div>
+        </div>
+    </div>
+</article>

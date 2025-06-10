@@ -1,0 +1,72 @@
+{
+    "title": "Einfache Liste mit Text/Bild",
+    "identifier": "SmugSimpleList",
+    "type": "plugin",
+    "category": "Lists",
+    "description": {
+        "de": "Plugin zur Darstellung einer einfachen Liste mit Text/Bild Block",
+        "en": "Plugin for displaying a simple list with text/image block"
+    },
+    "settings": {
+        "plugin": {
+            "fields": [
+                {
+                    "placeholder": "CORE_SECTION",
+                    "identifier": "core",
+                    "default": "",
+                    "type": "CoreSelect"
+                },
+                {
+                    "placeholder": "FILTER_SELECTION",
+                    "identifier": "filter",
+                    "default": "",
+                    "type": "Selectbox"
+                },
+                {
+                    "placeholder": "ITEM_LIMIT",
+                    "identifier": "itemLimit",
+                    "default": 6,
+                    "type": "Number"
+                },
+                {
+                    "placeholder": "DETAIL_PAGE",
+                    "identifier": "detailPage",
+                    "default": "/",
+                    "type": "LinkField"
+                }
+            ]
+        },
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/SimpleList/index.html.twig"
+            }
+        },
+        "scripts": [
+            "simpleList"
+        ],
+        "fields": [
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Welcome to Our Awesome Website",
+                "type": "Text",
+                "classes": ["text-5xl", "font-bold", "leading-tight", "mb-4"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": ["transition-all", "lazy", "shadow-md", "group-hover:shadow-2xl", "h-full", "w-full", "rounded-md", "background"],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            }
+        ]
+    }
+}

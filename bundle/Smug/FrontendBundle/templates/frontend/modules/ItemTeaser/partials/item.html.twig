@@ -1,0 +1,35 @@
+<div class="container mx-auto relative pt-3 lg:pt-5 space-y-16">
+    <a
+        href="{{ detailPage.value }}{{ data.slug }}"
+        title="{{ data.title }}"
+        target="_blank"
+    >
+        <div class="text-left flex flex-wrap items-center lg:items-start">
+            <div class="w-full text-center md:text-left md:w-3/12 lg:w-2/12">
+                <div class="inline-block relative">
+                    <div
+                        class="text-center md:text-left relative w-32 h-32 rounded-full border-4 border-primary overflow-hidden"
+                    >
+                        <section>
+                            <div
+                                class="h-32 w-full object-cover transition-all duration-500 ease-in-out transform group-hover:scale-110"
+                                style="background-repeat: no-repeat; background-position: center; background-image: url('https://api.storysh.de/_uploads/images/media/fallback/thumbnails/fallback_02_list_desktop.webp'); background-size: 100% 100%;"
+                            ></div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-9/12 lg:w-10/12 mt-5 lg:mt-0">
+                <div class="py-5">
+                    <h4 class="text-center md:text-left card-title text-xl font-semibold">
+                        {{ data.title }}
+                    </h4>
+                    
+                    <p>
+                        {{ data.teaser }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

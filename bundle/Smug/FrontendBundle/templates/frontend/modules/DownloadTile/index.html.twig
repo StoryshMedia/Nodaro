@@ -1,0 +1,39 @@
+<div {% if additionalClasses is defined %}class="{{ additionalClasses }}"{% endif %}>
+    <h3 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+        {{ headline.value }}
+    </h3>
+
+    {% if pluginSettings.image is defined and pluginSettings.image is not empty %}
+        {% set imageValue = getImage(pluginSettings.image) %}
+        {% set imagePath = imageValue.desktop.detail.src %}
+    {% else %}
+        {% set imagePath = getFallbackImage() %}
+    {% endif %}
+    {% if pluginSettings.file is defined and pluginSettings.file is not empty %}
+        {% set filePath = getFilePath(pluginSettings.file.0) %}
+    {% else %}
+        {% set filePath = '' %}
+    {% endif %}
+    
+    <a
+        href="{{filePath}}"
+        title="{{pluginSettings.label}}"
+        target="_blank"
+    >
+        <div class="h-72 lg:h-96 xl:h-72 mt-5 aos-init aos-animate" data-aos="fade-zoom-in">
+            <article class="flex w-full h-full relative flex-col post-card rounded-md shadow-md hover:shadow-2xl">
+                <div
+                    class="group overlay overflow-hidden transition-all relative flex-initial rounded-md h-full background overlay-black" style="flex: 0 0 auto; background-image: url('{{imagePath}}')"
+                >
+                    <div class="px-8 py-4 absolute bottom-0 right-0 left-0 flex-auto overlay-content">
+                        <h6>
+                            <p class="line-clamp-3 font-serif font-bold mt-2 block text-xl text-white group-hover:text-primary">
+                                {{pluginSettings.label}}
+                            </p>
+                        </h6>
+                    </div>
+                </div>  
+            </article>
+        </div>
+    </a>
+</div>

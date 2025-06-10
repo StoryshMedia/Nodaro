@@ -1,0 +1,15 @@
+{% if image.value is defined and image.value is not empty %}
+    {% set imageValue = getImage(image.value, true) %}
+    <div style="min-height: 16rem; height: {{imageValue.height}}px;">
+        <div
+            class="parallax lazy"
+            data-bg="{{imageValue.src}}"
+            data-bg-hidpi="{{imageValue.src}}"
+            style="flex: 0 0 auto;"
+        ></div>
+    </div>
+{% else %}
+    <img
+        {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+        class="w-full h-full" style="min-height: 16rem;" />
+{% endif %}

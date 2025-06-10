@@ -1,0 +1,32 @@
+<article class="article-wrapper relative z-10 px-4 sm:px-8 {% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    <div class="flex flex-wrap">
+        <div class="w-full md:w-1/3 md:pr-4">
+            {% if image.value is defined and image.value is not empty %}
+                {% set imageValue = getImage(image.value) %}
+                <img
+                    {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+                    srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
+                    sizes="(max-width: 600px) 480px,
+                            800px"
+                    src="{{ imageValue.desktop.detail.src }}"
+                    alt="{{ imageValue.desktop.detail.file }}" />
+            {% else %}
+                <img
+                    {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+                    src="/Resources/elements/fallback/images/preview.webp" />
+            {% endif %}
+        </div>
+        <div class="w-full md:w-2/3 header--text">
+            <header>
+                <div class="notch" ></div>
+                <h1 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+                    {{ headline.value }}
+                </h1>
+            </header>
+
+            <div class="{{ caption.classes }}" {% if id is defined %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
+                {{ caption.value | raw }}
+            </div>
+        </div>
+    </div>
+</article>
