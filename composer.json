@@ -60,9 +60,9 @@
         "phpdocumentor/reflection-docblock": "^3.0 || ^4.0 || ^5.0",
         "psr/container": "^2.0",
         "ramsey/uuid-doctrine": "^2.0",
-        "smug/administration-bundle": "^0.1",
-        "smug/search-bundle": "^0.1",
+        "smug/administration-bundle": "*",
         "smug/frontend-bundle": "^0.1",
+        "smug/search-bundle": "^0.1",
         "smug/system-bundle": "^0.1",
         "symfony/asset": "6.4.*",
         "symfony/browser-kit": "6.4.*",
@@ -157,16 +157,9 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.0.*",
             "docker": false
         }
-    },
-    "require-dev": {
-        "dama/doctrine-test-bundle": "^6.3",
-        "phpmd/phpmd": "^2.9",
-        "phpunit/phpunit": "^9",
-        "symfony/maker-bundle": "^1.9",
-        "symfony/phpunit-bridge": "^7.0"
     }
 }
