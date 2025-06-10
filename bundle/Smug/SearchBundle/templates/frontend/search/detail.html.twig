@@ -1,0 +1,64 @@
+{% extends '@frontend/base.html.twig' %}
+
+{% block body %}
+    <h3 class="text-xl font-normal uppercase leading-normal mt-0 mb-2 text-kelp-700 sm:truncate border-b-2 border-kelp-700">
+        {{ $t(detailResults.label) }}
+    </h3>
+    <div v-if="showLoading === false">
+        <div
+                v-for="detailResult in detailResults.results"
+                :key="detailResult.label"
+                class="relative mx-3"
+        >
+            <a
+                class="block text-sm text-kelp-700 border-b border-kelp-700"
+                role="menuitem"
+                :href="detailResult.path"
+            >
+                <div class="p-2 flex flex-wrap">
+                    <div class="w-1/12">
+                        <search-image
+                            :image="detailResult.image"
+                            :headline="detailResult.label">
+                        </search-image>
+                    </div>
+                    <div class="py-2 pl-4 pr-2 w-11/12">
+                        <div class="text-xl mb-2">
+                            <p>{{ detailResult.label }}</p>
+                            <div v-if="detailResult.additional" class="pt-1.5">
+                                <div
+                                    v-for="additionalItem in detailResult.additional.detail">
+                                    <p
+                                        v-if="additionalItem.type === 'string'"
+                                        class="text-sm pb-1.5">
+                                        {{ additionalItem.value }} <span v-if="additionalItem.label">{{ $t(additionalItem.label) }}</span>
+                                    </p>
+                                    <div
+                                        class="flex flex-wrap text-sm pb-1.5"
+                                        v-if="additionalItem.type === 'array'">
+                                        <span
+                                            class="p-1.5 border border-kelp-700 rounded-full mr-1.5 mb-1.5"
+                                            v-for="item in additionalItem.value"
+                                        >
+                                            {{ item }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div v-else>
+        <loading></loading>
+    </div>
+{% endblock %}
+<script>
+    import Loading from "../../../assets/js/components/common/Content/Loading";
+    import SearchImage from "../../../assets/js/components/common/Image/SearchImage";
+    export default {
+        components: {SearchImage, Loading}
+    }
+</script>
