@@ -217,7 +217,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { defineAsyncComponent } from "vue";
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 const ClassSelect = defineAsyncComponent(() =>
   import("./ClassSelect.vue" /* webpackChunkName: "administration-content-class-select" */)
 );

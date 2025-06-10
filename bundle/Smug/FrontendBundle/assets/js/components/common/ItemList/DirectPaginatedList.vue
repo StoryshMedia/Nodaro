@@ -37,38 +37,18 @@
 
               <div
                 v-else
+                class="container flex flex-wrap"
               >
                 <div
-                  v-if="model === 'authors'"
-                  class="container grid space-y-10 md:space-y-0 gap-0 md:gap-10 grid-cols-12 justify-items-stretch mt-12"
+                  v-for="(item, index) in listItems"
+                  :key="item.label"
+                  class="relative p-3 post-loop-wrapper"
+                  :class="(index === 0 || index === 1 || index === 5 || index === 6 || index === 10 || index === 11) ? 'w-full md:w-1/2' : 'w-full md:w-1/2 lg:w-1/3'"
                 >
-                  <div
-                    v-for="(item, index) in listItems"
-                    :key="index"
-                    class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4"
-                  >
-                    <author-api-card
-                      :slug="item.slug"
-                      :mode="getMode()"
-                      :get-call="getDetailGetCall()"
-                    />
-                  </div>
-                </div>
-                <div
-                  v-else
-                  class="container flex flex-wrap"
-                >
-                  <div
-                    v-for="(item, index) in listItems"
-                    :key="item.label"
-                    class="relative p-3 post-loop-wrapper"
-                    :class="(index === 0 || index === 1 || index === 5 || index === 6 || index === 10 || index === 11) ? 'w-full md:w-1/2' : 'w-full md:w-1/2 lg:w-1/3'"
-                  >
-                    <api-card
-                      :slug="item.slug"
-                      :get-call="getDetailGetCall()"
-                    />
-                  </div>
+                  <api-card
+                    :slug="item.slug"
+                    :get-call="getDetailGetCall()"
+                  />
                 </div>
               </div>
             </div>
@@ -232,17 +212,13 @@ const AppStandardListItem = defineAsyncComponent(() =>
 const AppLoading = defineAsyncComponent(() =>
   import("../Content/Loading" /* webpackChunkName: "loading" */)
 );
-const AuthorApiCard = defineAsyncComponent(() =>
-  import("../../../../../../PublicationBundle/assets/js/components/common/ItemList/AuthorApiCard" /* webpackChunkName: "author-api-card" */)
-);
 
 export default {
   name: "DirectPaginatedList",
   components: {
     AppStandardListItem,
     ApiCard,
-    AppLoading,
-    AuthorApiCard
+    AppLoading
   },
   model: {
     listItems: [],
@@ -478,14 +454,6 @@ export default {
     },
     getDetailGetCall() {
       switch (this.mode) {
-      case 'publication':
-        return '/fe/api/publication/detail/'
-      case 'author':
-        return '/fe/api/author/detail/'
-      case 'authors':
-        return '/fe/api/author/detail/'
-      case 'story':
-        return '/fe/api/story/detail/'
       default:
         return ''
       }

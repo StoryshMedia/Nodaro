@@ -88,8 +88,8 @@ const Icon = defineAsyncComponent(() =>
 const Confirm = defineAsyncComponent(() =>
   import("./Confirm.vue" /* webpackChunkName: "administration-modal-confirm" */)
 );
-import ApiService from '@SmugAdministrationServices/api/api.service';
-import ImageService from '@SmugAdministrationServices/image/image.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
+import ImageService from 'SmugAdministration/js/services/image/image.service';
 
 export default {
   name: "ImageModal",

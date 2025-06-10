@@ -334,8 +334,8 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import TextService from '@SmugAdministrationServices/text/text.service';
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import TextService from 'SmugAdministration/js/services/text/text.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 const Icon = defineAsyncComponent(() =>
   import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );

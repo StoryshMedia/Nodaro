@@ -464,8 +464,8 @@
 import { defineAsyncComponent } from "vue";
 import { defineComponent } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
-import ItemService from '@SmugAdministrationServices/item/item.service';
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ItemService from 'SmugAdministration/js/services/item/item.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 const ContentItem = defineAsyncComponent(() =>
   import("./additional/content/ContentItem.vue" /* webpackChunkName: "administration-content-editor-item" */)
 );

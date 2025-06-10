@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 import { defineAsyncComponent } from "vue";
 
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay, TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';

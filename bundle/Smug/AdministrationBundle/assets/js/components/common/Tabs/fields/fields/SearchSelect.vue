@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 import { defineAsyncComponent } from "vue";
 import { debounce } from "vue-debounce";
 import Multiselect from 'vue-multiselect';

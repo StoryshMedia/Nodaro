@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
-use Smug\FrontendUserBundle\Entity\MediaMarketingItemAssociation\MediaMarketingItemAssociation;
+use Smug\SearchBundle\Entity\MediaMarketingItemAssociation\MediaMarketingItemAssociation;
 use Smug\SearchBundle\Entity\SearchWindow\SearchWindow;
 use Symfony\Component\Serializer\Attribute\Groups;
 

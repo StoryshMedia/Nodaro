@@ -356,19 +356,6 @@
               v-else
             >
               <div
-                v-if="model === 'authors'"
-                class="container grid space-y-10 md:space-y-0 gap-0 lg:gap-10 grid-cols-12 justify-items-stretch mt-12"
-              >
-                <div
-                  v-for="(n,index) in itemLimit"
-                  :key="index"
-                  class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4"
-                >
-                  <loading-tile :class="'h-72 lg:h-96 xl:h-72'" />
-                </div>
-              </div>
-              <div
-                v-else
                 class="container flex flex-wrap"
               >
                 <div
@@ -566,9 +553,6 @@ const AppStandardListItem = defineAsyncComponent(() =>
 const LoadingTile = defineAsyncComponent(() =>
   import("../Content/LoadingTile" /* webpackChunkName: "loading-tile" */)
 );
-const AuthorApiCard = defineAsyncComponent(() =>
-  import("../../../../../../PublicationBundle/assets/js/components/common/ItemList/AuthorApiCard" /* webpackChunkName: "author-api-card" */)
-);
 const SelectBox = defineAsyncComponent(() =>
   import("../Input/SelectBox" /* webpackChunkName: "select-box" */)
 );
@@ -582,7 +566,6 @@ export default {
     AppStandardListItem,
     ApiCard,
     LoadingTile,
-    AuthorApiCard,
     IconClose,
     SelectBox
   },

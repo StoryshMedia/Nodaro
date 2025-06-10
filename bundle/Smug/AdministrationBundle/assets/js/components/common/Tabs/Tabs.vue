@@ -95,7 +95,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 const Icon = defineAsyncComponent(() =>
   import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)

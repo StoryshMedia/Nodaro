@@ -267,8 +267,8 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-import ApiService from '@SmugAdministrationServices/api/api.service';
-import ImageService from '@SmugAdministrationServices/image/image.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
+import ImageService from 'SmugAdministration/js/services/image/image.service';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay } from '@headlessui/vue';
 const ImageModal = defineAsyncComponent(() =>
   import("../../../../../Modal/ImageModal.vue" /* webpackChunkName: "administration-image-modal" */)

@@ -77,7 +77,6 @@ Encore
     .disableSingleRuntimeChunk()
 
     // enables Sass/SCSS support
-    .enableLessLoader()
     .enableSassLoader()
 
     /*

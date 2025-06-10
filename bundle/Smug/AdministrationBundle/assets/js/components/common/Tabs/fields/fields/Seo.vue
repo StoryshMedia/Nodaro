@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 import { defineAsyncComponent } from "vue";
 
 const FaqPage = defineAsyncComponent(() =>

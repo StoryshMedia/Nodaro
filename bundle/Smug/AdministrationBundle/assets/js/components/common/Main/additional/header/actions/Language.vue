@@ -43,7 +43,7 @@
 </template>
   
 <script>
-import ApiService from '@SmugAdministrationServices/api/api.service';
+import ApiService from 'SmugAdministration/js/services/api/api.service';
 
 export default {
   name: "Language",
