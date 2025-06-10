@@ -8,7 +8,7 @@
       class="w-full max-w-28 mx-auto my-auto"
       loading="lazy"
       :src="image"
-      onerror="this.onerror=null; this.src='https://api.storysh.de/_uploads/images/media/fallback/thumbnails/fallback_02_list_desktop.webp'"
+      onerror="this.onerror=null; this.src='/_uploads/images/media/fallback/thumbnails/fallback_02_list_desktop.webp'"
     >
   </div>
 </template>

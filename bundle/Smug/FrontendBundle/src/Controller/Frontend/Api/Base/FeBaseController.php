@@ -23,11 +23,11 @@ class FeBaseController extends BaseController
         $this->sendMail->sendHtmlMail(
             '@SmugFrontend/email/error/html/index.html.twig',
             [
-                'from' => 'admin@storysh.de',
+                'from' => $data['from'],
                 'subject' => 'Auf einer Seite ist ein Fehler aufgetreten',
                 'recipients' => [
                     [
-                        'email' => 'admin@storysh.de'
+                        'email' => $data['from']
                     ]
                 ]
             ],

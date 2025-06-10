@@ -1,6 +1,5 @@
 import axios from 'axios';
-const API_URL = 'https://storysh.de/fe_login';
-const RESPONSIBLE_API_URL = 'https://storysh.de/responsible_login';
+const API_URL = '/fe_login';
 class AuthService {
   login(user) {
     return axios

@@ -22,7 +22,7 @@
                 class="filter"
                 :alt="badge.name"
                 :class="activeClasses(badge)"
-                src="https://storysh.de/img/badge.png"
+                src="/img/badge.png"
                 loading="lazy"
                 @mouseenter="toggleTooltip(badge)"
                 @mouseleave="toggleTooltip(badge)"

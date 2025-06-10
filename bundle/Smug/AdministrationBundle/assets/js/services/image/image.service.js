@@ -59,7 +59,7 @@ class ImageService {
     return process.env.frontendURL + '/administration/img/lock/lock-screen-' + Math.floor(Math.random() * (6 - 1 + 1) + 1) + '.webp';
   }
   getFallbackImage() {
-    return 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' + Math.floor(Math.random() * (26 - 1 + 1) + 1) + '.webp';
+    return '/site/img/author/list/preview/authorListPreview-' + Math.floor(Math.random() * (26 - 1 + 1) + 1) + '.webp';
   }
   isImage(file) {
     return ['webp', 'jpg', 'png', 'svg'].includes(file.media.extension);

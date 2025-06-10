@@ -1,5 +1,4 @@
 framework:
-    trusted_hosts:  ['^storysh\.de$', '89.22.121.109', 'symfony.localhost']
     http_cache: true
     secret: '%env(APP_SECRET)%'
     #default_locale: en
@@ -21,7 +20,7 @@ framework:
     cache:
         # Put the unique name of your app here: the prefix seed
         # is used to compute stable namespaces for cache keys.
-        prefix_seed: storysh/storysh
+        prefix_seed: modaro/modaro
 
         # The app cache caches to the filesystem by default.
         # Other options include:

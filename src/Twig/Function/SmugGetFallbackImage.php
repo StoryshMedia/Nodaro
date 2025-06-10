@@ -16,6 +16,6 @@ class SmugGetFallbackImage extends AbstractExtension
 
     public function getImage(): string
     {
-        return 'https://api.storysh.de/site/img/author/list/preview/authorListPreview-' . rand(1, 26) . '.webp';
+        return '/site/img/author/list/preview/authorListPreview-' . rand(1, 26) . '.webp';
     }
 }

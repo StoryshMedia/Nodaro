@@ -226,19 +226,19 @@
     </div>
     <div class="bg-dark hidden lg:block w-full lg:w-1/2 h-screen relative">
       <img
-        src="https://api.storysh.de/site/img/booksCarouselImage.webp"
+        src="/site/img/booksCarouselImage.webp"
         class="h-screen w-full lg:absolute transition-all ease-in-out duration-300"
         :class="(currentIndex === 1) ? 'bottom-0' : 'bottom-full'"
         alt=""
       >
       <img
-        src="https://api.storysh.de/site/img/textsCarouselImage.webp"
+        src="/site/img/textsCarouselImage.webp"
         class="h-screen w-full lg:absolute transition-all ease-in-out duration-300"
         :class="(currentIndex === 2) ? 'bottom-0' : 'bottom-full'"
         alt=""
       >
       <img
-        src="https://api.storysh.de/site/img/communityCarouselImage.webp"
+        src="/site/img/communityCarouselImage.webp"
         class="h-screen w-full lg:absolute transition-all ease-in-out duration-300"
         :class="(currentIndex === 3) ? 'bottom-0' : 'bottom-full'"
         alt=""
