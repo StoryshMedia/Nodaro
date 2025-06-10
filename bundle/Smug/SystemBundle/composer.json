@@ -7,6 +7,11 @@
     "require": {
         "nodaro/core": "~0.1"
     },
+    "extra": {
+        "symfony": {
+            "bundle": true
+        }
+    },
     "autoload": {
         "psr-4": {
             "Smug\\SystemBundle\\": "src/"
