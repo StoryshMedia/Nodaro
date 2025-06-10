@@ -5,6 +5,7 @@ namespace Smug\Core\Command\Frontend;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Finder\Finder;
 
@@ -25,7 +26,7 @@ class FrontendStyleBuildCommand extends Command
             ->setDescription('collects all style files.');
     }
 
-    protected function execute(OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Searching style files');
         $output->writeln('#####################');

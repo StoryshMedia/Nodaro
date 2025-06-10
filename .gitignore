@@ -16,4 +16,5 @@ package-lock.json
 ./yarn.lock
 ./composer.lock
 composer.lock
-./yarn-error.log
+yarn-error.log
+.env

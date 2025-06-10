@@ -3,8 +3,6 @@
 namespace Smug\Core\Command\Frontend;
 
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
