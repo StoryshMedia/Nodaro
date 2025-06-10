@@ -17,11 +17,6 @@
             "Smug\\AdministrationBundle\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Smug\\AdministrationBundle\\Tests\\": "tests/"
-        }
-    },
     "authors": [
         {
             "name": "Alex Voß",
