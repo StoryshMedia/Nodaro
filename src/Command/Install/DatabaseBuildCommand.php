@@ -3,6 +3,7 @@
 namespace Smug\Core\Command\Install;
 
 use Smug\Core\Context\Context;
+use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Entity\Base\BaseModel;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\SystemBundle\Entity\Country\Country;
@@ -25,6 +26,8 @@ class DatabaseBuildCommand extends Command
     public function __construct(KernelInterface $kernel, Context $context, UserPasswordHasherInterface $hasher)
     {
         $this->context = $context;
+        $this->hasher = $hasher;
+
         parent::__construct();
     }
 
@@ -36,14 +39,20 @@ class DatabaseBuildCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (DataHandler::doesFileExist(__DIR__ . 'installed')) {
+        if (DataHandler::doesFileExist(__DIR__ . '/installed')) {
             return 0;
         }
 
         $userLanguage = null;
 
-        foreach (\Smug\Core\Command\Install\Country::getCountries() as $countryData) {
-            $country = new Country();
+        $countryClass = EntityGenerator::getGeneratedEntity(Country::class);
+        $languageClass = EntityGenerator::getGeneratedEntity(Language::class);
+        $userGroupClass = EntityGenerator::getGeneratedEntity(UserGroup::class);
+        $userClass = EntityGenerator::getGeneratedEntity(User::class);
+        $permissionClass = EntityGenerator::getGeneratedEntity(Permission::class);
+
+        foreach (\Smug\Core\Command\Install\Data\Country::getCountries() as $countryData) {
+            $country = new $countryClass();
             $country->__set('title', $countryData['title']);
             $country->__set('token', $countryData['token']);
             $country->__set('defaultCountry', $countryData['defaultCountry']);
@@ -52,8 +61,8 @@ class DatabaseBuildCommand extends Command
             $this->context->getEntityManager()->flush();
         }
 
-        foreach (\Smug\Core\Command\Install\Language::getLanguages() as $languageData) {
-            $language = new Language();
+        foreach (\Smug\Core\Command\Install\Data\Language::getLanguages() as $languageData) {
+            $language = new $languageClass();
             $language->__set('title', $languageData['title']);
             $language->__set('locale', $languageData['locale']);
             $language->__set('area', $languageData['area']);
@@ -66,10 +75,10 @@ class DatabaseBuildCommand extends Command
             }
         }
 
-        $userGroup = new UserGroup();
+        $userGroup = new $userGroupClass();
         $userGroup->__set('title', 'Administratoren');
         $userGroup->__set('description', 'Administratoren => Alle Rechte');
-        $userGroup->__set('admin', 1);
+        $userGroup->__set('admin', true);
 
         $this->context->getEntityManager()->persist($userGroup);
         $this->context->getEntityManager()->flush();
@@ -81,7 +90,7 @@ class DatabaseBuildCommand extends Command
             if ($class === BaseModel::class) {
                 continue;
             }
-            $permission = new Permission();
+            $permission = new $permissionClass();
             $modelArray = DataHandler::explodeArray('\\', $class);
 
             $model = DataHandler::getLastArrayElement($modelArray);
@@ -102,19 +111,20 @@ class DatabaseBuildCommand extends Command
             $this->context->getEntityManager()->flush();
         }
 
-        $user = new User();
+        $user = new $userClass();
 
         $user->__set('language', $userLanguage);
-        $user->__set('name', 'amdin');
-        $user->__set('surname', 'amdin');
-        $user->__set('username', 'amdin');
-        $user->__set('username_canonical', 'amdin');
+        $user->__set('name', 'admin');
+        $user->__set('surname', 'admin');
+        $user->__set('username', 'admin');
+        $user->__set('usernameCanonical', 'admin');
+        $user->__set('password', 'admin');
         $user->__set('email', 'info@example.com');
-        $user->__set('email_canonical', 'info@example.com');
-        $user->__set('enabled', '1');
-        $user->__set('last_login', '');
-        $user->__set('confirmation_token', null);
-        $user->__set('password_requested_at', null);
+        $user->__set('emailCanonical', 'info@example.com');
+        $user->__set('enabled', true);
+        $user->__set('lastLogin', null);
+        $user->__set('confirmationToken', null);
+        $user->__set('passwordRequestedAt', null);
         $user->__set('userGroup', $userGroup);
         $user->__set('roles', 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}');
         
@@ -126,7 +136,7 @@ class DatabaseBuildCommand extends Command
         $this->context->getEntityManager()->persist($user);
         $this->context->getEntityManager()->flush();
 
-        DataHandler::writeFile(__DIR__ . 'installed', '');
+        DataHandler::writeFile(__DIR__ . '/installed', '');
 	    
         return 0;
     }
