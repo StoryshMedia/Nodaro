@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import store from '../store';
 import { createI18n } from 'vue-i18n/index';
-import de from '../i18n/de.json';
 import axios from "axios";
 import VueFinalModal from 'vue-final-modal';
 import vueDebounce from 'vue-debounce';
@@ -20,7 +19,7 @@ class VueModule {
       let tries = 0;
       let resolved = false;
   
-      const tryMount = () => {
+      const tryMount = (i18n) => {
         const selector = `[id^=${identifier}-]`;
         const elements = document.querySelectorAll(selector);
         const created = [];
@@ -31,13 +30,6 @@ class VueModule {
   
           if (!el.__vue_app__) {
             const instance = axios.create();
-            const i18n = createI18n({
-              locale: 'de',
-              fallbackLocale: 'de',
-              messages: {
-                'de': de
-              },
-            });
 
             const app = createApp(component)
             app.use(i18n);
@@ -76,31 +68,33 @@ class VueModule {
   
         if (!resolved && tries < maxTries) {
           tries++;
-          setTimeout(tryMount, interval);
+          setTimeout(tryMount(i18n), interval);
         }
       };
   
-      const observer = new MutationObserver(() => {
-        setTimeout(tryMount, 100);
-      });
-  
-      const onReady = () => {
-        const container = document.body || document.documentElement;
-        observer.observe(container, {
-          childList: true,
-          subtree: true,
-          attributes: true,
-          characterData: true
+      this.createI18nObject().then(i18n => {
+        const observer = new MutationObserver(() => {
+          setTimeout(tryMount(i18n), 100);
         });
-  
-        tryMount();
-      };
-  
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', onReady);
-      } else {
-        onReady();
-      }
+    
+        const onReady = (i18n) => {
+          const container = document.body || document.documentElement;
+          observer.observe(container, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            characterData: true
+          });
+    
+          tryMount(i18n);
+        };
+    
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', onReady);
+        } else {
+          onReady(i18n);
+        }
+      });
     });
   }
   setObserver(module, options) {
@@ -151,6 +145,23 @@ class VueModule {
 
     app.config.globalProperties.axios=instance;
     return app;
+  }
+  createI18nObject() {
+    return new Promise((resolve) => {
+      const lang = localStorage.getItem('lang') ?? 'de';
+      const contexts = require.context('./locales', true, /\.json$/);
+      const messages = contexts(`./${lang}.json`);
+
+      const i18n = createI18n({
+        locale: lang,
+        fallbackLocale: lang,
+        messages: {
+          lang: messages
+        },
+      });
+
+      resolve(i18n);
+    });
   }
 }
 export default new VueModule();
