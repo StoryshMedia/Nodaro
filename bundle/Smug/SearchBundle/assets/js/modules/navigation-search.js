@@ -1,6 +1,5 @@
 
-import VueModule from '../../../../FrontendBundle/assets/js/modules/vue-module.js';
-import vueDebounce from 'vue-debounce';
+import VueModule from '@core/js/modules/vue-module.js';
 import NavigationSearch from '../components/common/Search/NavigationSearch.vue';
 
 VueModule.observeAndMount({
