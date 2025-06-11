@@ -1,7 +1,13 @@
 <template>
-  <div class="max-w-md w-full p-6 text-white">
+  <div class="max-w-md w-full rounded-xl p-6 bg-white text-dark">
+    <img
+      class="w-24 mx-auto my-4 flex-none"
+      src="/administration/img/logo/logo-navigation.svg"
+      alt=""
+    >
+
     <h1 class="text-3xl font-semibold mb-6 text-center">
-      {{ $t('LOGIN') }}
+      {{ $t('LOGIN_HEADLINE') }}
     </h1>
       
     <form 
@@ -38,7 +44,7 @@
       <div class="text-center">
         <button
           type="submit"
-          class="rounded-3xl bg-primary px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-white hover:text-dark"
+          class="rounded-3xl bg-primary px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-dark"
         >
           {{ $t('LOGIN') }}
         </button>

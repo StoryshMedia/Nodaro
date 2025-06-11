@@ -8,4 +8,4 @@ php -d memory_limit=-1 bin/console dynamic:frontend:component:build
 
 yarn build
 
-php -d memory_limit=-1 bin/console dynamic:frontend:component:build
+php -d memory_limit=-1 bin/console cache:clear

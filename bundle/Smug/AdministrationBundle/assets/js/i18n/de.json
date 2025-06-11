@@ -42,6 +42,10 @@
   "SECURITY_INFO_TEXT": "Einstellungen der Benutzergruppen für das Administrations Backend. Zugriffsrechte und Präferenzen der Gruppen können hier eingestellt werden.",
   "TO_GROUPS": "Zu den Gruppen",
 
+  "LOGIN_HEADLINE": "Nodaro Login",
+  "USER_NAME_OR_EMAIL": "Nutzername oder E-Mail",
+  "PASSWORD": "Passwort",
+  "Login": "Login",
   "USERNAME": "Nutzername",
   "SURNAME": "Nachname",
   "LAST_LOGIN": "Letzter Login",
