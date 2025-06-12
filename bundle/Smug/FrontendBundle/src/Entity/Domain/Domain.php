@@ -52,6 +52,7 @@ class Domain extends BaseModel
     protected $seo;
 
     #[Column(type: 'string')]
+    #[DefaultValue('@SmugFrontend/frontend/index/index.html.twig')]
     #[BackendField(config: [
         'type' => 'Selectbox',
         'placeholder' => 'TEMPLATE',

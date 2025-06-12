@@ -24,8 +24,8 @@ class DomainAddDataSubscriber implements EventSubscriberInterface
     {
         if ($event->getClass() === EntityGenerator::getGeneratedEntity(Domain::class)) {
             $data = $event->getData();
-
-            $site = new Site();
+            $siteClass = EntityGenerator::getGeneratedEntity(Site::class);
+            $site = new $siteClass();
 
             $site->__set('title', 'Root');
             $site->__set('domain', $data);
@@ -36,15 +36,18 @@ class DomainAddDataSubscriber implements EventSubscriberInterface
             $site->__set('seoKeywords', '');
             $site->__set('seoDescription', '');
             $site->__set('seoTitle', '');
+            $site->__set('parentId', '');
             $site->__set('seoData', DataHandler::getJsonEncode([]));
             $site->__set('noFollow', false);
             $site->__set('noIndex', false);
             $site->__set('rootPage', true);
+            $site->__set('siteStyles', DataHandler::getJsonEncode([]));
 
             $event->getContext()->getEntityManager()->persist($site);
             $event->getContext()->getEntityManager()->flush();
 
-            $seoData = new Seo();
+            $seoClass = EntityGenerator::getGeneratedEntity(Seo::class);
+            $seoData = new $seoClass();
             $seoData->__set('title', '');
             $seoData->__set('domain', $data);
 

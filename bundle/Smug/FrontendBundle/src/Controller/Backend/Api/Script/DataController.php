@@ -7,13 +7,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Factory\Finder\FinderFactory;
 use Smug\FrontendBundle\Entity\Module\Module;
 use Smug\FrontendBundle\Entity\Script\Script;
 use Smug\FrontendBundle\Entity\ScriptField\ScriptField;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\FrontendBundle\Entity\SiteScript\SiteScript;
 use Smug\FrontendBundle\Service\Script\Add\AddService;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DataController extends FeBaseController
@@ -26,26 +26,21 @@ class DataController extends FeBaseController
             Script::class
         );
 
-        $finder = new Finder();
-        $finder->directories()->in($this->context->getKernel()->getProjectDir() . "/bundle/")->depth(0);
-
-        foreach ($finder as $file) {
-            $bundleFinder = new Finder();
-            $bundleFinder->directories()->in($file->getRealPath())->depth(0);
-
-            foreach ($bundleFinder as $bundle) {
-                if (!DataHandler::proofDir($bundle->getRealPath() . DIRECTORY_SEPARATOR . 'config/frontend/script')) {
-                    continue;
-                }
-
-                $scriptFinder = new Finder();
-                $scriptFinder->files()->in($bundle->getRealPath() . DIRECTORY_SEPARATOR . 'config/frontend/script');
-
-                foreach ($scriptFinder as $script) {
-                    if ($script->getExtension() !== 'json') {
-                        continue;
-                    }
-
+        foreach (
+            DataHandler::mergeArray(
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false),
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false)
+            )
+            as $file
+        ) {
+            foreach (
+                FinderFactory::getElements($file->getRealPath(), 0, false)
+                as $bundle
+            ) {
+                foreach (
+                    FinderFactory::getElements($bundle->getRealPath() . DIRECTORY_SEPARATOR . 'config/frontend/script', -1, true, ['*.json'])
+                    as $script
+                ) {
                     $scriptData = DataHandler::getJsonDecode(
                         DataHandler::getFile($script->getRealPath()),
                         true
@@ -78,7 +73,7 @@ class DataController extends FeBaseController
     }
 
     #[Route('/be/api/custom/empty/install', name: 'be_script_install_empty', methods:"POST")]
-    public function installEmpty(Request $request, AddService $addService): JsonResponse
+    public function installEmpty(): JsonResponse
     {        
         $newScript = new Script();
         $newScript->__set('title', 'Untitled Script');

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ExceptionProvider;
+use Smug\Core\Service\Base\Factory\Finder\FinderFactory;
 use Smug\Core\Service\Base\Factory\ServiceGenerationFactory;
 use Smug\Core\Service\Base\Mail\SendMail;
 use Smug\Core\Service\Base\Service\ListBaseService;
@@ -30,7 +31,6 @@ use Smug\FrontendBundle\Service\Frontend\Slug\SlugService;
 use Smug\FrontendBundle\Service\Module\Add\AddService;
 use Smug\FrontendBundle\Service\Navigation\Update\UpdateService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -68,23 +68,22 @@ class DataController extends FeBaseController
             Module::class
         );
 
-        $finder = new Finder();
-        $finder->directories()->in($this->context->getKernel()->getProjectDir() . "/bundle/")->depth(0);
-
-        foreach ($finder as $file) {
-            $bundleFinder = new Finder();
-            $bundleFinder->directories()->in($file->getRealPath())->depth(0);
-
-            foreach ($bundleFinder as $bundle) {
-                if (!DataHandler::proofDir($bundle->getRealPath() . DIRECTORY_SEPARATOR . 'config/frontend/module')) {
-                    continue;
-                }
-
-                $moduleFinder = new Finder();
-                $moduleFinder->files()->in($bundle->getRealPath() . DIRECTORY_SEPARATOR . 'config/frontend/module');
-
-                foreach ($moduleFinder as $module) {
-                    if ($module->getExtension() !== 'json' || DataHandler::isInArray($module->getFilenameWithoutExtension(), self::$systemFiles)) {
+        foreach (
+            DataHandler::mergeArray(
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false),
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false)
+            )
+            as $file
+        ) {
+            foreach (
+                FinderFactory::getElements($file->getRealPath(), 0, false)
+                as $bundle
+            ) {
+                foreach (
+                    FinderFactory::getElements($bundle->getRealPath() . DIRECTORY_SEPARATOR . 'config/frontend/module', -1, true, ['*.json'])
+                    as $module
+                ) {
+                    if (DataHandler::isInArray($module->getFilenameWithoutExtension(), self::$systemFiles)) {
                         continue;
                     }
 

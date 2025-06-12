@@ -14,19 +14,17 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./bundle/Smug/SystemBundle"
+            "url": "./bundle/*",
+            "options": {
+                "symlink": true
+            }
         },
         {
             "type": "path",
-            "url": "./bundle/Smug/SearchBundle"
-        },
-        {
-            "type": "path",
-            "url": "./bundle/Smug/FrontendBundle"
-        },
-        {
-            "type": "path",
-            "url": "./bundle/Smug/AdministrationBundle"
+            "url": "./custom/*",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require": {

@@ -57,14 +57,6 @@ class BaseService
                 $this->currentUser = null;
             }
         }
-        if ($this->tokenStorage && !DataHandler::isString($this->tokenStorage->getUser())) {
-            /** @var BaseModel $userToken */
-            $userToken = $this->tokenStorage->getUser();
-            $user = $this->em->getRepository(FrontendUser::class)->findOneBy(['id' => $userToken->getId()]);
-            $this->currentFeUser = $user;
-        } else {
-            $this->currentFeUser = null;
-        }
         $this->setter = new BaseSetter($this->em);
     }
 
@@ -74,10 +66,6 @@ class BaseService
 
     public function getUser(): ?User {
         return ($this->currentUser) ? null : $this->currentUser;
-    }
-
-    public function getFeUser(): ?FrontendUser {
-        return ($this->currentFeUser) ? null : $this->currentFeUser;
     }
 	
 	public function processRemoveAssociation(
