@@ -1,5 +1,5 @@
 import SimplePaginatedList from '../components/elements/plugin/pagination/SimplePaginatedList.vue';
-import VueModule from './@core/js/modules/vue-module.js';
+import VueModule from '@core/js/modules/vue-module.js';
 
 VueModule.observeAndMount({
   identifier: 'simple-pagination-list',

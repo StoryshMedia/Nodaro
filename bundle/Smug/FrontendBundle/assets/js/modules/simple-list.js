@@ -1,5 +1,5 @@
 import SimpleList from '../components/elements/plugin/list/SimpleList.vue';
-import VueModule from './@core/js/modules/vue-module.js';
+import VueModule from '@core/js/modules/vue-module.js';
 
 VueModule.observeAndMount({
   identifier: 'simple-list',

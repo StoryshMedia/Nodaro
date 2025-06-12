@@ -1,5 +1,5 @@
 import Main from '../pages/Main';
-import VueModule from './@core/js/modules/vue-module.js';
+import VueModule from '@core/js/modules/vue-module.js';
 
 const asyncMount = async () => {
   const app = VueModule.create(Main, {useStore: true, provideDataset: true, identifier: 'main'});

@@ -1,5 +1,5 @@
 
-import VueModule from '@core/js/modules/@core/js/modules/vue-module.js';
+import VueModule from '@core/js/modules/vue-module.js';
 import NavigationSearch from '../components/common/Search/NavigationSearch.vue';
 
 VueModule.observeAndMount({
