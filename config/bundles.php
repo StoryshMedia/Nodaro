@@ -13,4 +13,9 @@ return [
     NotFloran\MjmlBundle\MjmlBundle::class => ['all' => true],
     ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
+    BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+    Smug\AdministrationBundle\SmugAdministrationBundle::class => ['all' => true],
+    Smug\FrontendBundle\SmugFrontendBundle::class => ['all' => true],
+    Smug\SearchBundle\SmugSearchBundle::class => ['all' => true],
+    Smug\SystemBundle\SmugSystemBundle::class => ['all' => true],
 ];

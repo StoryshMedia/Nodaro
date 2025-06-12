@@ -7,7 +7,7 @@ use Smug\Core\Service\Base\Components\Handler\DataHandler;
 
 class FinderFactory
 {
-    public static function getElements(string $path, int $depth = -1, bool $files = true, array $name = []): array|Finder
+    public static function getElements(string $path, int $depth = -1, bool $files = true, array $name = [], bool $returnAsArray = false): array|Finder
     {
         if (!DataHandler::proofDir($path)) {
             return [];
@@ -32,7 +32,7 @@ class FinderFactory
                 $finder->name($name);
             }
 
-            return $finder;
+            return ($returnAsArray === true) ? DataHandler::iteratorToArray($finder) : $finder;
         } catch (\Throwable) {
             return [];
         }

@@ -626,6 +626,11 @@ class DataHandler
         return (self::getArrayLength($outputArray) > 0);
     }
 
+    public static function iteratorToArray($data): array
+    {
+        return iterator_to_array($data);
+    }
+
     public static function isNull($value)
     {
         return is_null($value);

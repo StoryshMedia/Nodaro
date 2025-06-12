@@ -28,8 +28,8 @@ class DataController extends FeBaseController
 
         foreach (
             DataHandler::mergeArray(
-                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false),
-                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false)
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false, [], true),
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false, [], true)
             )
             as $file
         ) {
