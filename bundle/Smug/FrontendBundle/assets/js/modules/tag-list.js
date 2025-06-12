@@ -1,5 +1,5 @@
 import TagList from '../components/common/Content/TagList';
-import VueModule from './vue-module.js';
+import VueModule from './@core/js/modules/vue-module.js';
 
 VueModule.observeAndMount({
   identifier: 'tag-list',

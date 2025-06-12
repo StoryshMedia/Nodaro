@@ -1,5 +1,5 @@
 import BigTilePaginationList from '../components/elements/plugin/pagination/BigTilePaginationList.vue';
-import VueModule from './vue-module.js';
+import VueModule from './@core/js/modules/vue-module.js';
 
 VueModule.observeAndMount({
   identifier: 'big-tile-pagination-list',
