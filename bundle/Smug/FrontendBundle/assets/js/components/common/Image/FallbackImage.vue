@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     setFallback() {
-      this.fallbackImage = process.env.apiURL + '/site/img/author/list/preview/authorListPreview-' + Math.floor(Math.random() * (26 - 1 + 1) + 1) + '.webp'
+      this.fallbackImage = process.env.apiURL + '/img/fallback/fallbackImage-' + Math.floor(Math.random() * (26 - 1 + 1) + 1) + '.webp'
 
       setTimeout(() => {
         window.LL.update();

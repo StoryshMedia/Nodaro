@@ -93,28 +93,28 @@ class SmugGetImage extends AbstractExtension
         $number = rand(1, 26);
 
         if ($returnOriginal) {
-            return '/site/img/author/list/preview/authorListPreview-' . $number . '.webp';
+            return '/img/fallback/fallbackImage-' . $number . '.webp';
         }
 
         return [
             'mobile' => [
                 'list' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ],
                 'detail' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ]
             ],
             'desktop' => [
                 'list' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ],
                 'detail' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ]
             ]
         ];
