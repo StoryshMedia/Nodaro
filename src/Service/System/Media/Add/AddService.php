@@ -33,11 +33,13 @@ class AddService extends BaseService implements AddServiceInterface
         if (DataHandler::isInArray($data['extension'], FileTypeProvider::IMAGE_EXTENSIONS)) {
             if (DataHandler::isStringInString($data['path'], $data['extension'])) {
                 $imageSizes = $uploaderFactory->getImageSizes(
-                    $_SERVER['DOCUMENT_ROOT'] . $data['path']
+                    $_SERVER['DOCUMENT_ROOT'] . $data['path'],
+                    $data['extension']
                 );
             } else {
                 $imageSizes = $uploaderFactory->getImageSizes(
-                    $_SERVER['DOCUMENT_ROOT'] . $data['img']
+                    $_SERVER['DOCUMENT_ROOT'] . $data['img'],
+                    $data['extension']
                 );
             }
 	

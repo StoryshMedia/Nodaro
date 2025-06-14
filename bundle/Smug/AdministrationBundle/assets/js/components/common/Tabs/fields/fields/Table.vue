@@ -1,6 +1,6 @@
 <template>
   <div class="datatable">
-    <div class="flex items-end mb-8">
+    <div class="flex items-end mb-8 ml-3 pt-3">
       <button
         v-if="editAllowed === true && fieldConfig.addConfig"
         type="button"
@@ -12,8 +12,8 @@
     </div>
     <div class="bh-datatable bh-antialiased bh-relative bh-text-black bh-text-sm bh-font-normal">
       <div class="datatable relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-          <thead class="text-xs text-gray-700 bg-gray-50">
+        <table class="w-full text-sm text-left text-gray-400">
+          <thead class="text-xs">
             <tr>
               <th
                 v-for="(column, colindex) in fieldConfig.columns"

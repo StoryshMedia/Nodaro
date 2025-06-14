@@ -10,7 +10,7 @@
         <input
           ref="showSearchModalInput"
           v-model="searchTerm"
-          class="w-full input rounded-3xl shadow-xl border-gray"
+          class="w-full input rounded-3xl shadow-xl border-gray-400 "
           type="search"
           name="search"
           autocomplete="off"
@@ -71,7 +71,7 @@
                 <input
                   :ref="'searchInput'"
                   v-model="searchTerm"
-                  class="w-full input rounded-3xl shadow-xl border-gray"
+                  class="w-full input rounded-3xl shadow-xl border-gray-400 "
                   type="search"
                   name="search"
                   :placeholder="$t('SEARCH')"

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-3">
     <div
       v-for="(row, rowindex) in tabConfig.rows"
       :key="rowindex"

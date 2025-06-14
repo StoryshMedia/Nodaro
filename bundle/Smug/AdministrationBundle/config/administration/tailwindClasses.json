@@ -248,7 +248,7 @@
                 "name": "bg-gray-300"
             },
             {
-                "name": "bg-gray-400"
+                "name": "bg-gray-400 "
             },
             {
                 "name": "bg-gray-500"
@@ -672,7 +672,7 @@
                 "name": "border-gray-300"
             },
             {
-                "name": "border-gray-400"
+                "name": "border-gray-400 "
             },
             {
                 "name": "border-gray-500"

@@ -9,7 +9,7 @@
     <div
       v-if="isLoading === false && notAllowed === false"
     >
-      <div class="flex items-end mb-8">
+      <div class="flex items-end mb-8 pt-3 ml-3">
         <button
           v-if="tableConfig.listConfig.url.administration.back"
           type="button"
@@ -30,8 +30,8 @@
       <div class="datatable">
         <div class="bh-datatable bh-antialiased bh-relative bh-text-black bh-text-sm bh-font-normal">
           <div class="datatable relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full max-w-full text-sm text-left text-gray-500">
-              <thead class="text-xs text-gray-700 bg-gray-50">
+            <table class="w-full max-w-full text-sm text-left text-dark">
+              <thead class="text-xs">
                 <tr>
                   <th
                     scope="col"
@@ -145,7 +145,7 @@
             </table>
 
             <div class="py-5 px-3">
-              <span class="text-sm font-normal text-gray-500 my-4 block w-full md:inline md:w-auto">
+              <span class="text-sm font-normal text-gray-400 my-4 block w-full md:inline md:w-auto">
                 <span class="font-semibold text-gray-900">
                   {{ range.from }} - {{ range.to }}
                 </span>

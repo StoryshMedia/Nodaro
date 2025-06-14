@@ -34,7 +34,7 @@
           <ul class="flex items-center space-x-2">
             <li>
               <a
-                href="/apps/calendar"
+                href="/admin/calendar"
                 class="block p-2 rounded-full bg-white hover:text-primary"
               >
                 <icon
@@ -45,18 +45,10 @@
             </li>
             <li>
               <a
-                href="/apps/todolist"
+                href="/admin/todolist"
                 class="block p-2 rounded-full bg-white hover:text-primary"
               >
                 <icon :icon-string="'IconEdit'" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="/apps/chat"
-                class="block p-2 rounded-full bg-white"
-              >
-                <icon :icon-string="'IconChatNotification'" />
               </a>
             </li>
           </ul>

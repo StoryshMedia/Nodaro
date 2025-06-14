@@ -7,7 +7,7 @@
         v-for="(message, messageindex) in messages"
         :key="messageindex"
       >
-        <div class="mt-2 mx-auto border-b border-gray">
+        <div class="mt-2 mx-auto border-b border-gray-400 ">
           <message
             :message="message"
             :field-config="fieldConfig"

@@ -88,7 +88,10 @@ class UploadService extends BaseService
             }
         }
 
-        if (DataHandler::isInArray($imageObj->__get('extension'), FileTypeProvider::IMAGE_EXTENSIONS)) {
+        if (
+            DataHandler::isInArray($imageObj->__get('extension'), FileTypeProvider::IMAGE_EXTENSIONS) &&
+            $imageObj->__get('extension') !== 'svg'
+        ) {
             self::generateThumbnails($imageObj, $context);
         }
 

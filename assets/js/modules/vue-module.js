@@ -5,6 +5,11 @@ import axios from "axios";
 import VueFinalModal from 'vue-final-modal';
 import vueDebounce from 'vue-debounce';
 import { QuillEditor } from '@vueup/vue-quill/dist/vue-quill.global.prod';
+import { TippyPlugin } from 'tippy.vue';
+import VueEasyLightbox from 'vue-easy-lightbox';
+import PerfectScrollbar from 'vue3-perfect-scrollbar';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import Popper from 'vue3-popper';
 
 class VueModule {
   async create(module, options) {
@@ -14,88 +19,108 @@ class VueModule {
       return this.mount(section, module, options);
     }
   }
-  observeAndMount({ identifier, component, options, maxTries = 10, interval = 300 }) {
+  async observeAndMount({ identifier, component, options, maxTries = 10, interval = 300, dynamic = true }) {
     return new Promise((resolve, reject) => {
-      let tries = 0;
-      let resolved = false;
   
-      const tryMount = (i18n) => {
-        const selector = `[id^=${identifier}-]`;
-        const elements = document.querySelectorAll(selector);
-        const created = [];
-        
+      const observer = new MutationObserver(() => {
+        setTimeout(this.tryMount(identifier, component, options, maxTries, interval, dynamic), 100);
+      });
   
-        for (let i = 0; i <= elements.length - 1; i++) {
-          const el = elements[i];
+      const onReady = () => {
+        const container = document.body || document.documentElement;
+        observer.observe(container, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: true
+        });
   
-          if (!el.__vue_app__) {
-            const instance = axios.create();
-
-            const app = createApp(component)
-            app.use(i18n);
-            
-            if (options.useStore && options.useStore === true) {
-              app.use(store);
-            }
-            if (options.provideDataset && options.provideDataset === true) {
-              app.provide('dataset', el.dataset);
-            }
-            if (options.useEditor && options.useEditor === true) {
-              app.component('QuillEditor', QuillEditor);
-            }
-            if (options.useModal && options.useModal === true) {
-              app.use(VueFinalModal());
-            }
-            if (options.useDebounce && options.useDebounce === true) {
-              app.use(vueDebounce, {
-                listenTo: ['input', 'keyup']
-              });
-            }
-
-            app.config.globalProperties.axios=instance;
-            app.mount('#' + el.id);
-            resolved = true;
-            observer.disconnect();
-
-            created.push({ app, section: el });
-          }
-
-          if (i === elements.length - 1) {
-            resolve(created);
-            return;
-          }
-        }
-  
-        if (!resolved && tries < maxTries) {
-          tries++;
-          setTimeout(tryMount(i18n), interval);
-        }
+        resolve(this.tryMount(observer, identifier, component, options, maxTries, interval, dynamic));
       };
   
-      this.createI18nObject().then(i18n => {
-        const observer = new MutationObserver(() => {
-          setTimeout(tryMount(i18n), 100);
-        });
-    
-        const onReady = (i18n) => {
-          const container = document.body || document.documentElement;
-          observer.observe(container, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            characterData: true
-          });
-    
-          tryMount(i18n);
-        };
-    
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', onReady);
-        } else {
-          onReady(i18n);
-        }
-      });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', onReady);
+      } else {
+        onReady();
+      }
     });
+  }
+  async tryMount(observer, identifier, component, options, maxTries = 10, interval = 300, dynamic = true) {
+    let tries = 0;
+    let resolved = false;
+    const selector = (dynamic === true) ? `[id^=${identifier}-]` : `[id^=${identifier}]`;
+    const elements = document.querySelectorAll(selector);
+    const created = [];
+    
+
+    for (let i = 0; i <= elements.length - 1; i++) {
+      const el = elements[i];
+
+      if (!el.__vue_app__) {
+        const instance = axios.create();
+        const app = createApp(component);
+        const lang = localStorage.getItem('lang') ?? 'de';
+        const contexts = await require.context('./locales', true, /\.json$/);
+        const messages = contexts(`./${lang}.json`);
+
+        let languageConfig = {
+          locale: lang,
+          fallbackLocale: 'de',
+          messages: {
+          },
+        }
+        languageConfig.messages[lang] = messages;
+
+        const i18n = createI18n(languageConfig);
+        app.use(i18n);
+        
+        if (options.useStore && options.useStore === true) {
+          app.use(store);
+        }
+        if (options.provideDataset && options.provideDataset === true) {
+          app.provide('dataset', el.dataset);
+        }
+        if (options.useEditor && options.useEditor === true) {
+          app.component('QuillEditor', QuillEditor);
+        }
+        if (options.useTooltip && options.useTooltip === true) {
+          app.use(TippyPlugin);
+        }
+        if (options.usePopper && options.usePopper === true) {
+          app.component('Popper', Popper);
+        }
+        if (options.usePerfectScrollbar && options.usePerfectScrollbar === true) {
+          app.use(PerfectScrollbar);
+        }
+        if (options.useLightbox && options.useLightbox === true) {
+          app.use(VueEasyLightbox);
+        }
+        if (options.useModal && options.useModal === true) {
+          app.use(VueFinalModal());
+        }
+        if (options.useDebounce && options.useDebounce === true) {
+          app.use(vueDebounce, {
+            listenTo: ['input', 'keyup']
+          });
+        }
+
+        app.config.globalProperties.axios=instance;
+        app.mount('#' + el.id);
+        resolved = true;
+        observer.disconnect();
+
+        created.push({ app, section: el });
+
+        if (i === elements.length - 1) {
+          return created;
+        }
+      }
+    }
+
+    if (!resolved && tries < maxTries) {
+      tries++;
+      setTimeout(this.tryMount(identifier, component, options, maxTries, interval, dynamic), interval);
+    }
   }
   setObserver(module, options) {
     return new Promise((resolve) => {
@@ -145,23 +170,6 @@ class VueModule {
 
     app.config.globalProperties.axios=instance;
     return app;
-  }
-  createI18nObject() {
-    return new Promise((resolve) => {
-      const lang = localStorage.getItem('lang') ?? 'de';
-      const contexts = require.context('./locales', true, /\.json$/);
-      const messages = contexts(`./${lang}.json`);
-
-      const i18n = createI18n({
-        locale: lang,
-        fallbackLocale: lang,
-        messages: {
-          lang: messages
-        },
-      });
-
-      resolve(i18n);
-    });
   }
 }
 export default new VueModule();

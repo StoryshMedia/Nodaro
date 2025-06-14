@@ -50,7 +50,7 @@ export default {
     givenclass: {
       type: String,
       required: false,
-      default: 'w-full input rounded-3xl shadow-xl border-gray appearance-none select--arrow'
+      default: 'w-full input rounded-3xl shadow-xl border-gray-400  appearance-none select--arrow'
     },
     clearOnSelect: {
       type: Boolean,

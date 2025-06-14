@@ -22,7 +22,7 @@
           <div
             v-for="(img, idx) in images"
             :key="idx"
-            class="index-carousel-slide flex w-full flex-full pt-24 h-mobilePaginatedListItem md:h-tabletPaginatedListItem xl:h-paginatedListItem overlay items-center background overlay-gray overflow-hidden"
+            class="index-carousel-slide flex w-full flex-full pt-24 h-mobilePaginatedListItem md:h-tabletPaginatedListItem xl:h-paginatedListItem overlay items-center background overlay-gray-400 overflow-hidden"
             :class="(idx === currentIndex) ? '' : 'hidden'"
             @click="showImage(img)"
           >

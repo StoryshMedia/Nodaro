@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray rounded">
+  <div class="border border-gray-400  rounded">
     <button
       type="button"
       class="py-1 w-full flex items-center px-2"
@@ -28,7 +28,7 @@
       </div>
     </button>
     <vue-collapsible :is-open="expanded === true">
-      <div class="pt-1 pb-5 px-2 border-t border-gray">
+      <div class="pt-1 pb-5 px-2 border-t border-gray-400 ">
         <p
           class="mb-3 pl-2 text-xs mt-5"
         >

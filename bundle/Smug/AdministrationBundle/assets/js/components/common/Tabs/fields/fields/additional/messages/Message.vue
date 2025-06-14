@@ -111,7 +111,7 @@
               <button
                 v-if="showItem(action, message)"
                 type="button"
-                class="flex px-3 py-1 items-center text-sm text-gray-500 border border-primary rounded-lg hover:bg-primary hover:text-white transition-all font-medium"
+                class="flex px-3 py-1 items-center text-sm text-gray-400 border border-primary rounded-lg hover:bg-primary hover:text-white transition-all font-medium"
                 @click="handleAction(action, message)"
               >
                 <icon

@@ -73,7 +73,7 @@ class LanguageBuildCommand extends Command
         $output->writeln('#####################');
 
         foreach ($assets as $languageKey => $languageData) {
-           DataHandler::writeFile($this->kernel->getProjectDir() . '/assets/js/modules/locales/' . $languageKey . '.json', DataHandler::getJsonEncode($languageData)); 
+           DataHandler::writeFile($this->kernel->getProjectDir() . '/assets/js/modules/locales/' . $languageKey . '.json', DataHandler::getJsonEncodePretty($languageData)); 
         }
 
         $output->writeln('Done');

@@ -569,7 +569,6 @@ class DataController extends FeBaseController
             $itemClass = EntityGenerator::getGeneratedEntity(ContentItem::class);
             $newItem = new $itemClass();
             $newItem->__set('site', $site);
-            $newItem->__set('entry', $data->__get('entry'));
             $newItem->__set('title', $data->__get('title'));
             $newItem->__set('module', $data->__get('module'));
             $newItem->__set('additionalClasses', $data->__get('additionalClasses'));

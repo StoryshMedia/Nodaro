@@ -9,7 +9,7 @@
     <div
       v-if="isLoading === false && notAllowed === false"
     >
-      <div class="flex items-end mb-8">
+      <div class="flex items-end mb-8 ml-3 pt-3">
         <button
           v-if="config.url && config.url.administration.back"
           type="button"

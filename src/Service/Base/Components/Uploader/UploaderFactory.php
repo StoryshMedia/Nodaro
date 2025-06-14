@@ -107,8 +107,26 @@ class UploaderFactory
     /**
      * @return array
      */
-    public function getImageSizes($path): array
+    public function getImageSizes(string $path, string $extension): array
     {
+        if ($extension === 'svg') {
+            $doc = new \DOMDocument();
+            $doc->load($path);
+            $svg = $doc->getElementsByTagName('svg')->item(0);
+
+            $width = $svg->getAttribute('width');
+            $height = $svg->getAttribute('height');
+
+            if (!$width || !$height) {
+                $viewBox = $svg->getAttribute('viewBox');
+                if ($viewBox) {
+                    [$x, $y, $width, $height] = preg_split('/[\s,]+/', $viewBox);
+                }
+            }
+
+            return ['width' => $width, 'height' => $height];
+        }
+
         $size = getimagesize($path);
 
         return [

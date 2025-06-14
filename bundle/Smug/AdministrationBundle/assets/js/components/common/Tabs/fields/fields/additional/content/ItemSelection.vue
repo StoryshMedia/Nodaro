@@ -42,7 +42,7 @@
                 >
                   <icon :icon-string="'IconX'" />
                 </button>
-                <div class="text-lg font-bold bg-gray bg-opacity-40 pl-5 py-3 pr-24">
+                <div class="text-lg font-bold bg-gray-400  bg-opacity-40 pl-5 py-3 pr-24">
                   {{ $t('ITEM_SELECTION') }}
                 </div>
               </div>

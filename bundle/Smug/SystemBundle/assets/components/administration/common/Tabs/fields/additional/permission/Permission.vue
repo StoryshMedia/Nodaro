@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray rounded">
+  <div class="border border-gray-400  rounded">
     <button
       type="button"
       class="p-4 w-full flex items-center"
@@ -18,7 +18,7 @@
       </div>
     </button>
     <vue-collapsible :is-open="expanded === true">
-      <div class="p-4 border-t border-gray">
+      <div class="p-4 border-t border-gray-400 ">
         <div class="grid grid-cols-4 mt-3 border-b-4 border-dark">
           <div />
           <div>
