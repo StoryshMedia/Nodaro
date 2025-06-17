@@ -55,6 +55,27 @@ class WebpackModuleBuildCommand extends Command
                 'module' => DataHandler::getCamelCaseString($file->getFileNameWithoutExtension(), '-')
             ];
         }
+
+        $finder = new Finder();
+        $finder->files()->in($this->kernel->getProjectDir() . "/custom")->name(['*.js']);
+
+        $output->writeln('Done');
+        $output->writeln('Collecting assets');
+        $output->writeln('#####################');
+
+        foreach ($finder as $file) {
+            if ($file === '.' || $file === '..' ||  !stristr($file->getFilename(), 'js')) {
+                continue;
+            }
+            if (!DataHandler::isStringInString($file->getRelativePath(), 'modules')) {
+                continue;
+            }
+
+            $assets[] = [
+                'path' => $this->kernel->getProjectDir() . "/custom/" . $file->getRelativePath() . '/' . $file->getFileName(),
+                'module' => DataHandler::getCamelCaseString($file->getFileNameWithoutExtension(), '-')
+            ];
+        }
         
         $output->writeln('Done');
         $output->writeln('Writing Config File');

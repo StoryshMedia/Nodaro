@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "type": "symfony-bundle",
     "description": "Darstellung und Handling von Schreibwettbewerben",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": ">=8.1",
         "openai-php/client": "^0.10.3",

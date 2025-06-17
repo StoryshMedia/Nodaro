@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="showCard() === true"
-      class="md:w-80 w-full bg-white shadow-lg rounded border border-gray"
+      class="md:w-80 w-full bg-white shadow-lg rounded border border-gray-400 "
     >
       <div class="py-7 px-6">
         <div class="-mt-7 mb-7 -mx-6 rounded-tl rounded-tr h-52 overflow-hidden">
@@ -34,7 +34,7 @@
         </div>
         <div
           class="
-            bg-gray inset-x-0 top-0 mx-auto my-3
+            bg-gray-400  inset-x-0 top-0 mx-auto my-3
           "
           style="height: 1px"
         />
@@ -83,7 +83,7 @@
     </div>
     <div
       v-if="(Object.keys(item).length === 0) && loaded === true"
-      class="md:w-80 w-full bg-white shadow-lg rounded border border-gray"
+      class="md:w-80 w-full bg-white shadow-lg rounded border border-gray-400 "
     >
       <div class="py-7 px-6">
         <div class="-mt-7 mb-7 -mx-6 rounded-tl rounded-tr h-52 overflow-hidden">
@@ -105,7 +105,7 @@
         </div>
         <div
           class="
-            bg-gray inset-x-0 top-0 mx-auto my-3
+            bg-gray-400  inset-x-0 top-0 mx-auto my-3
           "
           style="height: 1px"
         />

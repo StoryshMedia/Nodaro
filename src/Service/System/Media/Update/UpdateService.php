@@ -69,7 +69,7 @@ class UpdateService extends BaseService
                     /** @var resource $imageObj */
                     $imageResource = $uploaderFactory->getImageObjectFromPath($imageSrc);
                     /** @var array $imageSizes */
-                    $imageSizes = $uploaderFactory->getImageSizes($imageResource);
+                    $imageSizes = $uploaderFactory->getImageSizes($imageResource, $media['extension']);
 
                     foreach ($settings as $setting) {
                         $newImageDestination = $uploaderFactory->getNewMediaPath($media, $setting);

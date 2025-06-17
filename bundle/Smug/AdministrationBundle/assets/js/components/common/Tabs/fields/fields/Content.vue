@@ -90,7 +90,7 @@
             }"
             class="h-full w-full"
           >
-            <div class="bg-white shadow-inner border-l-2 border-gray h-full w-full p-5">
+            <div class="bg-white shadow-inner border-l-2 border-gray-400  h-full w-full p-5">
               <h2 class="flex flex-row flex-nowrap items-center mb-5 mt-8">
                 <span class="flex-grow block border-t border-dark" />
                 <span class="flex-none block mx-2 px-4 py-2.5 rounded leading-none bg-dark text-white">
@@ -231,7 +231,7 @@
             }"
             class="h-full w-full"
           >
-            <div class="bg-white shadow-inner border-l-2 border-gray h-full w-full p-5">
+            <div class="bg-white shadow-inner border-l-2 border-gray-400  h-full w-full p-5">
               <h2 class="flex flex-row flex-nowrap items-center mb-5 mt-8">
                 <span class="flex-grow block border-t border-dark" />
                 <span class="flex-none block mx-2 px-4 py-2.5 rounded leading-none bg-dark text-white">
@@ -665,20 +665,17 @@ export default defineComponent({
     },
     insertChildItem(event, element) {
       this.itemSelectionIndex = event.index;
-      console.log("insertChildItem : " + this.itemSelectionIndex);
       this.multiItemParent = element;
       this.isMultiItemSelection = true;
       this.showItemSelection = true;
     },
     showItemSelectionModal(index) {
       this.itemSelectionIndex = index;
-      console.log("showItemSelectionModal : " + this.itemSelectionIndex);
       this.showItemSelection = true;
     },
     showChildItemSelectionModal(event, parentIndex) {
       this.itemSelectionColumn = event.column;
       this.itemSelectionIndex = event.index;
-      console.log("showChildItemSelectionModal : " + this.itemSelectionIndex);
       this.multiItemParent = event.parent;
       this.multiItemParentIndex = parentIndex;
       this.showItemSelection = true;

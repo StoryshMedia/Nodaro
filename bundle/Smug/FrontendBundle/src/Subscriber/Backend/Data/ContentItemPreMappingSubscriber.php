@@ -96,6 +96,10 @@ class ContentItemPreMappingSubscriber implements EventSubscriberInterface
 
             $requestData['module'] = $module->toArray();
 
+            if ($requestData['rowColumn'] === null) {
+                $requestData['rowColumn'] = 0;
+            }
+
             $event->getContext()->setRequestData($requestData);
         }
     }

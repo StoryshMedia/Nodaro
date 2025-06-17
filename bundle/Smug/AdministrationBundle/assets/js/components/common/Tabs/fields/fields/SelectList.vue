@@ -112,9 +112,6 @@ export default {
     },
     getData() {
       this.isLoading = true;
-      const config = {
-        headers: { Authorization: `Bearer ${window.localStorage.getItem('be-token', '')}` }
-      };
 
       if (this.fieldConfig.getCall) {
         if (this.fieldConfig.id) {

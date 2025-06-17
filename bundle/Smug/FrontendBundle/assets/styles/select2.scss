@@ -147,7 +147,7 @@ fieldset[disabled] .multiselect {
   }
 
   .multiselect__tags {
-    @apply px-5 py-4 rounded-lg text-dark border border-gray border-opacity-5 outline-none bg-white shadow-lg;
+    @apply px-5 py-4 rounded-lg text-dark border border-gray-400  border-opacity-5 outline-none bg-white shadow-lg;
   }
 
   .multiselect__tags input {
@@ -475,7 +475,7 @@ fieldset[disabled] .multiselect {
 .custom-multiselect .multiselect__option--highlight,
 .custom-multiselect .multiselect__option--selected.multiselect__option--highlight,
 .custom-multiselect .multiselect__option.multiselect__option--selected {
-    @apply bg-gray ;
+    @apply bg-gray-400  ;
 }
 
 .custom-multiselect .multiselect__option.multiselect__option--disabled {

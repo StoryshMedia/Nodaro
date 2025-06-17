@@ -3,7 +3,7 @@
     <h3 class="font-semibold text-lg pb-2">
       {{ $t('FAQ_ITEMS') }}
     </h3>
-    <div class="flex items-end mb-8">
+    <div class="flex items-end mb-8 ml-3 pt-3">
       <button
         type="button"
         class="btn btn-dark mr-3"

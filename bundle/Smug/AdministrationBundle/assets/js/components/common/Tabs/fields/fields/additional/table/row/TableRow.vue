@@ -7,7 +7,7 @@
       v-for="(col, colindex) in fieldConfig.columns"
       :key="colindex"
       scope="row"
-      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+      class="px-6 py-4 font-medium text-gray-400 whitespace-nowrap"
     >
       <column
         :column-value="(typeof itemData === 'object') ? getItemData(itemData, col) : itemData"

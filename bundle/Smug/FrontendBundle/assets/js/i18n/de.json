@@ -1,1 +1,9 @@
-{}
+{
+    "SITE_SETTINGS": "Seiteneinstellungen",
+    "SEO_SETTINGS": "SEO Einstellungen",
+    "SITE_STYLES": "Styles",
+    "CLOSE": "Schließen",
+    "WEBSITE": "Webseite",
+    "UPDATE_MODULE": "Aktualisieren",
+    "URL": "Url"
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap w-full justify-center">
-    <div class="border w-full border-gray-500/20 rounded-md shadow-lg p-6">
+    <div class="border w-full border-gray-400 rounded-md shadow-lg p-6">
       <div
         v-if="fieldConfig.icon && fieldConfig.icon !== ''"
         class="text-primary mb-5"

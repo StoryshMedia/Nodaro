@@ -86,12 +86,12 @@
       <div
         class="max-w-sm overflow-hidden px-1"
       >
-        <div class="lg:h-48 rounded-lg bg-gray-400 md:h-36 w-full object-cover object-center" />
+        <div class="lg:h-48 rounded-lg bg-gray-400  md:h-36 w-full object-cover object-center" />
       </div>
       <div class="px-3 py-4">
-        <p class="leading-relaxed mb-3 rounded-md w-full h-3 animate-pulse bg-gray-400" />
-        <p class="leading-relaxed mb-3 rounded-md w-2/3 h-3 animate-pulse bg-gray-400" />
-        <p class="leading-relaxed mb-3 rounded-md w-1/2 h-3 animate-pulse bg-gray-400" />
+        <p class="leading-relaxed mb-3 rounded-md w-full h-3 animate-pulse bg-gray-400 " />
+        <p class="leading-relaxed mb-3 rounded-md w-2/3 h-3 animate-pulse bg-gray-400 " />
+        <p class="leading-relaxed mb-3 rounded-md w-1/2 h-3 animate-pulse bg-gray-400 " />
       </div>
     </div>
   </article>

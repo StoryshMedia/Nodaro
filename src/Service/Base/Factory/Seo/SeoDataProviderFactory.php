@@ -7,15 +7,8 @@ use Smug\Core\Service\Base\Factory\ServiceGenerationFactory;
 use Smug\Core\Service\Base\Interfaces\Seo\SeoDataProviderInterface;
 use Exception;
 
-/**
- * Class SeoDataProviderFactory
- * @package Smug\Core\Service\Base\Factory\Seo
- */
 class SeoDataProviderFactory
 {
-    /**
-     * @return array
-     */
     public static function getProvider(string $mode): ?SeoDataProviderInterface
     {
         try {

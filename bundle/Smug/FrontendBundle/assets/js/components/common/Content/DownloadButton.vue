@@ -37,7 +37,7 @@
             id="DownloadStoryEmail"
             v-model="data.email"
             type="email"
-            class="w-full input rounded-3xl shadow-xl border-gray"
+            class="w-full input rounded-3xl shadow-xl border-gray-400 "
             :placeholder="$t('EMAIL')"
             :disabled="isLoading"
             style="transition: all 0.15s ease 0s;"

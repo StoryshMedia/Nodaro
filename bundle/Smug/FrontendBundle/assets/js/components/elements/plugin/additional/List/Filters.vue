@@ -16,7 +16,7 @@
         ref="searchValueInput"
         v-model="configuration.searchTerm"
         autocomplete="off"
-        class="w-full input rounded-3xl shadow-lg border-gray mb-3"
+        class="w-full input rounded-3xl shadow-lg border-gray-400  mb-3"
         :placeholder="$t('SEARCH')"
         @input="searchit"
       >

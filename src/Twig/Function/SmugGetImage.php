@@ -16,8 +16,12 @@ class SmugGetImage extends AbstractExtension
         ];
     }
 
-    public function getImage(array $images, bool $returnOriginal = false): array|string
+    public function getImage(array|string $images, bool $returnOriginal = false): array|string
     {
+        if (DataHandler::isString($images)) {
+            $images = DataHandler::getJsonDecode($images, true);
+        }
+        
         $mainImageData = (!DataHandler::doesKeyExists('id', $images)) ? DataHandler::getFirstArrayElement($images) : $images;
 
         if (!DataHandler::doesKeyExists('media', $mainImageData)) {
@@ -93,28 +97,28 @@ class SmugGetImage extends AbstractExtension
         $number = rand(1, 26);
 
         if ($returnOriginal) {
-            return '/site/img/author/list/preview/authorListPreview-' . $number . '.webp';
+            return '/img/fallback/fallbackImage-' . $number . '.webp';
         }
 
         return [
             'mobile' => [
                 'list' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ],
                 'detail' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ]
             ],
             'desktop' => [
                 'list' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ],
                 'detail' => [
-                    'src' => '/site/img/author/list/preview/authorListPreview-' . $number . '.webp',
-                    'file' => 'authorListPreview-' . $number
+                    'src' => '/img/fallback/fallbackImage-' . $number . '.webp',
+                    'file' => 'fallbackImage-' . $number
                 ]
             ]
         ];

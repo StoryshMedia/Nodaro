@@ -2,7 +2,7 @@
   <div>
     <div v-if="item.type === 0">
       <h2
-        class="py-3 px-7 flex items-center font-extrabold bg-gray bg-opacity-30 text-dark -mx-4 mb-1 cursor-pointer"
+        class="py-3 px-7 flex items-center font-extrabold bg-gray-50 text-dark -mx-4 mb-1 cursor-pointer"
         @click="setActiveDropdown(item.key)"
       >
         <icon
@@ -28,7 +28,7 @@
     >
       <button
         type="button"
-        class="nav-link group w-full hover:bg-gray hover:bg-opacity-50"
+        class="nav-link group w-full hover:bg-gray-50"
         :class="{ active: activeDropdown === item.key }"
         @click="setActiveDropdown(item.key)"
       >

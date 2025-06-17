@@ -52,19 +52,5 @@
 		{% block additionalJavascript %}
 		{% endblock %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-		<script src="{{ asset('Resources/js/lazyLoad/lazyload.min.js') }}"></script>
-		<script>
-			(function () {
-				const LL = new LazyLoad();
-				const config = { childList: true, subtree: true };
-
-				const callback = (mutationList, observer) => {
-					LL.update();
-				};
-
-				const observer = new MutationObserver(callback);
-				observer.observe(document, config);
-			})();
-		</script>
     </body>
 </html>

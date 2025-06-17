@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-end mb-8">
+    <div class="flex items-end mb-8 ml-3 pt-3">
       <button
         v-if="editAllowed === true && fieldConfig.addConfig"
         type="button"

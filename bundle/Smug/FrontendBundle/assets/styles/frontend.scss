@@ -38,7 +38,7 @@
     .border-bright {
         border-color: #ff6f00;
     }
-    .border-gray {
+    .border-gray-400  {
         border-color: #d1d5db;
     }
     .bg-error {
@@ -468,10 +468,6 @@
 
     h1 {
         @apply xl:text-6xl sm:text-5xl text-4xl;
-    }
-
-    .prose p {
-        @apply font-sans leading-8;
     }
 
     #sub-category-wrapper h3 {

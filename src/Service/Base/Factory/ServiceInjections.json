@@ -11,10 +11,6 @@
     "doctrine.orm.default_entity_manager",
     "kernel"
   ],
-  "Smug\\Core\\Service\\Import\\Dnb\\PublicationBaseService": [
-    "doctrine.orm.default_entity_manager",
-    "kernel"
-  ],
   "Smug\\Core\\Service\\Base\\Service\\BaseService": [
     "doctrine.orm.default_entity_manager",
     "kernel"

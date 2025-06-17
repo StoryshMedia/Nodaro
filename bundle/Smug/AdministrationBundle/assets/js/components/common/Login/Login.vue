@@ -1,7 +1,13 @@
 <template>
-  <div class="max-w-md w-full p-6 text-white">
+  <div class="max-w-md w-full rounded-xl p-6 bg-white text-dark">
+    <img
+      class="w-24 mx-auto my-4 flex-none"
+      src="/administration/img/logo/logo-navigation.svg"
+      alt=""
+    >
+
     <h1 class="text-3xl font-semibold mb-6 text-center">
-      {{ $t('LOGIN') }}
+      {{ $t('LOGIN_HEADLINE') }}
     </h1>
       
     <form 
@@ -50,7 +56,7 @@
   
 <script>
 export default {
-  name: "AdministrationSidebarNavigation",
+  name: "AdministrationLogin",
   components: {
   },
   inject: ['dataset'],
@@ -58,6 +64,7 @@ export default {
     return{
       hasLoginError: false,
       loginData: {
+        mode: 'be',
         username: '',
         password: ''
       }

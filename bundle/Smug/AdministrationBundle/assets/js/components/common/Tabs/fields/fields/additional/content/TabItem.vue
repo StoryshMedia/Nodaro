@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray rounded">
+  <div class="border border-gray-400  rounded">
     <button
       type="button"
       class="p-1 w-full flex items-center"
@@ -17,7 +17,7 @@
       </div>
     </button>
     <vue-collapsible :is-open="expanded === true">
-      <div class="py-1 px-2 border-t border-gray">
+      <div class="py-1 px-2 border-t border-gray-400 ">
         <div
           v-for="(field, fieldindex) in tab.fields"
           :key="fieldindex"
@@ -109,6 +109,9 @@ export default {
       }
       if (field.config.valueType === 'file') {
         config.mini = true;
+        config.deleteCall = '/be/api/smug/frontend/MediaContentItemModuleFieldAssociation/delete';
+        config.uploadCall = '/be/api/media/image/upload';
+        config.assignAlbum = 'frontend';
       }
       return config;
     },

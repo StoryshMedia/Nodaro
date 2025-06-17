@@ -53,7 +53,7 @@
         @apply sticky top-0 z-20;
     }
     .navbar-floating header {
-        @apply bg-gray px-6 pt-4;
+        @apply bg-gray-400  px-6 pt-4;
     }
     .navbar-floating header > div > div:first-child {
         @apply rounded-md;
@@ -82,28 +82,31 @@
 
     .sidebar .nav-item > button,
     .sidebar .nav-item > a {
-        @apply mb-1 flex w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md p-2.5 text-gray;
+        @apply mb-1 flex w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md p-2.5 text-gray-400 ;
     }
     .sidebar .nav-item > a:hover {
         @apply bg-dark text-black;
     }
     .sidebar .nav-item > button.active,
     .sidebar .nav-item > a.active {
-        @apply bg-gray bg-opacity-50 text-black;
+        @apply bg-gray-50  bg-opacity-50 text-black;
     }
 
     .sidebar ul.sub-menu li button,
     .sidebar ul.sub-menu li a {
         @apply flex w-full items-center px-9 py-2.5;
     }
+    .sidebar ul.sub-menu li a {
+        @apply text-dark;
+    }
     .sidebar ul.sub-menu li a:hover {
-        @apply bg-gray text-primary;
+        @apply bg-gray-50 text-primary;
     }
     .sidebar ul.sub-menu li a::before {
-        @apply h-0.5 w-2 rounded bg-gray;
+        @apply h-0.5 w-2 rounded bg-gray-50 ;
     }
     .sidebar ul.sub-menu li a::before:hover {
-        @apply bg-gray text-primary bg-primary mr-2;
+        @apply bg-gray-50  text-primary bg-primary mr-2;
     }
     .sidebar ul.sub-menu li button.active,
     .sidebar ul.sub-menu li a.active {
@@ -177,11 +180,11 @@
         @apply flex items-center justify-between px-4 py-2;
     }
     .horizontal-menu ul.sub-menu a:hover {
-        @apply bg-gray text-primary;
+        @apply bg-gray-400  text-primary;
     }
 
     .horizontal-menu ul.sub-menu a.active {
-        @apply bg-gray text-primary;
+        @apply bg-gray-400  text-primary;
     }
 
     .horizontal-menu > li.nav-item:hover > ul.sub-menu,
@@ -425,7 +428,7 @@
     .form-textarea,
     .form-select,
     .form-multiselect {
-        @apply w-full rounded-md border border-gray bg-white px-4 py-2 text-sm text-black outline-none focus:border-primary focus:ring-transparent;
+        @apply w-full rounded-md border border-gray-400  bg-white px-4 py-2 text-sm text-black outline-none focus:border-primary focus:ring-transparent;
     }
 
     .site--content-editor {
@@ -434,7 +437,7 @@
         .form-textarea,
         .form-select,
         .form-multiselect {
-            @apply w-full rounded-md border border-gray bg-white px-4 py-2 text-sm text-black outline-none focus:border-primary focus:ring-transparent;
+            @apply w-full rounded-md border border-gray-400  bg-white px-4 py-2 text-sm text-black outline-none focus:border-primary focus:ring-transparent;
         }
     }
 
@@ -645,7 +648,7 @@ input[type=color]{
 }
 
 .checkbox-label {
-    @apply rounded-full border border-gray;
+    @apply rounded-full border border-gray-400 ;
 	cursor: pointer;
 	text-indent: -9999px;
 	width: 4rem;
@@ -655,7 +658,7 @@ input[type=color]{
 }
 
 .checkbox-label:after {
-    @apply bg-gray;
+    @apply bg-gray-400 ;
 	content: '';
 	position: absolute;
 	top: 0.1rem;
@@ -679,7 +682,7 @@ input[type=color]{
 /* perfect scrollbar */
 .ps__rail-y > .ps__thumb-y,
 .ps__rail-y > .ps__thumb-y {
-    @apply w-1.5 bg-gray;
+    @apply w-1.5 bg-gray-400 ;
 }
 .ps .ps__rail-x:hover,
 .ps .ps__rail-y:hover,

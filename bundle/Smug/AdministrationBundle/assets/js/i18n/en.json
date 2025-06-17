@@ -32,6 +32,12 @@
   "ON": "on",
   "CAUTION": "Caution",
 
+  "BACK": "Back",
+  "ABORT": "Abort",
+  "SAVE": "Save",
+  "TITLE": "Title",
+  "USERS": "Users",
+  "SETTINGS": "Settings",
   "TO_LANGUAGES": "To the languages",
   "LOCALE": "Locale",
   "LANGUAGES": "Languages",

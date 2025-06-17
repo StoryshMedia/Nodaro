@@ -317,6 +317,11 @@ class DataHandler
         return json_encode($array, $flags);
     }
 
+    public static function getJsonEncodePretty($array)
+    {
+        return json_encode($array, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+
     public static function intExplode(string $delimiter, string $string, bool $removeEmptyValues = false, int $limit = 0)
     {
         $result = explode($delimiter, $string);
@@ -624,6 +629,11 @@ class DataHandler
         }
 
         return (self::getArrayLength($outputArray) > 0);
+    }
+
+    public static function iteratorToArray($data): array
+    {
+        return iterator_to_array($data);
     }
 
     public static function isNull($value)

@@ -66,7 +66,7 @@ export default {
 
       try {
         if (field) {
-          return defineAsyncComponent(() => import("../../../../../../../../" + field.path + ".vue"));
+          return defineAsyncComponent(() => import("../../../../../../../../../" + field.path + ".vue"));
         } else {
           return '';
         }

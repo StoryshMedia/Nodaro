@@ -2,7 +2,9 @@
 
 namespace Smug\Core\Command\Frontend;
 
+use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Factory\Finder\FinderFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,9 +14,11 @@ use Symfony\Component\Finder\Finder;
 class FrontendFieldsBuildCommand extends Command
 {
     private KernelInterface $kernel;
+    protected Context $context;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, Context $context)
     {
+        $this->context = $context;
         $this->kernel = $kernel;
 
         parent::__construct();
@@ -34,15 +38,14 @@ class FrontendFieldsBuildCommand extends Command
         $assets = [
         ];
         
-        $assets = [];
-        $finder = new Finder();
-        $finder->files()->in($this->kernel->getProjectDir() . "/bundle")->name(['frontendFields.json']);
-
         $output->writeln('Done');
         $output->writeln('Collecting Frontend Formular Fields');
         $output->writeln('#####################');
 
-        foreach ($finder as $file) {
+        foreach (DataHandler::mergeArray(
+            FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false, ['frontendFields.json'], true),
+            FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false, ['frontendFields.json'], true)
+        ) as $file) {
             if ($file === '.' || $file === '..' ||  !stristr($file->getFilename(), 'json')) {
                 continue;
             }

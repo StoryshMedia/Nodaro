@@ -24,7 +24,7 @@
             </a>
             <a
               href="javascript:;"
-              class="collapse-icon w-8 h-8 rounded-full flex items-center hover:bg-gray-500/10 transition duration-300 hover:text-primary"
+              class="collapse-icon w-8 h-8 rounded-full flex items-center hover:bg-gray-50 transition duration-300 hover:text-primary"
               style="rotate: 90deg;"
               @click="toggleSidebar()"
             >

@@ -14,19 +14,17 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./bundle/Smug/SystemBundle"
+            "url": "./bundle/*/*",
+            "options": {
+                "symlink": true
+            }
         },
         {
             "type": "path",
-            "url": "./bundle/Smug/SearchBundle"
-        },
-        {
-            "type": "path",
-            "url": "./bundle/Smug/FrontendBundle"
-        },
-        {
-            "type": "path",
-            "url": "./bundle/Smug/AdministrationBundle"
+            "url": "./custom/*/*",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require": {
@@ -62,6 +60,7 @@
         "ramsey/uuid-doctrine": "^2.0",
         "smug/administration-bundle": "*",
         "smug/frontend-bundle": "^0.1",
+        "smug/nodaro-website-bundle": "^0.1.0",
         "smug/search-bundle": "^0.1",
         "smug/system-bundle": "^0.1",
         "symfony/asset": "6.4.*",

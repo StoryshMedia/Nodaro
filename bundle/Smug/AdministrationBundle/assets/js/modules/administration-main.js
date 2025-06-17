@@ -1,19 +1,11 @@
-import { createApp } from 'vue';
-import store from '../store';
 import Main from '../components/common/Main/Main';
-import { createI18n } from 'vue-i18n/index';
-import de from '../i18n/de.json'
+import VueModule from '@core/js/modules/vue-module.js';
 
-const i18n = createI18n({
-  locale: 'de',
-  fallbackLocale: 'de',
-  messages: {
-    'de': de
-  }
-})
-
-let app=createApp(Main);
-app.use(store);
-app.use(i18n);
-app.provide('store' , store);
-app.mount("#administration-main");
+VueModule.observeAndMount({
+  identifier: 'administration-main',
+  component: Main,
+  options: {useStore: true, provideDataset: true, identifier: 'administration-main'},
+  dynamic: false
+}).then(({ app, section }) => {
+  console.log('Vue erfolgreich gemountet auf:', section);
+}).catch(console.error);
