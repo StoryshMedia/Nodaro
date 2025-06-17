@@ -2,6 +2,7 @@
 
 namespace Smug\Core\Command\Backend;
 
+use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,9 +13,11 @@ use Symfony\Component\Finder\Finder;
 class BackendFieldsBuildCommand extends Command
 {
     private KernelInterface $kernel;
+    protected Context $context;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, Context $context)
     {
+        $this->context = $context;
         $this->kernel = $kernel;
 
         parent::__construct();
@@ -29,12 +32,13 @@ class BackendFieldsBuildCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $assets = [];
-        $finder = new Finder();
-        $finder->files()->in($this->kernel->getProjectDir() . "/bundle")->name(['fields.json']);
 
         $output->writeln('Done');
         $output->writeln('Collecting Administration Assets');
         $output->writeln('#####################');
+
+        $finder = new Finder();
+        $finder->files()->in($this->kernel->getProjectDir() . "/bundle")->name(['fields.json']);
 
         foreach ($finder as $file) {
             if ($file === '.' || $file === '..' ||  !stristr($file->getFilename(), 'json')) {
@@ -63,7 +67,48 @@ class BackendFieldsBuildCommand extends Command
                     $componentFilePath = $componentFile->getRelativePath();
                 }
 
-                $component['path'] = $nameSpace . '/' . $bundle . '/' . $componentFilePath . '/' . $component['name'];
+                $component['path'] = 'bundle/' . $nameSpace . '/' . $bundle . '/' . $componentFilePath . '/' . $component['name'];
+
+                $components[] = $component;
+            }
+
+            $assets = DataHandler::mergeArray(
+                $assets,
+                $components
+            );
+        }
+        
+        $finder = new Finder();
+        $finder->files()->in($this->kernel->getProjectDir() . "/custom")->name(['fields.json']);
+
+        foreach ($finder as $file) {
+            if ($file === '.' || $file === '..' ||  !stristr($file->getFilename(), 'json')) {
+                continue;
+            }
+
+            $components = [];
+
+            foreach (DataHandler::getJsonDecode(DataHandler::getFile($file->getRealPath()), true) as $component) {
+                $bundle = '';
+                $nameSpace = '';
+                
+                foreach (DataHandler::explodeArray('/', $file->getPath()) as $partKey => $part) {
+                    if (DataHandler::isStringInString($part, 'Bundle')) {
+                        $bundle = $part;
+                        $nameSpace = DataHandler::explodeArray('/', $file->getPath())[$partKey - 1];
+                        break;
+                    }
+                }
+
+                $componentFinder = new Finder();
+                $componentFinder->files()->in($this->kernel->getProjectDir() . "/custom/" . $nameSpace . '/' . $bundle)->name([$component['name'] . '.vue']);
+                $componentFilePath = '';
+                
+                foreach ($componentFinder as $componentFile) {
+                    $componentFilePath = $componentFile->getRelativePath();
+                }
+
+                $component['path'] = 'custom/' . $nameSpace . '/' . $bundle . '/' . $componentFilePath . '/' . $component['name'];
 
                 $components[] = $component;
             }

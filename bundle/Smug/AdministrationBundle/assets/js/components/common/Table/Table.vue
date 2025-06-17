@@ -447,6 +447,8 @@ export default {
 
       ApiService.post(this.tableConfig.listConfig.url.api.get, this.filterData)
         .then(result =>  {
+          console.log(result);
+          console.log(this.tableConfig.listConfig.paginatorModel);
           if (!result[this.tableConfig.listConfig.paginatorModel]) {
             this.isLoading = false;
             this.notAllowed = true;

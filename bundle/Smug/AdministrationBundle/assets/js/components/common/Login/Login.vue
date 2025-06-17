@@ -56,7 +56,7 @@
   
 <script>
 export default {
-  name: "AdministrationSidebarNavigation",
+  name: "AdministrationLogin",
   components: {
   },
   inject: ['dataset'],
@@ -64,6 +64,7 @@ export default {
     return{
       hasLoginError: false,
       loginData: {
+        mode: 'be',
         username: '',
         password: ''
       }

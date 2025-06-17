@@ -1,47 +1,42 @@
 import axios from 'axios';
 class AuthService {
   login(user) {
-    const API_URL = process.env.apiURL + '/fe_login';
+    const mode = user.mode ?? 'fe';
+    const API_URL = process.env.apiURL + '/' + mode + '_login';
     return axios
       .post(API_URL, user)
       .then(response => {
         if (response.data.token) {
-          const token = this.getToken('jwt_token');
+          if (mode === 'be') {
+            try {
+              document.cookie = "be_jwt_token=" + response.data.token + "; Secure; SameSite=Lax";
+              window.window.localStorage.setItem('be-logged-in', true);
+              window.location.replace(window.location.origin + "/admin");
+            } catch (e) {
+              console.log(e);
+            }
+          } else {
+            const token = this.getToken('jwt_token');
 
-          if (!token) {
-            document.cookie = "jwt_token=" + response.data.token + "; Secure; SameSite=Lax";
-          }
+            if (!token) {
+              document.cookie = "jwt_token=" + response.data.token + "; Secure; SameSite=Lax";
+            }
 
-          window.window.localStorage.setItem('logged-in', true);
-          if (user.redirectAfterLogin === true) {
-            window.location.replace("/account");
+            window.window.localStorage.setItem('logged-in', true);
+            if (user.redirectAfterLogin === true) {
+              window.location.replace("/account");
+            }
           }
         }
-        return response.data.token;
       }).catch(error => {
+        console.log(error);
         return false;
-      });
-  }
-  responsibleLogin(user) {
-    return axios
-      .post(RESPONSIBLE_API_URL, user)
-      .then(response => {
-        if (response.data.token) {
-          window.window.localStorage.setItem('responsible-user-token', response.data.token);
-          window.window.localStorage.setItem('responsible-logged-in', true);
-          window.location.reload();
-        }
       });
   }
   logout() {
     window.window.localStorage.removeItem('user-token');
     window.window.localStorage.removeItem('show-ads');
     window.window.localStorage.setItem('logged-in', false);
-  }
-  responsibleLogout() {
-    window.window.localStorage.removeItem('responsible-user-token');
-    window.window.localStorage.removeItem('show-ads');
-    window.window.localStorage.setItem('responsible-logged-in', false);
   }
   getToken(name) {
     const value = `; ${document.cookie}`;

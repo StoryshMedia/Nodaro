@@ -2,7 +2,9 @@
 
 namespace Smug\Core\Command\Language;
 
+use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Factory\Finder\FinderFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,9 +14,11 @@ use Symfony\Component\Finder\Finder;
 class LanguageBuildCommand extends Command
 {
     private KernelInterface $kernel;
+    protected Context $context;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, Context $context)
     {
+        $this->context = $context;
         $this->kernel = $kernel;
 
         parent::__construct();
@@ -36,7 +40,11 @@ class LanguageBuildCommand extends Command
         $output->writeln('Collecting translations');
         $output->writeln('#####################');
 
-        foreach ($finder as $namespace) {
+        foreach (
+            DataHandler::mergeArray(
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false, [], true),
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false, [], true)
+            ) as $namespace) {
             $bundleFinder = new Finder();
             $bundleFinder->directories()->in($namespace->getPathname())->depth(0);
             

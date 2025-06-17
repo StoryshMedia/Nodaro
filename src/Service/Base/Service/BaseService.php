@@ -244,7 +244,7 @@ class BaseService
 
         if (DataHandler::getArrayLength($actualEntities) === 0) {
             return [
-                'delete' => $actualEntities,
+                'delete' => $existingEntities,
                 'new' => []
             ];
         }

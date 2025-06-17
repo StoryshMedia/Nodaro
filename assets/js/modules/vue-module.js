@@ -148,19 +148,24 @@ class VueModule {
       observer.observe(container, config);
     });
   }
-  mount(section, module, options) {
+  async mount(section, module, options) {
     const instance = axios.create();
-    const i18n = createI18n({
-      locale: 'de',
+    const lang = localStorage.getItem('lang') ?? 'de';
+    const contexts = await require.context('./locales', true, /\.json$/);
+    const messages = contexts(`./${lang}.json`);
+
+    let languageConfig = {
+      locale: lang,
       fallbackLocale: 'de',
       messages: {
-        'de': de
       },
-    });
+    }
+    languageConfig.messages[lang] = messages;
 
     let app=createApp(module)
+    const i18n = createI18n(languageConfig);
     app.use(i18n);
-    
+
     if (options.useStore && options.useStore === true) {
       app.use(store);
     }

@@ -1,4 +1,4 @@
-import Login from '../components/common/Login/Login';
+import Login from '../components/common/Login/Login.vue';
 import VueModule from '@core/js/modules/vue-module.js';
 
 VueModule.observeAndMount({

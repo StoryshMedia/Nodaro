@@ -1,0 +1,74 @@
+[
+    {
+        "title": "AUTHOR",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-author.html.twig"
+    },
+    {
+        "title": "CHAT_BUBBLE_MULTIPLE",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-chat-bubble-multiple.html.twig"
+    },
+    {
+        "title": "CHAT_BUBBLE",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-chat-bubble.html.twig"
+    },
+    {
+        "title": "CHEVRON_DOWN",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-chevron-down.html.twig"
+    },
+    {
+        "title": "PUZZLE",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-puzzle.html.twig"
+    },
+    {
+        "title": "CODE",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-code.html.twig"
+    },
+    {
+        "title": "CHEVRON_RIGHT",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-chevron-right.html.twig"
+    },
+    {
+        "title": "ROCKET",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-rocket.html.twig"
+    },
+    {
+        "title": "CLOCK",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-clock.html.twig"
+    },
+    {
+        "title": "COMMENTS",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-comments.html.twig"
+    },
+    {
+        "title": "GLOBE",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-globe.html.twig"
+    },
+    {
+        "title": "HASHTAG",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-hashtag.html.twig"
+    },
+    {
+        "title": "LOCATION",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-location.html.twig"
+    },
+    {
+        "title": "NEXT",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-next.html.twig"
+    },
+    {
+        "title": "SIGNAL_SLASH",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-signal-slash.html.twig"
+    },
+    {
+        "title": "SPARKLES",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-sparkles.html.twig"
+    },
+    {
+        "title": "TAG",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-tag.html.twig"
+    },
+    {
+        "title": "TRUCK",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-truck.html.twig"
+    }
+]

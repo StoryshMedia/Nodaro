@@ -251,6 +251,8 @@ module.exports = {
     extend: {
       backgroundColor: ['checked'],
       borderColor: ['checked'],
+      filter: ['hover'],
+      grayscale: ['hover'],
       opacity: ['disabled'],
       scale: ['group-hover'],
       padding: ['group-hover'],

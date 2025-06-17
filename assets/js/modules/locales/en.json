@@ -1,4 +1,10 @@
 {
+    "PLAN_DESCRIPTION": "Short description",
+    "PRICE": "Price",
+    "PLANS": "Plans",
+    "BENEFITS": "Benefits",
+    "IS_BESTSELLER": "Bestseller",
+    "PRODUCTS": "Products",
     "A": "A",
     "B": "B",
     "C": "C",

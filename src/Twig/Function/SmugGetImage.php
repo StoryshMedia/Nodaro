@@ -16,8 +16,12 @@ class SmugGetImage extends AbstractExtension
         ];
     }
 
-    public function getImage(array $images, bool $returnOriginal = false): array|string
+    public function getImage(array|string $images, bool $returnOriginal = false): array|string
     {
+        if (DataHandler::isString($images)) {
+            $images = DataHandler::getJsonDecode($images, true);
+        }
+        
         $mainImageData = (!DataHandler::doesKeyExists('id', $images)) ? DataHandler::getFirstArrayElement($images) : $images;
 
         if (!DataHandler::doesKeyExists('media', $mainImageData)) {

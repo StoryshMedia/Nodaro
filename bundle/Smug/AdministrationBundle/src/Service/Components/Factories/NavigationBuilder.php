@@ -6,7 +6,6 @@ use Smug\AdministrationBundle\Interface\Navigation\NavigationBuilderInterface;
 use Smug\Core\Security\SecurityProvider;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\FileContentProvider;
-use Smug\SystemBundle\Entity\UserGroup\UserGroup;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 

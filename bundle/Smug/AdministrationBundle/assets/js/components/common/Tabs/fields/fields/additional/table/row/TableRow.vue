@@ -1,7 +1,7 @@
 <template>
   <tr
     v-if="itemData"
-    class="bg-white border-b hover:bg-gray-400"
+    class="bg-white border-b hover:bg-gray-50"
   >
     <td
       v-for="(col, colindex) in fieldConfig.columns"

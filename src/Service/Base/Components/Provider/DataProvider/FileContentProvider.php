@@ -11,6 +11,8 @@ class FileContentProvider
     const SYSTEM_BUNDLE_DIRECTORY = '/../../../../../';
 
     const BUNDLE_DIRECTORY = '/../../../../../../bundle/';
+    
+    const CUSTOM_DIRECTORY = '/../../../../../../custom/';
 
     const BASE_DIRECTORY = '/../../../../../../';
 
@@ -19,9 +21,15 @@ class FileContentProvider
     public static function getSystemFileContent(string $pattern): array
     {
         return DataHandler::mergeArray(
-            self::getContents(
-                $pattern,
-                __DIR__ . self::SYSTEM_BUNDLE_DIRECTORY
+            DataHandler::mergeArray(
+                self::getContents(
+                    $pattern,
+                    __DIR__ . self::SYSTEM_BUNDLE_DIRECTORY
+                ),
+                self::getContents(
+                    $pattern,
+                    __DIR__ . self::CUSTOM_DIRECTORY
+                )
             ),
             self::getContents(
                 $pattern,

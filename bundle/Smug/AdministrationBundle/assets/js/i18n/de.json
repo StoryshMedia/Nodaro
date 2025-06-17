@@ -33,10 +33,15 @@
   "TEXTS": "Texte",
   "CAUTION": "Achtung",
 
+  "LOGIN_HEADLINE": "Nodaro Login",
+  "USER_NAME_OR_EMAIL": "Username oder E-Mail",
+  "PASSWORD": "Passwort",
+
   "BACK": "Zurück",
   "ABORT": "Abbrechen",
   "SAVE": "Speichern",
   "TITLE": "Titel",
+  "DESCRIPTION": "Beschreibung",
   "USERS": "Nutzer",
   "SETTINGS": "Einstellungen",
   "TO_LANGUAGES": "Zu den Sprachen",

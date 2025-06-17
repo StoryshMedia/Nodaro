@@ -109,6 +109,9 @@ export default {
       }
       if (field.config.valueType === 'file') {
         config.mini = true;
+        config.deleteCall = '/be/api/smug/frontend/MediaContentItemModuleFieldAssociation/delete';
+        config.uploadCall = '/be/api/media/image/upload';
+        config.assignAlbum = 'frontend';
       }
       return config;
     },

@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Smug\Core\Entity\Base\Attribute\BackendField;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Smug\Core\Entity\Base\Attribute\DefaultValue;
 use Smug\FrontendBundle\Entity\Seo\Seo;
 
 #[Entity]
