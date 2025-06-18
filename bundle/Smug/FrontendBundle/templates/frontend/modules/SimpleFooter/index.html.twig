@@ -15,7 +15,7 @@
                     {% for link in pluginSettings.links %}
                         <div class="relative group">
                             <a
-                                class="lg:flex lg:flex-row block w-full lg:w-auto font-medium  px-4 py-4 text-base text-center lg:text-left border-b-2 border-kelp-800 lg:border-b-0"
+                                class="lg:flex lg:flex-row block w-full lg:w-auto font-medium  px-4 py-4 text-base text-center lg:text-left border-b border-gray-200 lg:border-b-0"
                                 href="{{link.slug}}"
                                 title="{{ link.title }}"
                             >
@@ -25,7 +25,7 @@
                     {% endfor %}
                 </nav>
             </nav>
-            <p class="font-medium text-gray-400 text-sm mt-4 lg:mt-0" {% if id is defined %} {{ adminConfig(_context, 'copyright', id) }} {% endif %}>{{ copyright.value | raw }}</p>
+            <p class="font-medium text-gray-400 text-sm mt-4 lg:mt-0" {% if isBackendView(_context) %} {{ adminConfig(_context, 'copyright', id) }} {% endif %}>{{ copyright.value | raw }}</p>
         </div>
     </div>
 </div>

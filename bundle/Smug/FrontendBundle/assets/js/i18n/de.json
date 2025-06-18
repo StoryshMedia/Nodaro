@@ -4,6 +4,15 @@
     "SITE_STYLES": "Styles",
     "CLOSE": "Schließen",
     "WEBSITE": "Webseite",
+    "PARENT_SITE": "Übergeordnete Seite",
+    "ROOT_PAGE": "Hauptseite",
+    "HIDDEN_IN_MENU": "Im Menu verstecken",
+    "CLASSES": "Klassen",
+    "PLUGIN_SETTINGS": "Plugin Einstellungen",
+    "UPDATE_MODULE": "Aktualisieren",
+    "FACEBOOK_LINK": "Facebook Link",
+    "INSTAGRAM_LINK": "Instagram Link",
+    "ADD_COLUMN": "Spalte hinzufügen",
     "UPDATE_MODULE": "Aktualisieren",
     "URL": "Url"
 }

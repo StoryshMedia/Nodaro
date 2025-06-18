@@ -5,12 +5,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const dropdownMenu = document.getElementById('mobile-navigation')
 
     // Toggle the 'hidden' class to show or hide the dropdown menu
-    if (dropdownMenu.classList.contains("h-0")) {
-      dropdownMenu.classList.remove("h-0")
-      dropdownMenu.classList.add("h-screen")
+    if (dropdownMenu.classList.contains("-left-full")) {
+      dropdownMenu.classList.remove("-left-full")
+      dropdownMenu.classList.add("left-0")
     } else {
-      dropdownMenu.classList.remove("h-screen")
-      dropdownMenu.classList.add("h-0")
+      dropdownMenu.classList.remove("left-0")
+      dropdownMenu.classList.add("-left-full")
+    }
+  })
+
+  const closeToggleButtonElement = document.getElementById('mobile-navigation-close-toggle');
+  closeToggleButtonElement.addEventListener("click", () => {
+    // Find the next sibling element which is the dropdown menu
+    const dropdownMenu = document.getElementById('mobile-navigation')
+
+    // Toggle the 'hidden' class to show or hide the dropdown menu
+    if (dropdownMenu.classList.contains("-left-full")) {
+      dropdownMenu.classList.remove("-left-full")
+      dropdownMenu.classList.add("left-0")
+    } else {
+      dropdownMenu.classList.remove("left-0")
+      dropdownMenu.classList.add("-left-full")
     }
   })
 

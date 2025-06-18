@@ -18,6 +18,7 @@
 
 <script>
 import ValueService from '@SmugAdministration/js/services/value/value.service';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
   name: "Editor",

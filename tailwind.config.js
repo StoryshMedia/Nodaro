@@ -259,7 +259,7 @@ module.exports = {
       transition: ['group-hover'],
       inset: ['group-hover'],
       maxHeight: ['group-hover'],
-      height: ['group-hover'],
+      height: ['responsive', 'hover', 'focus', 'group-hover'],
     }
   },
   plugins: [
