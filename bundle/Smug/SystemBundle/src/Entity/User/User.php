@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 use Smug\Core\Entity\Base\Attribute\BackendField;
 use Smug\Core\Entity\Base\Attribute\DefaultValue;
+use Smug\Core\Entity\Base\Attribute\Encode;
 use Smug\SystemBundle\Entity\Media\MediaUserAssociation;
 use Smug\SystemBundle\Entity\UserGroup\UserGroup;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -24,6 +25,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 class User extends UserBaseModel
 {
 	#[Column(type: 'string')]
+    #[Encode()]
     #[BackendField(config: [
         'type' => 'Text',
         'placeholder' => 'USERNAME'
@@ -31,6 +33,7 @@ class User extends UserBaseModel
 	protected string $username;
 	
 	#[Column(type: 'string')]
+    #[Encode()]
     #[BackendField(config: [
         'type' => 'Text',
         'placeholder' => 'USERNAME_CANONICAL'
@@ -38,6 +41,7 @@ class User extends UserBaseModel
 	protected string $usernameCanonical;
 	
 	#[Column(type: 'string')]
+    #[Encode()]
     #[BackendField(config: [
         'type' => 'Email',
         'placeholder' => 'EMAIL'
@@ -45,6 +49,7 @@ class User extends UserBaseModel
 	protected string $email;
 	
 	#[Column(type: 'string')]
+    #[Encode()]
     #[BackendField(config: [
         'type' => 'Email',
         'placeholder' => 'EMAIL_CANONICAL'
@@ -122,6 +127,7 @@ class User extends UserBaseModel
 	protected Language $language;
 	
     #[Column(type: 'string', nullable: true)]
+    #[Encode()]
     #[BackendField(config: [
         'type' => 'Text',
         'placeholder' => 'NAME'
@@ -129,6 +135,7 @@ class User extends UserBaseModel
 	protected string $name;
 	
     #[Column(type: 'string', nullable: true)]
+    #[Encode()]
     #[BackendField(config: [
         'type' => 'Text',
         'placeholder' => 'SURNAME'
