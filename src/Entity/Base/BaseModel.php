@@ -17,7 +17,9 @@ use ReflectionNamedType;
 use ReflectionProperty;
 use Smug\Core\DataAbstractionLayer\SchemaExtensionBuilder;
 use Smug\Core\Entity\Base\Attribute\BackendField;
+use Smug\Core\Entity\Base\Attribute\Encode;
 use Smug\Core\Entity\Base\Structs\BaseStruct;
+use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 
 #[MappedSuperclass]
 #[HasLifecycleCallbacks]
@@ -38,6 +40,13 @@ class BaseModel extends BaseStruct
 
     public function __get($name)
     {        
+        $property = new ReflectionProperty($this, $name);
+        $shouldEncode = $property->getAttributes(Encode::class);
+
+        if (!DataHandler::isEmpty($shouldEncode)) {
+            return EncryptionFactory::getDecryptedValue($this->$name);
+        }
+
         return $this->$name;
     }
 
@@ -58,7 +67,14 @@ class BaseModel extends BaseStruct
                 $value = intval($value);
             }
             
-            $this->$name = $value;
+            $shouldEncode = $field->getAttributes(Encode::class);
+
+            if (!DataHandler::isEmpty($shouldEncode)) {
+                $this->$name = EncryptionFactory::getEcryptedValue($value);
+            } else {
+                $this->$name = $value;
+            }
+            
         }
     }
 

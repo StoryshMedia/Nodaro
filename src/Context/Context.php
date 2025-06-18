@@ -11,6 +11,7 @@ use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Entity\Base\BaseModel;
 use Smug\Core\Exception\Base\NotAllowedException;
 use Smug\Core\Security\SecurityProvider;
+use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Factory\ServiceGenerationFactory;
 use Smug\SystemBundle\Entity\User\User;
@@ -149,7 +150,11 @@ final class Context implements ContextInterface
             $userClass = \Smug\FrontendUserBundle\Entity\FrontendUser\FrontendUser::class;
         }
 
-        return $this->em->getRepository(EntityGenerator::getGeneratedEntity($userClass))->findOneBy(['email' => $this->user->__get('email')]);
+        return $this->em->getRepository(EntityGenerator::getGeneratedEntity($userClass))->findOneBy(
+            [
+                'email' => EncryptionFactory::getEcryptedValue($this->user->__get('email'))
+            ]
+        );
     }
 
     public function getUserArray(): ?array

@@ -5,6 +5,7 @@ namespace Smug\AdministrationBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
+use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -77,7 +78,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         /** @var \Smug\SystemBundle\Entity\User\User $user */
         $user = $this->em->getRepository(
             EntityGenerator::getGeneratedEntity(\Smug\SystemBundle\Entity\User\User::class)
-            )->findOneBy(['username' => $identifier]);
+            )->findOneBy(['username' => EncryptionFactory::getEcryptedValue($identifier)]);
 
         return $user;
     }
@@ -90,6 +91,6 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
     {
         return $this->em->getRepository(
             EntityGenerator::getGeneratedEntity(\Smug\SystemBundle\Entity\User\User::class)
-            )->findOneBy(['username' => $username]);
+            )->findOneBy(['username' =>  EncryptionFactory::getEcryptedValue($identifier)]);
     }
 }

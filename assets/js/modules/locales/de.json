@@ -22,7 +22,6 @@
     "FACEBOOK_LINK": "Facebook Link",
     "INSTAGRAM_LINK": "Instagram Link",
     "ADD_COLUMN": "Spalte hinzufügen",
-    "UPDATE_MODULE": "Aktualisieren",
     "URL": "Url",
     "A": "A",
     "B": "B",
@@ -60,10 +59,8 @@
     "LOGIN_HEADLINE": "Nodaro Login",
     "USER_NAME_OR_EMAIL": "Username oder E-Mail",
     "PASSWORD": "Passwort",
-
     "IMAGES": "Bilder",
     "PLEASE_SELECT": "Bitte wählen",
-
     "BACK": "Zurück",
     "ABORT": "Abbrechen",
     "SAVE": "Speichern",

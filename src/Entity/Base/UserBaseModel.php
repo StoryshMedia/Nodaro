@@ -4,7 +4,6 @@ namespace Smug\Core\Entity\Base;
 
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
-use Smug\SystemBundle\Entity\UserGroup\UserGroup;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -17,7 +16,7 @@ class UserBaseModel extends BaseModel implements UserInterface, PasswordAuthenti
      */
 	public function getUserIdentifier(): string
     {
-        return $this->__get('email');
+        return $this->__get('email', true);
     }
 
 	/**
