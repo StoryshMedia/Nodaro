@@ -6,15 +6,12 @@ class AuthService {
     return axios
       .post(API_URL, user)
       .then(response => {
-        console.log(mode);
-        console.log(response.data);
         if (response.data.token) {
           if (mode === 'be') {
-            document.cookie = "be_jwt_token=" + response.data.token + "; Secure; SameSite=Lax";
-            window.window.localStorage.setItem('be-logged-in', true);
-            window.location.replace(window.location.origin + "/admin");
             try {
-              console.log('DONE');
+              document.cookie = "be_jwt_token=" + response.data.token + "; Secure; SameSite=Lax";
+              window.window.localStorage.setItem('be-logged-in', true);
+              window.location.replace(window.location.origin + "/admin");
             } catch (e) {
               console.log(e);
             }

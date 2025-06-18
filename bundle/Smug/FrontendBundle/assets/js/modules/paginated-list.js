@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n/index';
 import de from '../i18n/de.json';
 import PaginatedList from '../components/common/ItemList/PaginatedList';
-import store from '../store';
+import store from '@core/js/store/index.js';
 
 const i18n = createI18n({
   locale: 'de',
