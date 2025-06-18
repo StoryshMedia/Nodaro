@@ -116,11 +116,9 @@ export default {
         this.showAddData = false;
       } else {
         ApiService.post('/be/api/smug/frontend/site/add', event.item).then(result => {
-          if (result.success === true) {
-            this.showAddData = false;
-            this.showSuccess = true;
-            this.getData();
-          }
+          this.showAddData = false;
+          this.showSuccess = true;
+          this.getData();
         });
       }
     },

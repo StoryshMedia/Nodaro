@@ -57,14 +57,14 @@
             <div class="flex items-center space-x-4">
                 {% if pluginSettings.showSearch is same as(true) %}
                     <div class='px-4 py-2.5 rounded max-lg:hidden'>
-                        <div id="navigation-search-{% if id is defined %}{{ id }}{% endif %}" {% if id is defined %}class="administration--plugin-overlay"{% endif %} data-props="{{ searchWindowData | json_encode() }}"></div>
+                        <div id="navigation-search-{% if isBackendView(_context) %}{{ id }}{% endif %}" {% if isBackendView(_context) %}class="administration--plugin-overlay"{% endif %} data-props="{{ searchWindowData | json_encode() }}"></div>
                         {{ smug_encore_entry_script_tags('navigationSearch', null, '_default', [], true) }}
                     </div>
                 {% endif %}
 
                 {% if pluginSettings.showAccount is same as(true) %}
                     <div class="ml-auto space-x-8">
-                        <div id="navigation-login-{% if id is defined %}{{ id }}{% endif %}" {% if id is defined %}class="administration--plugin-overlay"{% endif %} data-props="{{ loginWindowData | json_encode() }}" data-loggedIn="{{ isLoggedIn(_context) }}"></div>
+                        <div id="navigation-login-{% if isBackendView(_context) %}{{ id }}{% endif %}" {% if isBackendView(_context) %}class="administration--plugin-overlay"{% endif %} data-props="{{ loginWindowData | json_encode() }}" data-loggedIn="{{ isLoggedIn(_context) }}"></div>
                         {{ smug_encore_entry_script_tags('navigationLogin', null, '_default', [], true) }}
                     </div>
                 {% endif %}

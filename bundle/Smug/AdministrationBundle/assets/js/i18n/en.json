@@ -32,6 +32,12 @@
   "ON": "on",
   "CAUTION": "Caution",
 
+  "LOGIN_HEADLINE": "Nodaro Login",
+  "USER_NAME_OR_EMAIL": "Username or E-Mail",
+  "PASSWORD": "Password",
+  "IMAGES": "Images",
+  "PLEASE_SELECT": "Please Select",
+
   "BACK": "Back",
   "ABORT": "Abort",
   "SAVE": "Save",

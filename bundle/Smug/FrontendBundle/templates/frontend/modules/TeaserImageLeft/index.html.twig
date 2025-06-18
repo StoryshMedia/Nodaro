@@ -3,7 +3,7 @@
         {% if image.value is defined and image.value is not empty %}
             {% set imageValue = getImage(image.value) %}
             <img
-                {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+                {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %}
                 class="w-full h-full"
                 srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
                 sizes="(max-width: 600px) 480px,
@@ -12,24 +12,24 @@
                 alt="{{ imageValue.desktop.detail.file }}" />
         {% else %}
             <img
-                {% if id is defined %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+                {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %}
                 class="w-full h-full" />
         {% endif %}
     </div>
     <article
         class="smug-teaser-image-left-textbox {{ getTemplateItemClasses(template, 'box') }}"
     >
-        <h2 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+        <h2 class="{{ headline.classes}}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
             {{ headline.value }}
         </h2>
-        <div class="{{ caption.classes }}" {% if id is defined %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
+        <div class="{{ caption.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
             {{ caption.value | raw }}
         </div>
         <a
             href="{{ button.settings.link.value }}"
             title="{{ button.value }}"
             class="{{ button.classes }} p-1"
-            {% if id is defined %} {{ adminConfig(_context, 'button', id) }} {% endif %}
+            {% if isBackendView(_context) %} {{ adminConfig(_context, 'button', id) }} {% endif %}
         >
             <span class="flex">{{ button.value }} {{ include('@SmugFrontend/frontend/shared/icons/icon-next.html.twig') }}<span>
         </a>

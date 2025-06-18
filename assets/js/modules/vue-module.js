@@ -8,7 +8,6 @@ import { QuillEditor } from '@vueup/vue-quill/dist/vue-quill.global.prod';
 import { TippyPlugin } from 'tippy.vue';
 import VueEasyLightbox from 'vue-easy-lightbox';
 import PerfectScrollbar from 'vue3-perfect-scrollbar';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import Popper from 'vue3-popper';
 
 class VueModule {

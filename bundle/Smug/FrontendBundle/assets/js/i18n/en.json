@@ -1,1 +1,17 @@
-{}
+{
+    "SITE_SETTINGS": "Site settings",
+    "SEO_SETTINGS": "SEO settings",
+    "SITE_STYLES": "Styles",
+    "CLOSE": "Close",
+    "WEBSITE": "Website",
+    "PARENT_SITE": "Parent site",
+    "ROOT_PAGE": "Root page",
+    "HIDDEN_IN_MENU": "Hide in menu",
+    "CLASSES": "Classes",
+    "PLUGIN_SETTINGS": "Plugin settings",
+    "UPDATE_MODULE": "Update module",
+    "FACEBOOK_LINK": "Facebook Link",
+    "INSTAGRAM_LINK": "Instagram Link",
+    "ADD_COLUMN": "Add column",
+    "URL": "Url"
+}

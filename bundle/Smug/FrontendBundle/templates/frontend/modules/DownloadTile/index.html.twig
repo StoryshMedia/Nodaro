@@ -1,5 +1,5 @@
 <div {% if additionalClasses is defined %}class="{{ additionalClasses }}"{% endif %}>
-    <h3 class="{{ headline.classes}}" {% if id is defined %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+    <h3 class="{{ headline.classes}}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
         {{ headline.value }}
     </h3>
 
