@@ -35,6 +35,7 @@ class SmugGetImage extends AbstractExtension
 
             return [
                 'src' => DataHandler::getReplaceString('//', '/', $this->getSrcFromMainImage($mainImageData['media'])),
+                'file' => $mainImageData['media']['file'],
                 'width' => $mainImageData['media']['sizeX'],
                 'height' => $mainImageData['media']['sizeY']
             ];

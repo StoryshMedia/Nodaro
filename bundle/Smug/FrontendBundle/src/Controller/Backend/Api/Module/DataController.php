@@ -242,10 +242,28 @@ class DataController extends FeBaseController
                     $this->context->getEntityManager()->flush();
                 }
             }
+
+            if (!DataHandler::isEmpty($moduleData['settings']['tabs'] ?? [])) {
+                foreach ($usedItem->__get('tabs') as $tab) {
+                    $addService->updateTab(
+                        $tab,
+                        $moduleData['settings']['tabs'][0],
+                        $this->context,
+                        false,
+                        'contentItemModuleField'
+                    );
+                }
+            }
         }
 
         if (!DataHandler::isEmpty($moduleData['settings']['tabs'] ?? [])) {
-            $addService->installTabs($moduleData['settings']['tabs'], $this->context, $module);
+            foreach ($module->__get('tabs') as $tab) {
+                $addService->updateTab(
+                    $tab,
+                    $moduleData['settings']['tabs'][0],
+                    $this->context
+                );
+            }
         }
 
         return $this->prepareReturn(['success' => true]);
