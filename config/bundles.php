@@ -19,4 +19,6 @@ return [
     Smug\SearchBundle\SmugSearchBundle::class => ['all' => true],
     Smug\SystemBundle\SmugSystemBundle::class => ['all' => true],
     Smug\NodaroWebsiteBundle\SmugNodaroWebsiteBundle::class => ['all' => true],
+    Smug\ContactBundle\SmugContactBundle::class => ['all' => true],
+    Smug\FrontendFormBundle\SmugFrontendFormBundle::class => ['all' => true],
 ];
