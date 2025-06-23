@@ -1,0 +1,80 @@
+{
+    "title": "Horizontal vollflächige Kachel",
+    "identifier": "SmugFullWidthHorizontalCard",
+    "type": "contentElement",
+    "category": "Text",
+    "description": {
+        "de": "Horizontal vollflächige Kachel mit Bild und Call to Action Button",
+        "en": "Horizontal full-surface tile with image and call-to-action button"
+    },
+    "settings": {
+        "template": {
+            "frontend": {
+                "templatePath": "@SmugFrontend/frontend/modules/FullWidthHorizontalCard/index.html.twig"
+            }
+        },
+        "fields": [
+            {
+                "identifier": "button",
+                "placeholder": "TEASER_CTA",
+                "type": "Text",
+                "default": "Action",
+                "classes": ["p-1", "flex", "select-none", "items-center", "gap-2", "rounded-lg", "py-3", "px-6", "text-center", "align-middle", "font-sans", "text-xs", "font-bold", "text-primary", "transition-all"],
+                "settings": {
+                    "link": {
+                        "type": "linkField",
+                        "placeholder": "LINK_TARGET",
+                        "value": "#"
+                    }
+                },
+                "config": {
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "image",
+                "placeholder": "IMAGE",
+                "type": "FileUpload",
+                "classes": [],
+                "config": {
+                    "multiple": false,
+                    "valueType": "file",
+                    "contentEditable": false
+                }
+            },
+            {
+                "identifier": "highlight",
+                "placeholder": "HIGHLIGHT",
+                "default": "Your Highlight",
+                "type": "Text",
+                "classes": ["mb-4", "block", "font-sans", "text-base", "font-semibold", "leading-relaxed", "tracking-normal", "text-primary", "antialiased"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "headline",
+                "placeholder": "HEADLINE",
+                "default": "Welcome to Our Awesome Website",
+                "type": "Text",
+                "classes": ["mb-2", "block", "font-sans", "text-2xl", "font-semibold", "leading-snug", "tracking-normal", "text-dark", "antialiased"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            },
+            {
+                "identifier": "caption",
+                "placeholder": "CAPTION",
+                "default": "Discover amazing features and services that await you.",
+                "type": "Editor",
+                "classes": ["mb-8", "block", "font-sans", "text-base", "font-normal", "leading-relaxed", "text-gray-700", "antialiased"],
+                "config": {
+                    "valueType": "string",
+                    "contentEditable": true
+                }
+            }
+        ]
+    }
+}

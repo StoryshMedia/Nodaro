@@ -33,6 +33,9 @@
   "TEXTS": "Texte",
   "CAUTION": "Achtung",
 
+  "UPLOAD_IMAGES": "Hochladen",
+  "STANDARD": "Standard",
+
   "LOGIN_HEADLINE": "Nodaro Login",
   "USER_NAME_OR_EMAIL": "Username oder E-Mail",
   "PASSWORD": "Passwort",

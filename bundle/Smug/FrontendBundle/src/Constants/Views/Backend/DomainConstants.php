@@ -58,6 +58,7 @@ class DomainConstants implements BackendDataConstantsInterface
 			],
 			[
 				'headline' => 'SEO_SETTINGS',
+				'icon' => 'IconSettings',
 				'type' => 'standard',
 				'rows' => [
 					[
@@ -88,6 +89,7 @@ class DomainConstants implements BackendDataConstantsInterface
 			[
 				'headline' => 'SITE_TREE',
 				'type' => 'standard',
+				'icon' => 'IconRouter',
 				'rows' => [
 					[
 						'class' => 'grid grid-cols-1',
