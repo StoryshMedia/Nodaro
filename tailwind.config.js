@@ -262,6 +262,11 @@ module.exports = {
       height: ['responsive', 'hover', 'focus', 'group-hover'],
     }
   },
+  safelist: [
+    {
+      pattern: /^h-/,
+    },
+  ],
   plugins: [
     require('flowbite/plugin')
   ],
