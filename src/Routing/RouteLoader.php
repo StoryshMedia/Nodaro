@@ -33,6 +33,28 @@ class RouteLoader extends Loader
                 continue;
             }
         }
+        
+        $finder = new Finder();
+
+        $finder
+            ->directories()->in(__DIR__. '/../../custom')->depth(1);
+        
+        foreach ($finder as $dir) {
+            if (!\str_contains($dir->getFilename(), 'Bundle')) {
+                continue;
+            }
+            
+            $resource = '@' . $dir->getRelativePath() . $dir->getFilename() . '/config/routes.yaml';
+            $type = 'yaml';
+    
+            try {
+                $importedRoutes = $this->import($resource, $type);
+        
+                $routes->addCollection($importedRoutes);
+            } catch (Exception $e) {
+                continue;
+            }
+        }
 
         return $routes;
     }
