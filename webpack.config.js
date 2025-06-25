@@ -9,7 +9,8 @@ var aliases = require('./src/Command/Frontend/webpack-aliases.json');
 const TerserPlugin = require('terser-webpack-plugin');
 let aliasesMappings = {
     '@core': path.resolve(__dirname, 'assets'),
-    'Bundle': path.resolve(__dirname, './bundle')
+    'Bundle': path.resolve(__dirname, './bundle'),
+    '@root': path.resolve(__dirname, './')
 };
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 //     .BundleAnalyzerPlugin;

@@ -497,7 +497,7 @@
         @apply outline-none
     }
     input, select {
-        @apply px-5 py-4 rounded-md transition-all font-sans border border-dark border-opacity-5 outline-none bg-white;
+        @apply px-5 py-4 rounded-md transition-all font-sans border border-dark;
     }
 
     /* select:focus {
@@ -529,9 +529,6 @@
     margin-bottom: 0 !important;
     margin-top: 0 !important;
     padding: 0.9rem 2rem !important;
-    }
-    input.input-l, select.input-l, textarea.input-l {
-        @apply px-8 py-3 rounded-lg text-lg text-dark border border-dark border-opacity-5 outline-none bg-white;
     }
     .rounded--left-unset {
         border-top-left-radius: 0 !important;

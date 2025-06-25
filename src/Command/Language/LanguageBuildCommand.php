@@ -34,9 +34,6 @@ class LanguageBuildCommand extends Command
     {
         $assets = [];
 
-        $finder = new Finder();
-        $finder->directories()->in($this->kernel->getProjectDir() . "/bundle")->depth(0);
-
         $output->writeln('Collecting translations');
         $output->writeln('#####################');
 
