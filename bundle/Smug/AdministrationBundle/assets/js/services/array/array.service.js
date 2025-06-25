@@ -12,6 +12,10 @@ class ArrayService {
   getIndexInArray(array, value) {
     return array.findIndex(x => x === value)
   }
+  removeObjectProperty(object, key) {
+    object.delete(key);
+    return object;
+  }
   isArray(array) {
     return Array.isArray(array);
   }
