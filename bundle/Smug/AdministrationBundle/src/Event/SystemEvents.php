@@ -27,4 +27,6 @@ final class SystemEvents
     public const DATA_MODEL_LIST_LOADED = 'smug.administration.bundle.data.model.list.loaded';
 
     public const DATA_DELETED = 'smug.administration.bundle.data.deleted';
+
+    public const SEND_EMAIL_DATA = 'smug.system.email.is.send';
 }

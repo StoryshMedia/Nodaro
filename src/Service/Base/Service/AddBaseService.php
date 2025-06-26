@@ -323,11 +323,11 @@ class AddBaseService extends BaseService implements AddServiceInterface
      */
     public function add(Context $context, $import = false): array
     {
+        try {
             $data = $this->processAdd(
                 $context,
                 $import
             );
-        try {
             
             return [
                 'success' => true,

@@ -14,7 +14,6 @@ use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ExceptionProvider;
 use Smug\Core\Service\Base\Factory\Finder\FinderFactory;
 use Smug\Core\Service\Base\Factory\ServiceGenerationFactory;
-use Smug\Core\Service\Base\Mail\SendMail;
 use Smug\Core\Service\Base\Service\ListBaseService;
 use Smug\FrontendBundle\Entity\ContentItem\ContentItem;
 use Smug\FrontendBundle\Entity\ContentItemModule\ContentItemModule;
@@ -32,6 +31,7 @@ use Smug\FrontendBundle\Service\Module\Add\AddService;
 use Smug\FrontendBundle\Service\Navigation\Update\UpdateService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class DataController extends FeBaseController
@@ -48,7 +48,7 @@ class DataController extends FeBaseController
         Context $context,
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher,
-        SendMail $mail
+        MailerInterface $mailer
     ) {
         $this->renderer = $renderer;    
         parent::__construct(
@@ -56,7 +56,7 @@ class DataController extends FeBaseController
             $context,
             $em,
             $dispatcher,
-            $mail
+            $mailer
         );
     }
 

@@ -26,6 +26,22 @@
     }
 
     table {
-        @apply my-3;
+        @apply my-3 text-left table-auto;
+
+        thead {
+            tr {
+                @apply border-b border-gray-300 bg-gray-50;
+
+                th {
+                    @apply p-4 py-5;
+                }
+            }
+        }
+
+        tbody {
+            td {
+                @apply p-4 border-b border-gray-200 py-5;
+            }
+        }
     }
 }

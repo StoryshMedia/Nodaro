@@ -3,6 +3,6 @@ mjml:
   renderer: binary # default: binary
   options:
     binary: '%kernel.project_dir%/node_modules/.bin/mjml' # default: mjml
-    node: '/opt/plesk/node/16/bin/node' # default: null
+    node: '/usr/bin/node' # default: null
     minify: false
     validation_level: strict
