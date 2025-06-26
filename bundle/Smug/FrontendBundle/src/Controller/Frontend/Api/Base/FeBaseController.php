@@ -20,7 +20,7 @@ class FeBaseController extends BaseController
 {
     public function sendErrorMail(array $data)
     {
-        $this->sendMail->sendHtmlMail(
+        $this->sendHtmlMail(
             '@SmugFrontend/email/error/html/index.html.twig',
             [
                 'from' => $data['from'],

@@ -3,8 +3,6 @@
 namespace Smug\Core\Controller\Backend\Api\Base;
 
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
-use Smug\Core\Service\Base\Components\Handler\TimeHandler;
-use Smug\Core\Service\Base\Mail\SendMail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -12,12 +10,17 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\KernelInterface;
-use \Exception;
+use Smug\AdministrationBundle\Event\SystemEvents;
 use Smug\AdministrationBundle\Service\Components\Factories\View\View;
 use Smug\AdministrationBundle\Trait\DispatchDataTrait;
 use Smug\AdministrationBundle\Trait\RequestParameterTrait;
 use Smug\Core\Context\Context;
+use Smug\Core\Events\Email\EmailSendEvent;
+use Smug\Core\Service\Email\EmailData;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -30,14 +33,11 @@ class BaseController extends AbstractController
 
     const EDIT_RIGHTS = '';
 
-    /** @var Context $context */
     public Context $context;
 
-    /** @var SendMail $sendMail */
-    public SendMail $sendMail;
-
-    /** @var EntityManagerInterface $em */
     public EntityManagerInterface $em;
+
+    public MailerInterface $mailer;
     
     protected EventDispatcherInterface $dispatcher;
 
@@ -46,18 +46,14 @@ class BaseController extends AbstractController
         Context $context,
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher,
-        SendMail $mail
+        MailerInterface $mailer
     ) {
         $this->context = $context;
         $this->em = $em;
+        $this->mailer = $mailer;
         $this->dispatcher = $dispatcher;
-        $this->sendMail = $mail;
     }
 	
-	/**
-	 * @param array $returnData
-	 * @return JsonResponse
-	 */
     public function prepareReturn(array $returnData): JsonResponse
     {
         $response = new JsonResponse($returnData);
@@ -69,13 +65,6 @@ class BaseController extends AbstractController
         return $response;
     }
 
-    /**
-     * @param string $command
-     * @param KernelInterface $kernel
-     * @param array $parameters
-     * @return string
-     * @throws Exception
-     */
     public function runCliCommand(string $command, KernelInterface $kernel, array $parameters = []): string
     {
         $application = new Application($kernel);
@@ -115,5 +104,81 @@ class BaseController extends AbstractController
         }
 
         return $config;
+    }
+    
+    public function sendHtmlMail(EmailData $emailData, ?array $attachment = null): bool
+    {
+        $attachmentList = [];
+
+        $data = [
+            'sender' => $emailData->__get('sender'),
+            'recipients' => $emailData->__get('recipients'),
+            'subject' => $emailData->__get('subject'),
+            'preview' => 'Informationen von ' . $emailData->__get('sender')['name'],
+            'body' => $this->render(
+                $emailData->__get('template'),
+                ['data' => $emailData->__get('data')]
+            )->getContent()
+        ];
+
+        if ($attachment !== null) {
+            foreach ($attachment as $item) {
+                if (DataHandler::checkFile($item['path'])) {
+                    $attachmentList[] = [
+                        'name' => $item['fileName'],
+                        'content' => chunk_split(base64_encode(DataHandler::getFile($item['path'])))
+                    ];
+                }
+            }
+        }
+
+        if (!empty($attachmentList)) {
+            $emaildata['attachment'] = $attachmentList;
+        }
+
+        return $this->send($data);
+    }
+
+    protected function send(array $emailData): bool
+    {
+        $emailData['isSend'] = false;
+
+        $emailData = $this->dispatchData(
+            $emailData,
+            $this->context,
+            EmailSendEvent::class,
+            '',
+            SystemEvents::SEND_EMAIL_DATA
+        );
+
+        // if the email was not send by other bundles use the base symfoy fallback email sender
+        if (!$emailData['isSend']) {
+            $recipients = self::getEmailRecipients($emailData['recipients']);
+
+            $email = new Email();
+            $email->from(new Address($emailData['sender']['email'], $emailData['sender']['name']))
+                ->to(...$recipients)
+                ->subject($emailData['subject'])
+                ->html($emailData['body']);
+
+            foreach ($emaildata['attachment'] ?? [] as $attachment) {
+                $email->attach($attachment['content'], $attachment['name'] ?? '');
+            }
+
+            $this->mailer->send($email);
+        }
+
+        return true;
+    }
+
+    private static function getEmailRecipients(array $recipients): array
+    {
+        $addresses = [];
+
+        foreach ($recipients as $recipient) {
+            $addresses[] = new Address($recipient['email'], $recipient['name'] ?? '');
+        }
+
+        return $addresses;
     }
 }
