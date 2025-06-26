@@ -16,7 +16,7 @@ use Smug\AdministrationBundle\Trait\DispatchDataTrait;
 use Smug\AdministrationBundle\Trait\RequestParameterTrait;
 use Smug\Core\Context\Context;
 use Smug\Core\Events\Email\EmailSendEvent;
-use Smug\Core\Service\Email\EmailData;
+use Smug\Core\Service\System\Email\EmailData;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;

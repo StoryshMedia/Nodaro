@@ -1,6 +1,6 @@
 <?php
 
-namespace Smug\Core\Service\Email;
+namespace Smug\Core\Service\System\Email;
 
 class EmailData
 {
