@@ -33,6 +33,7 @@
         "no-case-declarations": "off",
         "no-useless-escape": "off",
         "no-undef": "off",
+        "no-empty": "off",
         "no-inner-declarations": "off",
         "vue/require-valid-default-prop": "off",
         "no-unused-vars": "off",

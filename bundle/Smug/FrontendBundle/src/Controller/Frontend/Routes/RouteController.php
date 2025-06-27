@@ -7,22 +7,9 @@ use Smug\Core\Http\Foundation\Request;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\FrontendBundle\Controller\Frontend\Api\Base\FeBaseController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RouteController extends FeBaseController
 {
-    #[Route('/fe/api/visit/{mode}/list', name: 'fe_set_list_visit', methods:"GET")]
-    public function listVisitAction(string $mode): JsonResponse
-    {
-        return $this->prepareReturn($this->setSiteVisit($mode, '', 'list'));
-    }
-
-    #[Route('/fe/api/visit/{mode}/{name}', name: 'fe_set_visit', methods:"GET")]
-    public function visitAction(string $mode, string $name): JsonResponse
-    {
-        return $this->prepareReturn($this->setSiteVisit($mode, $name));
-    }
-    
     #[
         Route(
             '/{slug}',

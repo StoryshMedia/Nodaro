@@ -26,14 +26,16 @@
             <div class="{{ caption.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'caption', id, loop.index) }} {% endif %}>
                 {{ caption.value | raw }}
             </div>
-            <a
-                href="{{ button.settings.link.value }}"
-                title="{{ button.value }}"
-                class="mt-2 md:mt-5 p-3 px-5 bg-black text-white font-bold text-sm hover:bg-primary"
-                {% if isBackendView(_context) %} {{ adminConfig(_context, 'button', id, loop.index) }} {% endif %}
-            >
-                {{ button.value }}
-            </a>
+            {% if button.value is not empty %}
+                <a
+                    href="{{ button.settings.link.value }}"
+                    title="{{ button.value }}"
+                    class="mt-2 md:mt-5 p-3 px-5 bg-black text-white font-bold text-sm hover:bg-primary"
+                    {% if isBackendView(_context) %} {{ adminConfig(_context, 'button', id, loop.index) }} {% endif %}
+                >
+                    {{ button.value }}
+                </a>
+            {% endif %}
         </div>
     </section>
 </section>

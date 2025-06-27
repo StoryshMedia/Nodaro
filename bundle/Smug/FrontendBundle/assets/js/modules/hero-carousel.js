@@ -21,7 +21,7 @@ const tryMount = () => {
         slidesContainer.scrollLeft -= slideWidth;
       });
     } catch (e) {
-      console.log(e);
+      
     }
   }
 

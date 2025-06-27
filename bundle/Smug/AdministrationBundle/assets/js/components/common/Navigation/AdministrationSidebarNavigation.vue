@@ -16,11 +16,10 @@
               class="main-logo flex items-center shrink-0"
             >
               <img
-                class="w-8 ml-3 flex-none"
+                class="h-10 ml-3 flex-none"
                 src="/administration/img/logo/logo-navigation.svg"
                 alt=""
               >
-              <span class="text-2xl ml-3 font-semibold align-middle lg:inline">Nodaro</span>
             </a>
             <a
               href="javascript:;"
