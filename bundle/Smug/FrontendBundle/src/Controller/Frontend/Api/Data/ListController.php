@@ -70,7 +70,7 @@ class ListController extends BaseController
             ]); 
         }
 
-        return $this->prepareReturn($data->toArray());
+        return $this->prepareReturn($this->serializer->serialize($data));
 
     }
 }

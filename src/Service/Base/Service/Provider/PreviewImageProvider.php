@@ -5,25 +5,19 @@ namespace Smug\Core\Service\Base\Service\Provider;
 use Smug\Core\Entity\Media\Media;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\Core\Service\Base\Interfaces\Provider\ProviderInterface;
 
-/**
- * Class PreviewImageProvider
- * @package Smug\Core\Service\Base\Service\Provider
- */
 class PreviewImageProvider implements ProviderInterface
 {
-    /**
-     * @inheritDoc
-     */
-    public static function provide(array $config): array
+    public static function provide(array $config, EntitySerializer $serializer): array
     {
         if ($config['previewImage'] !== null) {
             $arPublicationImage = $config['previewImage']->toArray();
             if (DataHandler::doesMethodExist($config['previewImage'], 'getMedia')) {
-                $thumbnails = ArrayProvider::getObjectsAsArray($config['previewImage']->getMedia()->__get('thumbnails'));
+                $thumbnails = ArrayProvider::getObjectsAsArray($config['previewImage']->getMedia()->__get('thumbnails'), $serializer);
             } else {
-                $thumbnails = ArrayProvider::getObjectsAsArray($config['previewImage']->__get('thumbnails'));
+                $thumbnails = ArrayProvider::getObjectsAsArray($config['previewImage']->__get('thumbnails'), $serializer);
             }
             $viewportThumbnails = [];
 
@@ -39,8 +33,8 @@ class PreviewImageProvider implements ProviderInterface
 
             /** @var Media $fallbackImage */
             $fallbackImage = $mediaRepository->findOneBy(['file' => 'fallback_0' . $randomFallbackNumber]);
-            $arPublicationImage = ['media' => $fallbackImage->toArray()];
-            $thumbnails = ArrayProvider::getObjectsAsArray($fallbackImage->__get('thumbnails'));
+            $arPublicationImage = ['media' => $serializer->serialize($fallbackImage)];
+            $thumbnails = ArrayProvider::getObjectsAsArray($fallbackImage->__get('thumbnails'), $serializer);
             $viewportThumbnails = [];
 
             foreach ($thumbnails as $thumbnail) {

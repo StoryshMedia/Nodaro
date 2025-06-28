@@ -10,14 +10,6 @@ use \Exception;
 
 abstract class MediaAttachmentProcessor implements ProviderInterface
 {
-    /**
-     * @param EntityManagerInterface $em
-     * @param BaseSetter $setter
-     * @param $attachment
-     * @param array $data
-     * @param string $class
-     * @return array
-     */
     public static function process(
         EntityManagerInterface $em,
         BaseSetter $setter,

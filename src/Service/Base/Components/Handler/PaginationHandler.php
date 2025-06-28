@@ -6,6 +6,7 @@ use Smug\Core\Entity\Base\BaseModel;
 use Smug\Core\Entity\Base\Interfaces\ModelInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class PaginationHandler
 {
@@ -26,7 +27,7 @@ class PaginationHandler
         ];
     }
 
-    public static function getPaginatedList(Query $query, array $params, $model)
+    public static function getPaginatedList(Query $query, array $params, $model, EntitySerializer $serializer)
     {
         if (!DataHandler::doesKeyExists('page', $params) || DataHandler::isEmpty($params['page'])) {
             $params['page'] = 1;
@@ -37,7 +38,7 @@ class PaginationHandler
         /** @var integer $absoluteCount */
         $absoluteCount = self::getAbsoluteCount($query);
         /** @var BaseModel[] $data */
-        $data = self::paginate($query, $params, $params['limit'], $params['page']);
+        $data = self::paginate($query, $params, $params['limit'], $params['page'], $serializer);
 
         $rangeFrom = $params['page'] * $params['limit'];
 
@@ -145,7 +146,7 @@ class PaginationHandler
         return $paginator->count();
     }
 
-    public static function paginate(Query $query, $params = [], $pageSize = 10, $currentPage = 1)
+    public static function paginate(Query $query, $params = [], $pageSize = 10, $currentPage = 1, EntitySerializer $serializer)
     {
         $pageSize = (int)$pageSize;
         $currentPage = (int)$currentPage;
@@ -186,10 +187,10 @@ class PaginationHandler
                         );
                     }
                 } else {
-                    $results[$key] = $result->getListItem();
+                    $results[$key] = $serializer->serialize($result);
                 }
             } else {
-              $results[$key] = $result->getListItem();
+              $results[$key] = $serializer->serialize($result);
             }
         }
 

@@ -7,6 +7,7 @@ use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Frontend\Site\ContentItemLoadedEvent;
 use Smug\Core\Events\Frontend\Site\PluginSettingsLoadedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -24,10 +25,10 @@ class SiteContentBuilder
         return $info;
     }
 
-    public static function getContentItems($site, array $additional = [], ?EventDispatcherInterface $dispatcher = null, ?Context $context = null): array
+    public static function getContentItems($site, array $additional = [], EntitySerializer $serializer, ?EventDispatcherInterface $dispatcher = null, ?Context $context = null): array
     {
-        $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $site->toArray() : $site;
-
+        $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $serializer->serialize($site) : $site;
+        
         $siteArray['contentItems'] = DataHandler::getTree($siteArray['contentItems']);
         $siteArray['contentItems'] = self::enrichContentItems($siteArray['contentItems'], $additional, $dispatcher, $context);
         $siteArray['contentItems'] = DataHandler::sortItemsByField($siteArray['contentItems'], 'position');

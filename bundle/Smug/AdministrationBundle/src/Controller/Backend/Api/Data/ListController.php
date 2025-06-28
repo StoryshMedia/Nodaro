@@ -55,7 +55,7 @@ class ListController extends BaseController
             return new JsonResponse(ExceptionProvider::getException($exception));
         }
 
-        return $this->prepareReturn($service->getPaginated($this->context), $request);
+        return $this->prepareReturn($service->getPaginated($this->context, $this->serializer), $request);
     }
 
     #[Route(

@@ -17,6 +17,7 @@ use Doctrine\DBAL\ParameterType;
 use \Exception;
 use Smug\Core\Context\Context;
 use Smug\Core\Context\SearchContext;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\Core\Service\Base\Query\QueryMapper;
 
 class ListBaseService extends BaseService implements ListServiceInterface
@@ -49,11 +50,11 @@ class ListBaseService extends BaseService implements ListServiceInterface
         );
 
         if (!DataHandler::doesKeyExists('returnModel', $context->getConfig())) {
-            return $model->toArray($disAllowedFields);
+            return $this->serializer->serialize($model);
         }
 
         if ($context->getConfig()['returnModel'] === false) {
-            return $model->toArray($disAllowedFields);
+            return $this->serializer->serialize($model);
         }
 
         return $model;
@@ -154,7 +155,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
                 ];
 
                 if (DataHandler::doesKeyExists('multiple', $detail) && $detail['multiple'] === true) {
-                    $subResult['items'] = ArrayProvider::getObjectsAsArray($model->$getFunction());
+                    $subResult['items'] = ArrayProvider::getObjectsAsArray($model->$getFunction(), $this->serializer);
                 } else {
                     $subResult['items'] = $model->$getFunction();
                 }
@@ -203,7 +204,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
                 $config['fields']
             );
         } else {
-            $items = ArrayProvider::getObjectsAsArray($model->__get($config['field']));
+            $items = ArrayProvider::getObjectsAsArray($model->__get($config['field']), $this->serializer);
         }
 
         if (DataHandler::doesKeyExists('nested', $config) && $config['nested'] === true) {
@@ -225,7 +226,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
     {
         $searchContext = new SearchContext($context);
 
-        return ArrayProvider::getObjectsAsArray($searchContext->getSearchQuery()->getResult());
+        return ArrayProvider::getObjectsAsArray($searchContext->getSearchQuery()->getResult(), $this->serializer);
     }
 
     public function getItemImages(array $itemImages): array
@@ -236,7 +237,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
             /** @var Media $media */
             $media = $mediaRepo->findOneBy(['id' => $image['media']['id']]);
 
-            $thumbnails = ArrayProvider::getObjectsAsArray($media->__get('thumbnails'));
+            $thumbnails = ArrayProvider::getObjectsAsArray($media->__get('thumbnails'), $this->serializer);
 
             $viewportThumbnails = [];
 
@@ -256,11 +257,11 @@ class ListBaseService extends BaseService implements ListServiceInterface
 
             /** @var Media $fallbackImage */
             $fallbackImage = $mediaRepo->findOneBy(['file' => 'fallback_0' . $randomFallbackNumber]);
-            $arFallbackImage = $fallbackImage->toArray();
+            $arFallbackImage = $this->serializer->serialize($fallbackImage);
             $arFallbackImage = DataHandler::unsetArrayElement($arFallbackImage, 'id');
             $arPublicationImage = ['media' => $arFallbackImage];
             $arPublicationImage['media'] = DataHandler::unsetArrayElement($arPublicationImage['media'], 'id');
-            $thumbnails = ArrayProvider::getObjectsAsArray($fallbackImage->__get('thumbnails'));
+            $thumbnails = ArrayProvider::getObjectsAsArray($fallbackImage->__get('thumbnails'), $this->serializer);
             $viewportThumbnails = [];
 
             foreach ($thumbnails as $thumbnail) {
@@ -275,9 +276,9 @@ class ListBaseService extends BaseService implements ListServiceInterface
         return $itemImages;
     }
 
-    public function processGetPaginated(array $config): array
+    public function processGetPaginated(array $config, EntitySerializer $serializer): array
     {
-        return PaginationHandler::getPaginatedList($this->getPaginationData($config), $config['params'], $config['model']);
+        return PaginationHandler::getPaginatedList($this->getPaginationData($config), $config['params'], $config['model'], $serializer);
     }
 
     public function processGetPaginatedQuery(array $config): Query
@@ -292,7 +293,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
 
     public function processGetData(Context $context): array
     {
-        return ArrayProvider::getObjectsAsArray($context->getMainRepository()->findAll());
+        return ArrayProvider::getObjectsAsArray($context->getMainRepository()->findAll(), $this->serializer);
     }
 
     public function processGetDataFromFile(array $config): array
@@ -413,7 +414,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
         );
     }
 
-    public function getPaginated(Context $context): array
+    public function getPaginated(Context $context, EntitySerializer $serializer): array
     {
         if (!DataHandler::doesKeyExists('params', $context->getConfig())) {
             $context->setConfigItem('params', $context->getRequestData());
@@ -424,7 +425,8 @@ class ListBaseService extends BaseService implements ListServiceInterface
                     'class' => $context->getRepositories()['main'],
                 ],
                 $context->getConfig()
-            )
+            ),
+            $serializer
         );
     }
 
@@ -477,7 +479,8 @@ class ListBaseService extends BaseService implements ListServiceInterface
                 ->from($context->getMainRepositoryClass(), 'c')
                 ->where('c.' . $identifierKey . ' = :entityId')
                 ->setParameter('entityId', $context->getIdentifier(), ParameterType::STRING)
-                ->getQuery()->getResult()
+                ->getQuery()->getResult(),
+                $this->serializer
             );
         } catch (Exception $exception) {
             return [
@@ -530,7 +533,7 @@ class ListBaseService extends BaseService implements ListServiceInterface
 
         if (DataHandler::doesMethodExist($model, 'getImages')) {
             $additionalData = [
-                'images' => $this->getItemImages(ArrayProvider::getObjectsAsArray($model->getImages()))
+                'images' => $this->getItemImages(ArrayProvider::getObjectsAsArray($model->getImages(), $this->serializer))
             ];
         }
 

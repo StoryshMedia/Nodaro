@@ -25,6 +25,7 @@ class Domain extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected $title;
 
     #[Column(type: 'string')]
@@ -32,10 +33,11 @@ class Domain extends BaseModel
         'type' => 'Text',
         'placeholder' => 'URL'
     ])]
+    #[Groups(['public'])]
     protected $url;
 
     #[OneToMany(targetEntity: Site::class, mappedBy: 'domain')]
-    #[Groups(['list', 'nested'])]
+    #[Groups(['list', 'nested', 'public'])]
     #[BackendField(config: [
         'type' => 'SiteTree',
         'placeholder' => 'SITE_TREE',
@@ -49,7 +51,7 @@ class Domain extends BaseModel
 
     #[OneToOne(targetEntity: Seo::class, mappedBy: 'domain')]
     #[JoinColumn(name: 'seo_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['minimal', 'public'])]
     protected $seo;
 
     #[Column(type: 'string')]
@@ -61,6 +63,7 @@ class Domain extends BaseModel
             'getCall' => '/be/api/custom/template/list'
         ]
     ])]
+    #[Groups(['public'])]
     protected $templateString;
 
     public function __construct()

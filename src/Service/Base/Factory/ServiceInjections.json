@@ -19,10 +19,6 @@
     "kernel",
     "doctrine.orm.default_entity_manager"
   ],
-  "Smug\\Core\\Service\\Base\\Mail\\SendMail": [
-    "swiftmailer.mailer.default",
-    "kernel"
-  ],
   "Smug\\Core\\DatabaseSetter\\Base\\BaseSetter": [
     "doctrine.orm.default_entity_manager"
   ]

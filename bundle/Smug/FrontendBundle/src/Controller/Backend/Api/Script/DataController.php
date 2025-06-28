@@ -218,7 +218,7 @@ class DataController extends FeBaseController
         $data = $this->context->getEntityByIdentifier($id);
         $result = [];
 
-        $scripts = ArrayProvider::getObjectsAsArray($data->__get('siteScripts'));
+        $scripts = ArrayProvider::getObjectsAsArray($data->__get('siteScripts'), $this->serializer);
         foreach ($scripts as $script) {
             if (!DataHandler::doesKeyExists($script['area'], $result)) {
                 $result[$script['area']] = [];

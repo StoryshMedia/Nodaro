@@ -1,7 +1,18 @@
 module.exports = {
   purge: {
-    enabled: false,
-    content: ['./templates/frontend/base.html.twig', './assets/**/*.{js,ts,jsx,tsx,vue}']
+    enabled: true,
+    content: [
+      './bundle/**/*.html.twig',
+      './custom/**/*.html.twig',
+      './templates/**/*.html.twig',
+      './bundle/**/*.js',
+      './custom/**/*.js',
+      './assets/**/*.js',
+      './bundle/**/*.vue',
+      './custom/**/*.vue',
+      './src/**/*.vue',
+      './src/**/*.ts',
+    ]
   },
   darkMode: false, // or 'media' or 'class'
   content: [

@@ -20,11 +20,11 @@ class ModuleTab extends BaseModel
 {
     #[ManyToOne(targetEntity: Module::class, inversedBy: 'tabs')]
     #[JoinColumn(name: 'module_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected Module $module;
 
     #[OneToMany(targetEntity: ModuleField::class, mappedBy: 'tab')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected Collection $fields;
 
     public function __construct() {

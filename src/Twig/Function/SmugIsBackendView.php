@@ -22,7 +22,7 @@ class SmugIsBackendView extends AbstractExtension
 
     public function isBackendView(): bool
     {
-        if (DataHandler::isEmpty($this->context->getUserArray())) {
+        if (DataHandler::isEmpty($this->context->getUser())) {
             return false;
         }
 

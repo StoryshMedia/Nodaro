@@ -224,7 +224,7 @@ class UpdateBaseService extends BaseService implements UpdateServiceInterface
 
             if (DataHandler::doesKeyExists('multiple', $childConfig) && $childConfig['multiple'] === true) {
                 foreach ($context->getRequestData()[$childData['identifier']] as $childItem) {
-                    $childItem[$childConfig['parentIdentifier']] = $context->getParentModel()->toArray();
+                    $childItem[$childConfig['parentIdentifier']] = $this->serializer->serialize($context->getParentModel());
 
                     $childContext->buildFromData($childItem, $childConfig['class'] ,$childConfig);
                     
@@ -252,7 +252,7 @@ class UpdateBaseService extends BaseService implements UpdateServiceInterface
                 }
 
                 $selections = $this->getEntitiesFromSelectionList(
-                    ArrayProvider::getObjectsAsArray($context->getParentModel()->__get($selectList['identifier'])),
+                    ArrayProvider::getObjectsAsArray($context->getParentModel()->__get($selectList['identifier']), $this->serializer),
                     $context->getRequestData()[$selectList['identifier']]
                 );
 
@@ -577,7 +577,7 @@ class UpdateBaseService extends BaseService implements UpdateServiceInterface
 
         return [
             'success' => true,
-            'data' => $imageObj->toArray()
+            'data' => $this->serializer->serialize($imageObj)
         ];
     }
 

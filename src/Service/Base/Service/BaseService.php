@@ -17,6 +17,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use \Exception;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class BaseService
 {
@@ -41,7 +42,7 @@ class BaseService
 	/** @var BaseSetter $setter */
 	public BaseSetter $setter;
 
-    public function __construct (EntityManagerInterface $entityManager, KernelInterface $kernel)
+    public function __construct (protected EntitySerializer $serializer, EntityManagerInterface $entityManager, KernelInterface $kernel)
     {
         $this->em = $entityManager;
         $this->container = $kernel->getContainer();

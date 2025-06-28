@@ -4,6 +4,7 @@ namespace Smug\Core\Twig\Function;
 
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\MediaProvider;
+use Throwable;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -36,6 +37,7 @@ class SmugGetImage extends AbstractExtension
             return [
                 'src' => DataHandler::getReplaceString('//', '/', $this->getSrcFromMainImage($mainImageData['media'])),
                 'width' => $mainImageData['media']['sizeX'],
+                'file' => $mainImageData['media']['file'],
                 'height' => $mainImageData['media']['sizeY']
             ];
         }
@@ -72,7 +74,11 @@ class SmugGetImage extends AbstractExtension
 
     public function getSrcFromMainImage(array $image): string
     {
-        $src = '/' . DataHandler::getReplaceString('//', '/', $image['path']);
+        try {
+            $src = '/' . DataHandler::getReplaceString('//', '/', $image['path']);
+        } catch (Throwable $e) {
+            dd($image);
+        }
 
         if (!DataHandler::getLastCharacterFromString($src) !== '/') {
             $src .= '/';
