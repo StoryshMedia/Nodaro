@@ -18,6 +18,7 @@ use ReflectionProperty;
 use Smug\Core\DataAbstractionLayer\SchemaExtensionBuilder;
 use Smug\Core\Entity\Base\Attribute\BackendField;
 use Smug\Core\Entity\Base\Attribute\Encode;
+use Smug\Core\Entity\Base\Attribute\Nested;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 

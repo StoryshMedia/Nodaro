@@ -23,6 +23,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 #[Table('frontend_site')]
 class Site extends BaseModel
 {
+    protected array $children = [];
+
     #[Column(type: 'string')]
     #[Groups(['public'])]
     protected $title;

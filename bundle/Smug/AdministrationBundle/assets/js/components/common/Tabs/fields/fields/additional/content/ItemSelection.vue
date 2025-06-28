@@ -144,6 +144,7 @@
 </template>
 <script>
 import ApiService from '@SmugAdministration/js/services/api/api.service';
+import ImageService from '@SmugAdministration/js/services/image/image.service';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay, TabGroup, TabList, Tab } from '@headlessui/vue';
 import { defineComponent, defineAsyncComponent } from 'vue';
 const Icon = defineAsyncComponent(() =>
@@ -255,6 +256,10 @@ export default defineComponent({
       this.selectedTabIndex = modulecategoryindex;
     },
     getPreviewImage(module) {
+      if (!module.assets.preview) {
+        return ImageService.getFallbackImage();
+      }
+
       return process.env.frontendURL + module.assets.preview;
     },
     emitReaction(event) {

@@ -14,6 +14,7 @@ use Smug\Core\Entity\Base\Attribute\BackendField;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Smug\Core\Entity\Base\Attribute\DefaultValue;
+use Smug\Core\Entity\Base\Attribute\Nested;
 use Smug\FrontendBundle\Entity\Seo\Seo;
 
 #[Entity]
@@ -37,7 +38,8 @@ class Domain extends BaseModel
     protected $url;
 
     #[OneToMany(targetEntity: Site::class, mappedBy: 'domain')]
-    #[Groups(['list', 'nested', 'public'])]
+    #[Groups(['public'])]
+    #[Nested()]
     #[BackendField(config: [
         'type' => 'SiteTree',
         'placeholder' => 'SITE_TREE',

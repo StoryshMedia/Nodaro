@@ -383,7 +383,7 @@ class UpdateBaseService extends BaseService implements UpdateServiceInterface
      */
     private function handleMedia(Context $context): void
     {
-        $mediaRepository = $this->em->getRepository(Media::class);
+        $mediaRepository = $this->em->getRepository(EntityGenerator::getGeneratedEntity(Media::class));
 
         if (DataHandler::doesKeyExists('images', $context->getRequestData())) {
             if (DataHandler::doesKeyExists('media', $context->getConfig())) {
@@ -417,7 +417,6 @@ class UpdateBaseService extends BaseService implements UpdateServiceInterface
                             $image = $image['media'];
                         }
     
-                        /** @var Media $imageObj */
                         $imageObj = $mediaRepository->findOneBy(
                             [
                                 'id' => $image['id']
@@ -429,11 +428,17 @@ class UpdateBaseService extends BaseService implements UpdateServiceInterface
                         continue;
                     }
 
+                    $associationClass = EntityGenerator::getGeneratedEntity($associationClass);
+                    
                     $mediaAssociation = new $associationClass();
 
                     $mediaAssociation->__set($context->getConfig()['media']['modelIdentifier'], $context->getParentModel());
                     $mediaAssociation->__set('media', $imageObj);
                     $mediaAssociation->__set('main', false);
+
+                    if (DataHandler::doesPropertyExist($mediaAssociation, 'approved')) {
+                        $mediaAssociation->__set('approved', false);
+                    }
 
                     $this->em->persist($mediaAssociation);
                     $this->em->flush();
