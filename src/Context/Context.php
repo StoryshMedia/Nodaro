@@ -163,7 +163,7 @@ final class Context implements ContextInterface
             return null;
         }
 
-        return $this->user->toArray();
+        return $this->user;
     }
 
     public function setConfig(array $config): void

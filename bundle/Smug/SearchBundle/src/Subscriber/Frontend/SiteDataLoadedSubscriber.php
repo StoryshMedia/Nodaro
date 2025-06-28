@@ -5,6 +5,7 @@ namespace Smug\SearchBundle\Subscriber\Frontend;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Frontend\Site\SiteLoadedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Smug\FrontendBundle\Service\Frontend\Renderer\SiteRenderer;
@@ -14,7 +15,7 @@ class SiteDataLoadedSubscriber implements EventSubscriberInterface
 {
     protected SiteRenderer $renderer;
 
-    public function __construct(SiteRenderer $renderer)
+    public function __construct(SiteRenderer $renderer, protected EntitySerializer $serializer)
     {
         $this->renderer = $renderer;
     }
@@ -31,7 +32,7 @@ class SiteDataLoadedSubscriber implements EventSubscriberInterface
         if ($event->getClass() === EntityGenerator::getGeneratedEntity(Site::class)) {
             $data = $event->getData();
             if (!DataHandler::isEmpty($data['site']->__get('domain')->__get('searchWindow'))) {
-                $data['additional']['searchWindowData'] = $data['site']->__get('domain')->__get('searchWindow')->toArray();
+                $data['additional']['searchWindowData'] = $this->serializer->serialize($data['site']->__get('domain')->__get('searchWindow'));
             }
             $event->setData($data);
         }

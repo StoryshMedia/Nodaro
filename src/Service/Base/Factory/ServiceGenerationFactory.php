@@ -4,19 +4,12 @@ namespace Smug\Core\Service\Base\Factory;
 
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Psr\Container\ContainerInterface;
-use Smug\Core\Entity\Connection\Query\QueryBuilder;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\FileContentProvider;
 
 class ServiceGenerationFactory
 {
-	/**
-	 * self|null
-	 */
 	private static $instance = null;
 	
-	/**
-	 * ContainerInterface
-	 */
 	private static $myContainer;
 	
 	/**

@@ -8,6 +8,7 @@ use Smug\SystemBundle\Entity\User\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class ListController extends BaseController
 {
@@ -17,7 +18,14 @@ class ListController extends BaseController
     {
         /** @var User $user */
         $user = $this->context->getUser();
+        $cacheKey = 'smug_admin_navigation_' . $user->__get('id');
 
-	    return $this->prepareReturn(NavigationBuilder::collect($user->getUserGroup()));
+        $data = $this->cache->get($cacheKey, function (ItemInterface $item) use ($user) {
+            $item->expiresAfter(86400); // 1 Stunde
+
+            return NavigationBuilder::collect($user->__get('userGroup'));
+        });
+
+	    return $this->prepareReturn($data);
     }
 }

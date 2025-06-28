@@ -23,6 +23,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected $title;
 
     #[Column(type: 'string')]
@@ -30,6 +31,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected $identifier;
 
     #[Column(type: 'string')]
@@ -37,6 +39,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'CATEGORY'
     ])]
+    #[Groups(['public'])]
     protected $category;
 
     #[Column(type: 'string')]
@@ -44,6 +47,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TYPE'
     ])]
+    #[Groups(['public'])]
     protected $type;
 
     #[Column(type: 'string')]
@@ -51,35 +55,42 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected $configFile;
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
+    #[Groups(['public'])]
     protected $multi;
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
+    #[Groups(['public'])]
     protected $installed;
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
+    #[Groups(['public'])]
     protected bool $active;
 
     #[Column(type: 'text')]
+    #[Groups(['public'])]
     protected $description;
 
     #[Column(type: 'text')]
+    #[Groups(['public'])]
     protected $template;
 
     #[OneToMany(targetEntity: ModuleField::class, mappedBy: 'module')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected Collection $fields;
 
     #[Column(type: 'text')]
     #[DefaultValue('[]')]
+    #[Groups(['public'])]
     protected string $scripts = '[]';
 
     #[OneToMany(targetEntity: ModuleTab::class, mappedBy: 'module')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected Collection $tabs;
 }

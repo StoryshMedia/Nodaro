@@ -61,6 +61,6 @@ class ListController extends FeBaseController
         $queryBuilder->select('items')
             ->from($this->context->getRequestData()['table'], 'items');
 
-        return $this->prepareReturn(ArrayProvider::getObjectsAsArray($queryBuilder->getQuery()->getResult()));
+        return $this->prepareReturn(ArrayProvider::getObjectsAsArray($queryBuilder->getQuery()->getResult(), $this->serializer));
     }
 }

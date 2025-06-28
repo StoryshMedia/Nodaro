@@ -333,7 +333,7 @@ class DataController extends FeBaseController
         }
 
         return $this->prepareReturn(
-            $tab->toArray()
+            $this->serializer->serialize($tab)
         );
     }
 
@@ -457,7 +457,7 @@ class DataController extends FeBaseController
         $domains = $this->context->getAllEntities();
 
         foreach ($domains as $domain) {
-            $domain = $domain->toArray();
+            $domain = $this->serializer->serialize($domain);
             $context = ServiceGenerationFactory::createInstance(Context::class);
             $context->buildFromData(
                 $domain,

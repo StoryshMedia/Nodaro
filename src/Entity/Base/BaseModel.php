@@ -18,16 +18,18 @@ use ReflectionProperty;
 use Smug\Core\DataAbstractionLayer\SchemaExtensionBuilder;
 use Smug\Core\Entity\Base\Attribute\BackendField;
 use Smug\Core\Entity\Base\Attribute\Encode;
-use Smug\Core\Entity\Base\Structs\BaseStruct;
+use Smug\Core\Entity\Base\Attribute\Nested;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 
 #[MappedSuperclass]
 #[HasLifecycleCallbacks]
-class BaseModel extends BaseStruct
+class BaseModel
 {
     #[Id]   
     #[Column(type: 'uuid', unique:true)]
     #[GeneratedValue(strategy: 'CUSTOM')]
+    #[Groups(['public'])]
     #[CustomIdGenerator(class: UuidV7Generator::class)]
     #[BackendField(config: [
         'type' => 'Text',
@@ -104,16 +106,6 @@ class BaseModel extends BaseStruct
     public function setId(string $id): void
     {
         $this->id = $id;
-    }
-
-    public function toArray(array $disAllowedFields = [], bool $getChildren = true, array $restrictions = []): array
-    {
-        return parent::getVars($disAllowedFields, $getChildren, $restrictions);
-    }
-
-    public function getListItem(): array
-    {
-        return $this->toArray();
     }
 
     public function getSelectedFieldsItem(array $fields): array

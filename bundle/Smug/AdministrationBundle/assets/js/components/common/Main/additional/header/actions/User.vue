@@ -126,7 +126,7 @@ export default {
       }));
     },
     logout(event) {
-      this.$store.dispatch("auth/logout").catch((err) => {
+      this.$store.dispatch("auth/logout", {mode: 'be'}).catch((err) => {
         this.hasLoginError = true;
       });
     },

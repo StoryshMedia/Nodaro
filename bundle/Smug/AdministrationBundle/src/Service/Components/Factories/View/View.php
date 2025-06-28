@@ -8,10 +8,11 @@ use Smug\AdministrationBundle\Interface\View\ViewInterface;
 use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class View implements ViewInterface
 {
-    public function __construct()
+    public function __construct(protected ?EntitySerializer $serializer = null)
     {
         $this->tabs = new ArrayCollection();    
     }
@@ -78,7 +79,7 @@ class View implements ViewInterface
 
     public function toArray(): array {
         return [
-            'tabs' => ArrayProvider::getObjectsAsArray($this->getTabs()),
+            'tabs' => ArrayProvider::getObjectsAsArray($this->getTabs(), $this->serializer),
             'config' => $this->getConfig()
         ];
     }

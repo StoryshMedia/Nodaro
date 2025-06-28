@@ -79,7 +79,6 @@ class ViewBuilder implements ViewBuilderInterface {
         $row = new Row();
 
         $row->setClass($rowConfiguration['class'] ?? '');
-        try {
             if (DataHandler::doesKeyExists('fields', $rowConfiguration)) {
                 foreach ($rowConfiguration['fields'] as $field) {
                     if (DataHandler::isArray($field)) {
@@ -89,6 +88,7 @@ class ViewBuilder implements ViewBuilderInterface {
                     $row = self::addField($row, $field, $rc);
                 }
             }
+        try {
         } catch (\Throwable $e) {
             dd($rowConfiguration);
         }

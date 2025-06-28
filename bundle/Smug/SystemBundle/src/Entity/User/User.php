@@ -30,6 +30,7 @@ class User extends UserBaseModel
         'type' => 'Text',
         'placeholder' => 'USERNAME'
     ])]
+    #[Groups(['public'])]
 	protected string $username;
 	
 	#[Column(type: 'string')]
@@ -38,6 +39,7 @@ class User extends UserBaseModel
         'type' => 'Text',
         'placeholder' => 'USERNAME_CANONICAL'
     ])]
+    #[Groups(['public'])]
 	protected string $usernameCanonical;
 	
 	#[Column(type: 'string')]
@@ -46,6 +48,7 @@ class User extends UserBaseModel
         'type' => 'Email',
         'placeholder' => 'EMAIL'
     ])]
+    #[Groups(['public'])]
 	protected string $email;
 	
 	#[Column(type: 'string')]
@@ -54,9 +57,11 @@ class User extends UserBaseModel
         'type' => 'Email',
         'placeholder' => 'EMAIL_CANONICAL'
     ])]
-	protected string $emailCanonical;
+    #[Groups(['public'])]
+	protected string $emailCanonicail;
 
     #[Column(type: 'string', nullable: true)]
+    #[Groups(['public'])]
 	protected ?string $salt = null;
 
     #[Column(type: 'boolean')]
@@ -64,6 +69,7 @@ class User extends UserBaseModel
         'type' => 'Checkbox',
         'placeholder' => 'ENABLED'
     ])]
+    #[Groups(['public'])]
     protected bool $enabled = false;
 
     #[Column(type: 'string')]
@@ -71,6 +77,7 @@ class User extends UserBaseModel
         'type' => 'Password',
         'placeholder' => 'PASSWORD'
     ])]
+    #[Groups(['public'])]
 	protected string $password;
 	
 	#[Column(type: 'datetime', nullable: true)]
@@ -82,9 +89,11 @@ class User extends UserBaseModel
             'disabled' => true
         ],
     ])]
+    #[Groups(['public'])]
 	protected ?DateTime $lastLogin;
 	
     #[Column(type: 'string', nullable: true)]
+    #[Groups(['public'])]
 	protected ?string $confirmationToken;
 	
 	#[Column(type: 'datetime', nullable: true)]
@@ -96,10 +105,12 @@ class User extends UserBaseModel
             'disabled' => true
         ],
     ])]
+    #[Groups(['public'])]
 	protected ?DateTime $passwordRequestedAt;
 	
     #[Column(type: 'text')]
     #[DefaultValue('a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}')]
+    #[Groups(['public'])]
 	protected string $roles = 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}';
 	
 	#[ManyToOne(targetEntity: UserGroup::class, inversedBy: 'member')]
@@ -112,6 +123,7 @@ class User extends UserBaseModel
             'getCall' => '/be/api/smug/system/user_group'
         ]
     ])]
+    #[Groups(['public'])]
 	protected ?UserGroup $userGroup;
 	
 	#[ManyToOne(targetEntity: Language::class)]
@@ -124,6 +136,7 @@ class User extends UserBaseModel
             'getCall' => '/be/api/smug/system/language'
         ]
     ])]
+    #[Groups(['public'])]
 	protected Language $language;
 	
     #[Column(type: 'string', nullable: true)]
@@ -132,6 +145,7 @@ class User extends UserBaseModel
         'type' => 'Text',
         'placeholder' => 'NAME'
     ])]
+    #[Groups(['public'])]
 	protected string $name;
 	
     #[Column(type: 'string', nullable: true)]
@@ -140,10 +154,11 @@ class User extends UserBaseModel
         'type' => 'Text',
         'placeholder' => 'SURNAME'
     ])]
+    #[Groups(['public'])]
 	protected ?string $surname;
 
     #[OneToMany(targetEntity: MediaUserAssociation::class, mappedBy: 'user')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     #[BackendField(config: [
         'type' => 'ImageGallery',
         'placeholder' => 'IMAGES',

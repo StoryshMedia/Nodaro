@@ -20,11 +20,11 @@ class ContentItemModuleTab extends BaseModel
 {
     #[ManyToOne(targetEntity: ContentItemModule::class, inversedBy: 'tabs')]
     #[JoinColumn(name: 'field_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected ContentItemModule $module;
 
     #[OneToMany(targetEntity: ContentItemModuleField::class, mappedBy: 'tab')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected Collection $fields;
 
     public function __construct() {

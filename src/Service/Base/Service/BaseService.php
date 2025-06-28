@@ -17,6 +17,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use \Exception;
+use Smug\Core\DataAbstractionLayer\EntityGenerator;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class BaseService
 {
@@ -29,8 +31,7 @@ class BaseService
     /** @var EventDispatcherInterface|null $eventDispatcher */
     protected ?EventDispatcherInterface $eventDispatcher = null;
 	
-	/** @var User $currentUser */
-	public ?User $currentUser;
+	public $currentUser;
 
 	/** @var FrontendUser $currentFeUser */
 	public ?FrontendUser $currentFeUser;
@@ -41,7 +42,7 @@ class BaseService
 	/** @var BaseSetter $setter */
 	public BaseSetter $setter;
 
-    public function __construct (EntityManagerInterface $entityManager, KernelInterface $kernel)
+    public function __construct (protected EntitySerializer $serializer, EntityManagerInterface $entityManager, KernelInterface $kernel)
     {
         $this->em = $entityManager;
         $this->container = $kernel->getContainer();
@@ -50,7 +51,7 @@ class BaseService
         if ($this->tokenStorage && !DataHandler::isString($this->tokenStorage->getUser())) {
             /** @var BaseModel $userToken */
             $userToken = $this->tokenStorage->getUser();
-            $user = $this->em->getRepository(User::class)->findOneBy(['id' => $userToken->getId()]);
+            $user = $this->em->getRepository(EntityGenerator::getGeneratedEntity(User::class))->findOneBy(['id' => $userToken->getId()]);
             if (!DataHandler::isEmpty($user)) {
                 $this->currentUser = $user;
             } else {
@@ -97,7 +98,7 @@ class BaseService
             $data
         );
 			
-		return $newMedia->toArray();
+		return $this->serializer->serialize($newMedia);
 	}
     
     public function processCreateMediaAttachment($attachment, array $data, string $class): array
@@ -120,9 +121,9 @@ class BaseService
 				$associationObj = $this->em->getRepository($config['associationClass'])->findOneBy(['id' => $singleAssociation['id']]);
 				
 				if ($key === 'new') {
-					$this->processCreateAssociationModel($baseModel->toArray(), $associationObj, $config['addFunction']);
+					$this->processCreateAssociationModel($this->serializer->serialize($baseModel), $associationObj, $config['addFunction']);
 				} else {
-					$this->processRemoveAssociation($baseModel->toArray(), $config['addFunction'], $associationObj);
+					$this->processRemoveAssociation($this->serializer->serialize($baseModel), $config['addFunction'], $associationObj);
 				}
 			}
 		}

@@ -6,6 +6,7 @@ use Smug\Core\Context\Context;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Frontend\Site\ContentItemLoadedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Smug\FrontendBundle\Subscriber\Frontend\ContentItemRenderingSubscriber;
@@ -16,7 +17,7 @@ class ContentItemLoadedSubscriber extends ContentItemRenderingSubscriber
 
     protected Context $context;
 
-    public function __construct(Context $context)
+    public function __construct(Context $context, protected EntitySerializer $serializer)
     {
         $this->context = $context;
         $this->identifiers = [
@@ -39,7 +40,7 @@ class ContentItemLoadedSubscriber extends ContentItemRenderingSubscriber
             $site = $this->context->getEntityManager()->getRepository(EntityGenerator::getGeneratedEntity(Site::class))->findOneBy(['id' => $data['site']['id'] ?? '']);
 
             if (!DataHandler::isEmpty($site->__get('domain')->__get('searchWindow'))) {
-                $data['variables']['searchWindowData'] = $site->__get('domain')->__get('searchWindow')->toArray();
+                $data['variables']['searchWindowData'] = $this->serializer->serialize($site->__get('domain')->__get('searchWindow'));
             }
         }
 

@@ -4,6 +4,7 @@ namespace Smug\Core\Controller\Backend\Api\Base;
 
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -16,6 +17,7 @@ use Smug\AdministrationBundle\Trait\DispatchDataTrait;
 use Smug\AdministrationBundle\Trait\RequestParameterTrait;
 use Smug\Core\Context\Context;
 use Smug\Core\Events\Email\EmailSendEvent;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\Core\Service\System\Email\EmailData;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -43,6 +45,8 @@ class BaseController extends AbstractController
 
     public function __construct(
         protected RouterInterface $router,
+        protected EntitySerializer $serializer,
+        protected CacheInterface $cache,
         Context $context,
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher,

@@ -17,31 +17,39 @@ use Symfony\Component\Serializer\Attribute\Groups;
 class Media extends BaseModel
 {
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $file;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $path;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $type;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $extension;
 
     #[Column(type: 'integer')]
+    #[Groups(['public'])]
     protected int $size;
 
     #[Column(type: 'integer')]
+    #[Groups(['public'])]
     protected int $sizeX;
 
     #[Column(type: 'integer')]
+    #[Groups(['public'])]
     protected int $sizeY;
 
     #[OneToMany(targetEntity: MediaThumbnail::class, mappedBy: 'media')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected Collection $thumbnails;
 
     #[Column(type: 'boolean')]
+    #[Groups(['public'])]
     protected bool $optimized = true;
 
     public function __construct()

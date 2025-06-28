@@ -60,13 +60,13 @@ class ListController extends BaseController
 
             return $this->prepareReturn([
                 'success' => true,
-                'data' => $searchWindow->toArray()
+                'data' => $this->serializer->serialize($searchWindow)
             ]);
         }
 
         return $this->prepareReturn([
             'success' => true,
-            'data' => $data->__get('searchWindow')->toArray()
+            'data' => $this->serializer->serialize($data->__get('searchWindow'))
         ]);
     }
 }

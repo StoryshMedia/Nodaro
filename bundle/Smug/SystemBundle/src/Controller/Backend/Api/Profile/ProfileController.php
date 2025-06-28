@@ -25,7 +25,7 @@ class ProfileController extends BaseController
         $user = [];
 
         if ($this->context->getUser()) {
-            $user = $this->context->getUser()->toArray();
+            $user = $this->serializer->serialize($this->context->getUser());
         }
 
         return $this->prepareReturn($user);
