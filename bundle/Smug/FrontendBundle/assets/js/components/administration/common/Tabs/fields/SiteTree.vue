@@ -49,7 +49,6 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import ApiService from '@SmugAdministration/js/services/api/api.service';
-import TreeService from '@SmugAdministration/js/services/tree/tree.service';
 const NestedTree = defineAsyncComponent(() =>
   import("./additional/tree/NestedTree.vue" /* webpackChunkName: "administration-nested-tree" */)
 );
@@ -102,7 +101,7 @@ export default {
     };
   },
   mounted() {
-    this.sites = TreeService.buildTree(this.fieldValue);
+    this.sites = this.fieldValue;
     this.loaded = true;
   },
   methods: {

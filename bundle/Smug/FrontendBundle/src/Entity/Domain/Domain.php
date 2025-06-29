@@ -38,7 +38,7 @@ class Domain extends BaseModel
     protected $url;
 
     #[OneToMany(targetEntity: Site::class, mappedBy: 'domain')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'navigation'])]
     #[Nested()]
     #[BackendField(config: [
         'type' => 'SiteTree',

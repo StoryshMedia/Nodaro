@@ -26,7 +26,7 @@ class Site extends BaseModel
     protected array $children = [];
 
     #[Column(type: 'string')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'navigation'])]
     protected $title;
 
     #[Column(type: 'string')]
@@ -35,7 +35,7 @@ class Site extends BaseModel
         'type' => 'Text',
         'placeholder' => 'SLUG'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'navigation'])]
     protected $slug;
 
     #[Column(type: 'boolean')]
@@ -61,7 +61,7 @@ class Site extends BaseModel
             'falseLabel' => 'NO'
         ]
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'navigation'])]
     protected $hidden;
 
     #[Column(type: 'boolean')]
@@ -74,7 +74,7 @@ class Site extends BaseModel
             'falseLabel' => 'NO'
         ]
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'navigation'])]
     protected $hiddenInMenu;
 
     #[ManyToOne(targetEntity: Domain::class, inversedBy: 'sites')]
@@ -182,7 +182,7 @@ class Site extends BaseModel
     protected string|array $siteStyles = '[]';
 
     #[Column(type: 'string')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'navigation'])]
     protected string $parentId = '';
 
     public function __construct()
