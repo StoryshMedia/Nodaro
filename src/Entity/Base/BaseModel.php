@@ -18,7 +18,6 @@ use ReflectionProperty;
 use Smug\Core\DataAbstractionLayer\SchemaExtensionBuilder;
 use Smug\Core\Entity\Base\Attribute\BackendField;
 use Smug\Core\Entity\Base\Attribute\Encode;
-use Smug\Core\Entity\Base\Attribute\Nested;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 
@@ -29,7 +28,7 @@ class BaseModel
     #[Id]   
     #[Column(type: 'uuid', unique:true)]
     #[GeneratedValue(strategy: 'CUSTOM')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'id'])]
     #[CustomIdGenerator(class: UuidV7Generator::class)]
     #[BackendField(config: [
         'type' => 'Text',
