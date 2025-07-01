@@ -3,6 +3,7 @@
 namespace Smug\FrontendBundle\Service\Frontend\Renderer;
 
 use Exception;
+use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Twig\Environment;
 
@@ -10,7 +11,7 @@ class FrontendModuleRenderer
 {
     protected Environment $twig;
 
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, protected Context $context)
     {
         $this->twig = $twig;
     }
@@ -22,19 +23,19 @@ class FrontendModuleRenderer
         } catch (Exception $e) {
             dd($module);
         }
-        $pluginSettings = FieldEnricher::enrichPluginFields($module);
+        $pluginSettings = FieldEnricher::enrichPluginFields($module, $this->context);
         $data = DataHandler::mergeArray(
-            FieldEnricher::enrichFields($module, $moduleConfigFile),
+            FieldEnricher::enrichFields($module, $moduleConfigFile, $this->context),
             [
                 'templatePath' => $moduleConfigFile['settings']['template']['frontend']['templatePath'],
                 'pluginSettings' => $pluginSettings,
-                'pluginSettingsJson' => DataHandler::getJsonEncode(FieldEnricher::enrichPluginFields($module))
+                'pluginSettingsJson' => DataHandler::getJsonEncode(FieldEnricher::enrichPluginFields($module, $this->context))
             ]
         );
 
         $tabs = [];
         foreach ($module['module']['tabs'] as $tab) {
-            $tabs[] = FieldEnricher::enrichFields($tab, $moduleConfigFile);
+            $tabs[] = FieldEnricher::enrichFields($tab, $moduleConfigFile, $this->context);
         }
         $data['tabs'] = $tabs;
 

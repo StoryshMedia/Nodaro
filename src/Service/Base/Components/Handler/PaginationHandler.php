@@ -146,7 +146,7 @@ class PaginationHandler
         return $paginator->count();
     }
 
-    public static function paginate(Query $query, $params = [], $pageSize = 10, $currentPage = 1, EntitySerializer $serializer)
+    public static function paginate(Query $query, $params = [], $pageSize = 10, $currentPage = 1, ?EntitySerializer $serializer = null)
     {
         $pageSize = (int)$pageSize;
         $currentPage = (int)$currentPage;

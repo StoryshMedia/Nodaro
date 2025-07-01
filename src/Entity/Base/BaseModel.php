@@ -28,7 +28,7 @@ class BaseModel
     #[Id]   
     #[Column(type: 'uuid', unique:true)]
     #[GeneratedValue(strategy: 'CUSTOM')]
-    #[Groups(['public', 'id'])]
+    #[Groups(['public', 'id', 'subData'])]
     #[CustomIdGenerator(class: UuidV7Generator::class)]
     #[BackendField(config: [
         'type' => 'Text',

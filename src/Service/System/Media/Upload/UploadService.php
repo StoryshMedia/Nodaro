@@ -26,12 +26,13 @@ class UploadService extends BaseService
     public static function upload(Context $context): array
     {
         try {
+            $serviceGenerationFactory = new ServiceGenerationFactory($context->getKernel()->getContainer());
             /** @var Uploader $uploader */
-            $uploader = ServiceGenerationFactory::createInstance(Uploader::class);
+            $uploader = $serviceGenerationFactory::createInstance(Uploader::class);
             /** @var MediaAddService $addService */
-            $addService = ServiceGenerationFactory::createInstance(MediaAddService::class);
+            $addService = $serviceGenerationFactory::createInstance(MediaAddService::class);
             /** @var MediaListService $listService */
-            $listService = ServiceGenerationFactory::createInstance(MediaListService::class);
+            $listService = $serviceGenerationFactory::createInstance(MediaListService::class);
         } catch (Exception $exception) {
             return ExceptionProvider::getException($exception);
         }
@@ -95,12 +96,9 @@ class UploadService extends BaseService
             self::generateThumbnails($imageObj, $context);
         }
 
-        return ['media' => $imageObj->toArray()];
+        return ['media' => $context->getSerializer()->serialize($imageObj)];
     }
 
-    /**
-     * @param BaseModel $media
-     */
     private static function generateThumbnails(BaseModel $media, Context $context)
     {
         try {

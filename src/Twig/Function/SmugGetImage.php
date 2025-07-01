@@ -25,19 +25,16 @@ class SmugGetImage extends AbstractExtension
         
         $mainImageData = (!DataHandler::doesKeyExists('id', $images)) ? DataHandler::getFirstArrayElement($images) : $images;
 
-        if (!DataHandler::doesKeyExists('media', $mainImageData)) {
+        if (!DataHandler::doesKeyExists('media', $mainImageData) || DataHandler::isEmpty($mainImageData['media'])) {
             return $this->getFallbackImage($returnOriginal);
         }
 
         if ($returnOriginal) {
-            if (DataHandler::isEmpty($mainImageData['media'])) {
-                return $this->getFallbackImage($returnOriginal);
-            }
-
             return [
                 'src' => DataHandler::getReplaceString('//', '/', $this->getSrcFromMainImage($mainImageData['media'])),
-                'width' => $mainImageData['media']['sizeX'],
                 'file' => $mainImageData['media']['file'],
+                'alternativeText' => $mainImageData['media']['alternativeText'] ?? '',
+                'width' => $mainImageData['media']['sizeX'],
                 'height' => $mainImageData['media']['sizeY']
             ];
         }
@@ -55,10 +52,13 @@ class SmugGetImage extends AbstractExtension
             foreach(MediaProvider::getThumbnailVariants() as $variant) {
                 $result[$variant['viewport']][$variant['variant']] = [
                     'file' => $mainImageData['media']['file'],
-                    'src' => $image
+                    'src' => $image,
+                    'width' => $mainImageData['media']['sizeX'],
+                    'height' => $mainImageData['media']['sizeY']
                 ];
             }
 
+            $result['alternativeText'] = $mainImageData['media']['alternativeText'] ?? '';
             return $result;
         }
 
@@ -68,7 +68,8 @@ class SmugGetImage extends AbstractExtension
             $image['src'] = $this->getSrcFromThumbnail($image);
             $result[$thumbnail['viewport']][$thumbnail['variant']] = $image;
         }
-
+        
+        $result['alternativeText'] = $mainImageData['media']['alternativeText'] ?? '';
         return $result;
     }
 
@@ -107,6 +108,7 @@ class SmugGetImage extends AbstractExtension
         }
 
         return [
+            'alternativeText' => 'Fallback Image',
             'mobile' => [
                 'list' => [
                     'src' => '/img/fallback/fallbackImage-' . $number . '.webp',

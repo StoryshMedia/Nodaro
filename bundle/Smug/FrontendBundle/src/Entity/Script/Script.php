@@ -56,7 +56,6 @@ class Script extends BaseModel
     protected bool $active;
     
     #[OneToMany(targetEntity: SiteScript::class, mappedBy: 'script')]
-    #[Groups(['public'])]
     protected Collection $siteScripts;
 
     #[OneToMany(targetEntity: ScriptField::class, mappedBy: 'script')]

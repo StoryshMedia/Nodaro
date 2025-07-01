@@ -13,6 +13,7 @@ use Smug\Core\Exception\Base\NotAllowedException;
 use Smug\Core\Security\SecurityProvider;
 use Smug\Core\Service\Base\Components\Encryption\EncryptionFactory;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\Core\Service\Base\Factory\ServiceGenerationFactory;
 use Smug\SystemBundle\Entity\User\User;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +40,7 @@ final class Context implements ContextInterface
     private $request;
 
     public function __construct(
+        protected EntitySerializer $serializer,
         KernelInterface $kernel,
         EntityManagerInterface $em
     )
@@ -76,6 +78,16 @@ final class Context implements ContextInterface
         $this->config = $config;
         $this->repositories['main'] = $domain;
         $this->preparer = $this->getPreparer($domain);
+    }
+
+    public function getSerialized(object $object, array $groups = ['public']): array
+    {
+        return $this->serializer->serialize($object, $groups);
+    }
+
+    public function getSerializer(): EntitySerializer
+    {
+        return $this->serializer;
     }
 
     public function getPublicDir(): string
@@ -261,6 +273,11 @@ final class Context implements ContextInterface
     public function getMainEntity(): ?BaseModel
     {
         return $this->em->getRepository($this->repositories['main'])->findOneBy(['id' => $this->getRequestData()['id']]);
+    }                                                                                                    
+
+    public function getMainEntityByIdentifier(): ?BaseModel
+    {
+        return $this->em->getRepository($this->repositories['main'])->findOneBy(['id' => $this->getIdentifier()]);
     }
 
     public function getEntityByIdentifier($identifier, $field = 'id', $repository = 'main'): ?BaseModel

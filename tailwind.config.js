@@ -12,7 +12,8 @@ module.exports = {
       './custom/**/*.vue',
       './src/**/*.vue',
       './src/**/*.ts',
-    ]
+    ],
+    safelist: require('./src/Command/Frontend/safelist.json')
   },
   darkMode: false, // or 'media' or 'class'
   content: [

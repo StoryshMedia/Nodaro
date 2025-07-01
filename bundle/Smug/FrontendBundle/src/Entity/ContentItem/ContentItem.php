@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 class ContentItem extends BaseModel
 {
     #[Column(type: 'string')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     #[BackendField(config: [
         'type' => 'Text',
         'placeholder' => 'TITLE'
@@ -29,7 +29,7 @@ class ContentItem extends BaseModel
     protected $title;
 
     #[Column(type: 'integer')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     #[BackendField(config: [
         'type' => 'Number',
         'placeholder' => 'POSITION'
@@ -41,30 +41,30 @@ class ContentItem extends BaseModel
         'type' => 'Number',
         'placeholder' => 'COLUMN'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected int $rowColumn;
     
     #[ManyToOne(targetEntity: ContentItemModule::class, inversedBy: 'content')]
     #[JoinColumn(name: 'module_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected ContentItemModule $module;
 
     #[ManyToOne(targetEntity: Site::class, inversedBy: 'contentItems')]
     #[JoinColumn(name: 'site_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected ?Site $site;
 
     #[Column(type: 'text')]
     #[DefaultValue('[]')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected string $additionalClasses = '[]';
 
     #[Column(type: 'text')]
     #[DefaultValue('[]')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected string $templateClasses = '[]';
 
     #[Column(type: 'string')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected string $parentId = '';
 }
