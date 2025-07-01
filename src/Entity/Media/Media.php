@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use Smug\Core\Entity\Base\Attribute\DefaultValue;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[Entity]
@@ -19,6 +20,11 @@ class Media extends BaseModel
     #[Column(type: 'string')]
     #[Groups(['public'])]
     protected string $file;
+
+    #[Column(type: 'string')]
+    #[Groups(['public'])]
+    #[DefaultValue('')]
+    protected string $alternativeText;
 
     #[Column(type: 'string')]
     #[Groups(['public'])]

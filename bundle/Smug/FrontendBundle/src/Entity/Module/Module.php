@@ -23,7 +23,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $title;
 
     #[Column(type: 'string')]
@@ -31,7 +31,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $identifier;
 
     #[Column(type: 'string')]
@@ -39,7 +39,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'CATEGORY'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $category;
 
     #[Column(type: 'string')]
@@ -47,7 +47,7 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TYPE'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $type;
 
     #[Column(type: 'string')]
@@ -55,42 +55,42 @@ class Module extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $configFile;
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $multi;
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $installed;
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected bool $active;
 
     #[Column(type: 'text')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $description;
 
     #[Column(type: 'text')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $template;
 
     #[OneToMany(targetEntity: ModuleField::class, mappedBy: 'module')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected Collection $fields;
 
     #[Column(type: 'text')]
     #[DefaultValue('[]')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected string $scripts = '[]';
 
     #[OneToMany(targetEntity: ModuleTab::class, mappedBy: 'module')]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected Collection $tabs;
 }

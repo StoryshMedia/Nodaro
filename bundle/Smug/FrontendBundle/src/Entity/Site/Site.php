@@ -26,7 +26,7 @@ class Site extends BaseModel
     protected array $children = [];
 
     #[Column(type: 'string')]
-    #[Groups(['public', 'navigation'])]
+    #[Groups(['public', 'navigation', 'subData'])]
     protected $title;
 
     #[Column(type: 'string')]
@@ -35,7 +35,7 @@ class Site extends BaseModel
         'type' => 'Text',
         'placeholder' => 'SLUG'
     ])]
-    #[Groups(['public', 'navigation'])]
+    #[Groups(['public', 'navigation', 'subData'])]
     protected $slug;
 
     #[Column(type: 'boolean')]
@@ -61,7 +61,7 @@ class Site extends BaseModel
             'falseLabel' => 'NO'
         ]
     ])]
-    #[Groups(['public', 'navigation'])]
+    #[Groups(['public', 'navigation', 'subData'])]
     protected $hidden;
 
     #[Column(type: 'boolean')]
@@ -74,12 +74,12 @@ class Site extends BaseModel
             'falseLabel' => 'NO'
         ]
     ])]
-    #[Groups(['public', 'navigation'])]
+    #[Groups(['public', 'navigation', 'subData'])]
     protected $hiddenInMenu;
 
     #[ManyToOne(targetEntity: Domain::class, inversedBy: 'sites')]
     #[JoinColumn(name: 'domain_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal', 'public'])]
+    #[Groups(['minimal', 'public', 'subData'])]
     protected Domain $domain;
 
     #[Column(type: 'jsonField')]
@@ -98,7 +98,7 @@ class Site extends BaseModel
         'type' => 'Text',
         'placeholder' => 'SEO_TITLE'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $seoTitle;
 
     #[Column(type: 'text')]
@@ -108,7 +108,7 @@ class Site extends BaseModel
         'type' => 'Textarea',
         'placeholder' => 'SEO_DESCRIPTION'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $seoDescription;
 
     #[Column(type: 'string')]
@@ -118,7 +118,7 @@ class Site extends BaseModel
         'type' => 'Text',
         'placeholder' => 'SEO_KEYWORDS'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $seoKeywords;
 
     #[Column(type: 'string')]
@@ -128,7 +128,7 @@ class Site extends BaseModel
         'type' => 'Text',
         'placeholder' => 'CANONICAL_LINK'
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $canonicalLink;
 
     #[Column(type: 'boolean')]
@@ -141,7 +141,7 @@ class Site extends BaseModel
             'falseLabel' => 'NO'
         ]
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $noIndex;
 
     #[Column(type: 'boolean')]
@@ -154,11 +154,11 @@ class Site extends BaseModel
             'falseLabel' => 'NO'
         ]
     ])]
-    #[Groups(['public'])]
+    #[Groups(['public', 'subData'])]
     protected $noFollow;
 
     #[OneToMany(targetEntity: ContentItem::class, mappedBy: 'site')]
-    #[Groups(['list', 'public'])]
+    #[Groups(['public', 'contentItems'])]
     #[BackendField(config: [
         'type' => 'Content',
         'placeholder' => 'CONTENT',
@@ -173,16 +173,16 @@ class Site extends BaseModel
     protected Collection $contentItems;
 
     #[OneToMany(targetEntity: SiteScript::class, mappedBy: 'site')]
-    #[Groups(['list', 'public'])]
+    #[Groups(['public'])]
     protected Collection $siteScripts;
 
     #[Column(type: 'jsonField')]
     #[DefaultValue([])]
-    #[Groups(['list', 'public'])]
+    #[Groups(['public'])]
     protected string|array $siteStyles = '[]';
 
     #[Column(type: 'string')]
-    #[Groups(['public', 'navigation'])]
+    #[Groups(['public', 'navigation', 'subData'])]
     protected string $parentId = '';
 
     public function __construct()

@@ -111,7 +111,7 @@ class MediaController extends BaseController
 
     #[Route('/be/api/custom/media/folder/files', name: 'be_get_media_folder_files', methods: ['POST'])]
     #[IsGranted("ROLE_ADMIN")]
-    public function getMediaFolderFiles(Request $request, PaginatorInterface $pagination, SerializerInterface $serializerInterface): JsonResponse
+    public function getMediaFolderFiles(Request $request, PaginatorInterface $pagination): JsonResponse
     {
         $this->context->buildFromRequest($request, EntityGenerator::getGeneratedEntity(Media::class));
         $path = DataHandler::getReplaceString(
@@ -139,15 +139,6 @@ class MediaController extends BaseController
             ->setParameter('path', '%' . $path . '%')
             ->getQuery();
 
-        $paginated = $pagination->paginate(
-            $query,
-            $data['page'],
-            $data['limit'],
-            ['wrap-queries'=>true]
-        );
-
-        $paginationData = $serializerInterface->serialize($paginated, 'json');
-
-        return $this->prepareReturn(PaginationHandler::getKnpPaginatedData(DataHandler::getJsonDecode($paginationData, true), $data, $data['model']));
+        return $this->prepareReturn(PaginationHandler::getPaginatedList($query, $data, 'files', $this->serializer));
     }
 }

@@ -5,6 +5,7 @@ namespace Smug\Core\Service\Base\Factory;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Psr\Container\ContainerInterface;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\FileContentProvider;
+use Throwable;
 
 class ServiceGenerationFactory
 {
@@ -172,7 +173,11 @@ class ServiceGenerationFactory
 			    continue;
 		    }
 		
-		    $parameters[] = self::$myContainer->get('kernel')->getContainer()->get($parameter);
+			try {
+				$parameters[] = self::$myContainer->get('kernel')->getContainer()->get($parameter);
+			} catch (Throwable $e) {
+				dd($e);
+			}
 	    }
 	
 	    return $parameters;

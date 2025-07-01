@@ -4,6 +4,7 @@ namespace Smug\FrontendBundle\Controller\Backend\Api\Module;
 
 use Doctrine\DBAL\ParameterType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use Smug\Core\Context\Context;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Exception\Base\NotAllowedException;
@@ -11,7 +12,9 @@ use Smug\FrontendBundle\Controller\Frontend\Api\Base\FeBaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ExceptionProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\Core\Service\Base\Factory\Finder\FinderFactory;
 use Smug\Core\Service\Base\Factory\ServiceGenerationFactory;
 use Smug\Core\Service\Base\Service\ListBaseService;
@@ -45,6 +48,8 @@ class DataController extends FeBaseController
     public function __construct(
         FrontendModuleRenderer $renderer,
         protected RouterInterface $router,
+        protected EntitySerializer $serializer,
+        protected CacheInterface $cache,
         Context $context,
         EntityManagerInterface $em,
         EventDispatcherInterface $dispatcher,
@@ -53,6 +58,8 @@ class DataController extends FeBaseController
         $this->renderer = $renderer;    
         parent::__construct(
             $router,
+            $serializer,
+            $cache,
             $context,
             $em,
             $dispatcher,
@@ -400,8 +407,7 @@ class DataController extends FeBaseController
     #[Route('/be/api/custom/site/domain/sites/{id}', name: 'be_get_flat_sites', methods:"GET")]
     public function getSites(
         $id,
-        Request $request,
-        ListBaseService $service
+        Request $request
     ): JsonResponse
     {
         $this->context->buildFromRequest(
@@ -416,23 +422,22 @@ class DataController extends FeBaseController
         }
 
         $this->context->setIdentifier($id);
-        $site = $service->getSingle($this->context);
+        $site = $this->context->getMainEntityByIdentifier();
 
-        if (DataHandler::doesKeyExists('message', $site)) {
-            return $this->prepareReturn($site);
+        if (DataHandler::isEmpty($site)) {
+            return $this->prepareReturn([]);
         }
 
-        $context = ServiceGenerationFactory::createInstance(Context::class);
-        $context->buildFromData(
-            $site['domain'],
-            Domain::class
+        return $this->prepareReturn(
+            ArrayProvider::getObjectsAsArray(
+                $site->__get('domain')->__get('sites'),
+                $this->serializer,
+                [],
+                true,
+                [],
+                ['subData', 'contentItems']
+            )
         );
-
-        $context->setConfigItem('field', 'sites');
-        $context->setConfigItem('nested', false);
-        $context->setIdentifier($site['domain']['id']);
-
-        return $this->prepareReturn($service->getSubData($context));
     }
 
     #[Route('/be/api/custom/site/domain/sites', name: 'be_get_flat_sitesfrom_all_domains', methods:"GET")]

@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 my-5">
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-5 my-5">
       <div>
         <p
           class="font-semibold text-sm pb-2"
@@ -137,6 +137,40 @@
             :config="config"
             @control-emitted="getData()"
             @order-changed="onOrderChanged($event, 'fb')"
+          />
+        </div>
+      </div>
+      <div>
+        <p
+          class="font-semibold text-sm pb-2"
+        >
+          {{ $t('BODY_START_SCRIPTS') }}
+        </p>
+        <div class="w-full">
+          <drag-list
+            :items="siteScripts.bs"
+            :list-name="'bs'"
+            :sub-identifier="'script'"
+            :config="config"
+            @control-emitted="getData()"
+            @order-changed="onOrderChanged($event, 'bs')"
+          />
+        </div>
+      </div>
+      <div>
+        <p
+          class="font-semibold text-sm pb-2"
+        >
+          {{ $t('BODY_END_SCRIPTS') }}
+        </p>
+        <div class="w-full">
+          <drag-list
+            :items="siteScripts.be"
+            :list-name="'be'"
+            :sub-identifier="'script'"
+            :config="config"
+            @control-emitted="getData()"
+            @order-changed="onOrderChanged($event, 'be')"
           />
         </div>
       </div>
@@ -212,6 +246,14 @@ export default {
         {
           title: 'FOOTER_BOTTOM_SCRIPTS',
           area: 3
+        },
+        {
+          title: 'BODY_END',
+          area: 4
+        },
+        {
+          title: 'BODY_START',
+          area: 5
         }
       ],
       showAddScript: false,
@@ -220,7 +262,9 @@ export default {
         ht: [],
         hb: [],
         ft: [],
-        fb: []
+        fb: [],
+        be: [],
+        bs: []
       }
     };
   },
@@ -276,6 +320,12 @@ export default {
             break;
           case 3:
             this.siteScripts.fb = result[count];
+            break;
+          case 4:
+            this.siteScripts.be = result[count];
+            break;
+          case 5:
+            this.siteScripts.bs = result[count];
             break;
           default:
             break;

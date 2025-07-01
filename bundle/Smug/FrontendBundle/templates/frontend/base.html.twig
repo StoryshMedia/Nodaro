@@ -16,15 +16,18 @@
 				</div>
 			</noscript>
 		{% endblock %}
+		{% block bodyStartScripts %}
+			{% for script in scripts.bodyStart %}
+				{{ include('@SmugFrontend/frontend/index/script/script.html.twig', script) }}
+			{% endfor %}
+		{% endblock %}
+
 		<main class="z-20 transition-all frontend" id="main-container">
-			<div id="main" class="h-0">
-			</div>
 			{% block body %}{% endblock %}
 			
 			{% block footer %}
 				{{ include('@SmugFrontend/frontend/index/footer.html.twig') }}
 			{% endblock %}
-			{{ encore_entry_script_tags('main') }}
 		</main>
 		<script src="{{ asset('Resources/js/lazyLoad/lazyload.min.js') }}"></script>
 		<script>
@@ -41,5 +44,11 @@
 				observer.observe(targetNode, config);
 			})();
 		</script>
+
+		{% block bodyEndScripts %}
+			{% for script in scripts.bodyEnd %}
+				{{ include('@SmugFrontend/frontend/index/script/script.html.twig', script) }}
+			{% endfor %}
+		{% endblock %}
 	</body>
 </html>

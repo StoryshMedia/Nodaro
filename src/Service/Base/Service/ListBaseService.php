@@ -204,7 +204,14 @@ class ListBaseService extends BaseService implements ListServiceInterface
                 $config['fields']
             );
         } else {
-            $items = ArrayProvider::getObjectsAsArray($model->__get($config['field']), $this->serializer);
+            $items = ArrayProvider::getObjectsAsArray(
+                $model->__get($config['field']),
+                $this->serializer,
+                [],
+                true,
+                [],
+                ['subData', 'id']
+            );
         }
 
         if (DataHandler::doesKeyExists('nested', $config) && $config['nested'] === true) {

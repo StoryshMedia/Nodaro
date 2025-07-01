@@ -7,8 +7,8 @@ use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Frontend\Site\ContentItemLoadedEvent;
 use Smug\Core\Events\Frontend\Site\PluginSettingsLoadedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
-use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
@@ -39,7 +39,7 @@ class SiteContentBuilder
     public static function enrichContentItems(array $contentItems, $additional, $dispatcher, $context): array {
         foreach ($contentItems as $contentKey => $contentItem) {
             $item = $contentItems[$contentKey];
-            $item = self::enrichContentItem($item, $contentItem, $additional, $dispatcher);
+            $item = self::enrichContentItem($item, $contentItem, $additional, $dispatcher, $context);
             
             if (DataHandler::getArrayLength($item['children'] ?? [])) {
                 $columns = DataHandler::groupByField($item['children'], 'rowColumn');
@@ -72,7 +72,7 @@ class SiteContentBuilder
         return $contentItems;
     }
 
-    public static function enrichContentItem(array $item, array $contentItem, array $additional = [], ?EventDispatcherInterface $dispatcher = null): array
+    public static function enrichContentItem(array $item, array $contentItem, array $additional = [], ?EventDispatcherInterface $dispatcher = null, ?Context $context = null): array
     {
         $item['module']['module']['template'] = DataHandler::getJsonDecode($item['module']['module']['template'], true);
             
@@ -81,15 +81,15 @@ class SiteContentBuilder
             true
         );
 
-        $item['variables'] = FieldEnricher::enrichFields($contentItem['module'], $configFile);
-        $item['variables']['pluginSettings'] = FieldEnricher::enrichPluginFields($contentItem['module']);
+        $item['variables'] = FieldEnricher::enrichFields($contentItem['module'], $configFile, $context);
+        $item['variables']['pluginSettings'] = FieldEnricher::enrichPluginFields($contentItem['module'], $context);
         $event = new PluginSettingsLoadedEvent(
             DataHandler::mergeArray($item, ['additionalDataFromRequest' => $additional])
         );
 
         $tabs = [];
         foreach ($contentItem['module']['tabs'] as $tab) {
-            $tabs[] = FieldEnricher::enrichFields($tab, $configFile);
+            $tabs[] = FieldEnricher::enrichFields($tab, $configFile, $context);
         }
         $item['variables']['tabs'] = $tabs;
         

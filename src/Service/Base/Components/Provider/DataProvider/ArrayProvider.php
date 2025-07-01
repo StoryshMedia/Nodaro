@@ -8,16 +8,14 @@ use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class ArrayProvider
 {
-    public static function getObjectsAsArray($objects, ?EntitySerializer $serializer = null, array $disAllowedFields = [], bool $getChildren = true, array $restrictions = []): array
+    public static function getObjectsAsArray($objects, ?EntitySerializer $serializer = null, array $disAllowedFields = [], bool $getChildren = true, array $restrictions = [], array $groups = ['public']): array
     {
         $return = [];
         
         if (DataHandler::isEmpty($objects)) {
             return $return;
         }
-
-        try {
-            foreach ($objects as $object) {
+        foreach ($objects as $object) {
                 if (DataHandler::doesMethodExist($object, 'toArray')) {
                     $array = $object->toArray($disAllowedFields, $getChildren, $restrictions);
                     if (DataHandler::isEmpty($array)) {
@@ -29,7 +27,7 @@ class ArrayProvider
                         continue;
                     }
                     
-                    $array = $serializer->serialize($object);
+                    $array = $serializer->serialize($object, $groups);
 
                     if (DataHandler::isEmpty($array)) {
                         continue;
@@ -38,6 +36,8 @@ class ArrayProvider
                 }
                 
             }
+        try {
+            
         } catch (\Throwable $e) {
             dd($e);
         }

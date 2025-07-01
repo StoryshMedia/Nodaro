@@ -14,7 +14,9 @@ class ScriptBuilder
         'headerTop',
         'headerBottom',
         'footerTop',
-        'footerBottom'
+        'footerBottom',
+        'bodyEnd',
+        'bodyStart'
     ];
 
     public static function getSiteScripts(array $data, EntitySerializer $serializer, EventDispatcherInterface $dispatcher = null): array
@@ -25,7 +27,9 @@ class ScriptBuilder
             'headerTop' => [],
             'headerBottom' => [],
             'footerTop' => [],
-            'footerBottom' => []
+            'footerBottom' => [],
+            'bodyEnd' => [],
+            'bodyStart' => []
         ];
 
         foreach ($siteArray['siteScripts'] as $siteScript) {

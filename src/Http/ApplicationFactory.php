@@ -12,7 +12,7 @@ class ApplicationFactory
         self::handleDebug();
         self::setSecurityAspects();
         $kernel = self::createKernel();
-        self::buildContainer($kernel);
+        // self::buildContainer($kernel);
         self::runRequest($kernel);
     }
 
