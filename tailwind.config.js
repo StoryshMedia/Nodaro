@@ -156,6 +156,9 @@ module.exports = {
               light: '#16a085',
               'dark-light': 'rgba(0,171,85,.15)',
           },
+          logo: {
+              DEFAULT: '#2957A4'
+          },
           danger: {
               DEFAULT: '#c0392b',
               light: '#c0392b',

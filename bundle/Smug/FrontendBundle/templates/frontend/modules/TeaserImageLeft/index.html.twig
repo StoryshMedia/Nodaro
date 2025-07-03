@@ -4,7 +4,7 @@
             {% set imageValue = getImage(image.value) %}
             <img
                 {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %}
-                class="w-full h-full"
+                class="w-full h-full {{ image.classes }}"
                 srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
                 sizes="(max-width: 600px) 480px,
                         800px"
