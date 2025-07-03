@@ -10,13 +10,10 @@
             class="main-logo flex items-center shrink-0"
           >
             <img
-              class="w-8 -ml-1 inline"
+              class="h-10 -ml-1 inline"
               src="/administration/img/logo/logo-navigation.svg"
               alt=""
             >
-            <span
-              class="text-2xl ml-3 font-semibold align-middle hidden md:inline transition-all duration-300"
-            >Nodaro</span>
           </a>
 
           <a
