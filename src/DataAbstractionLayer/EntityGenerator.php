@@ -73,7 +73,7 @@ EOF;
         );
 
         foreach ($completeProperties as $classProperty) {
-            if ($classProperty->class === BaseModel::class || $classProperty->class === BaseStruct::class || $classProperty->class === UserBaseModel::class) {
+            if ($classProperty->class === BaseModel::class || $classProperty->class === UserBaseModel::class) {
                 continue;
             }
 

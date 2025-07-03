@@ -22,6 +22,7 @@ class UserGroup extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected string $title;
 
     #[Column(type: 'text')]
@@ -32,6 +33,7 @@ class UserGroup extends BaseModel
             'mentions' => false
         ]
     ])]
+    #[Groups(['public'])]
     protected string $description;
 
     #[Column(type: 'boolean')]
@@ -39,10 +41,10 @@ class UserGroup extends BaseModel
         'type' => 'Checkbox',
         'placeholder' => 'IS_ADMIN'
     ])]
+    #[Groups(['public'])]
     protected bool $admin = false;
 
     #[OneToMany(targetEntity: User::class, mappedBy: 'userGroup')]
-    #[Groups(['minimal'])]
     #[BackendField(config: [
         'type' => 'Table',
         'placeholder' => '',
@@ -67,13 +69,14 @@ class UserGroup extends BaseModel
             ]
         ]
     ])]
+    #[Groups(['public'])]
     protected Collection $member;
 
     #[OneToMany(targetEntity: Permission::class, mappedBy: 'userGroup')]
-    #[Groups(['minimal'])]
     #[BackendField(config: [
         'type' => 'UserPermission',
         'placeholder' => ''
     ])]
+    #[Groups(['public'])]
     protected Collection $permission;
 }

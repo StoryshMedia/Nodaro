@@ -20,12 +20,12 @@ class SiteScript extends BaseModel
 {
     #[ManyToOne(targetEntity: Script::class, inversedBy: 'siteScripts')]
     #[JoinColumn(name: 'script_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected ?Script $script = null;
 
     #[ManyToOne(targetEntity: Site::class, inversedBy: 'siteScripts')]
     #[JoinColumn(name: 'site_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected Site $site;
 
     #[Column(type: 'integer')]
@@ -54,9 +54,11 @@ class SiteScript extends BaseModel
             ]
         ]
     ])]
+    #[Groups(['public'])]
     protected $area;
 
     #[Column(type: 'integer')]
     #[DefaultValue(0)]
+    #[Groups(['public'])]
     protected $position;
 }

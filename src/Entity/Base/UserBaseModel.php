@@ -31,7 +31,7 @@ class UserBaseModel extends BaseModel implements UserInterface, PasswordAuthenti
      */
     public function getUsername(): string
     {
-        return $this->username;
+        return $this->__get('username');
     }
 
     /**

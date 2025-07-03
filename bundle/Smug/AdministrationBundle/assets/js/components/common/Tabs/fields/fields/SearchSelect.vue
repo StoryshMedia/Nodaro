@@ -259,7 +259,6 @@ export default {
       ApiService.post(searchCall, {'queryString': this.term})
         .then(result =>  {
           this.searchItems = result;
-          console.log(this.searchItems);
         })
         .catch(error => {
         })

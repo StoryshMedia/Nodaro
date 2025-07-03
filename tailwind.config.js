@@ -1,7 +1,19 @@
 module.exports = {
   purge: {
-    enabled: false,
-    content: ['./templates/frontend/base.html.twig', './assets/**/*.{js,ts,jsx,tsx,vue}']
+    enabled: true,
+    content: [
+      './bundle/**/*.html.twig',
+      './custom/**/*.html.twig',
+      './templates/**/*.html.twig',
+      './bundle/**/*.js',
+      './custom/**/*.js',
+      './assets/**/*.js',
+      './bundle/**/*.vue',
+      './custom/**/*.vue',
+      './src/**/*.vue',
+      './src/**/*.ts',
+    ],
+    safelist: require('./src/Command/Frontend/safelist.json')
   },
   darkMode: false, // or 'media' or 'class'
   content: [
@@ -265,6 +277,11 @@ module.exports = {
       height: ['responsive', 'hover', 'focus', 'group-hover'],
     }
   },
+  safelist: [
+    {
+      pattern: /^h-/,
+    },
+  ],
   plugins: [
     require('flowbite/plugin')
   ],

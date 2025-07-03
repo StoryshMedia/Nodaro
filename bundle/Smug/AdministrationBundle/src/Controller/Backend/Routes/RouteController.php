@@ -32,7 +32,7 @@ class RouteController extends BaseController
     #[Route('/admin/{namespace}/{bundle}/{model}/{view}', name: 'admin_view')]
     #[Route('/admin/{namespace}/{bundle}/{model}/{view}/{id}', name: 'admin_detail_view')]
     #[Route('/admin/{namespace}/{bundle}/{model}/{view}/{parameters}', name: 'admin_parameter_view')]
-    public function listPage(string $namespace, string $bundle, string $model, string $view, ?string $id = null, ?string $parameters = null)
+    public function view(string $namespace, string $bundle, string $model, string $view, ?string $id = null, ?string $parameters = null)
     {
         $provider = $this->getViewProviderClass();
         $constantsClass = $this->getConstantsClass($namespace, $bundle, $model);

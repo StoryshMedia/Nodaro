@@ -17,10 +17,11 @@ class MediaSeoAssociation extends BaseModel
 {
     #[ManyToOne(targetEntity: Media::class)]
     #[JoinColumn(name: 'media_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
+    #[Groups(['public'])]
     protected Media $media;
 
     #[ManyToOne(targetEntity: Seo::class, inversedBy: 'files')]
     #[JoinColumn(name: 'seo_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected Seo $seo;
 }

@@ -42,45 +42,63 @@ class FrontendFieldsBuildCommand extends Command
         $output->writeln('Collecting Frontend Formular Fields');
         $output->writeln('#####################');
 
-        foreach (DataHandler::mergeArray(
-            FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false, ['frontendFields.json'], true),
-            FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false, ['frontendFields.json'], true)
-        ) as $file) {
-            if ($file === '.' || $file === '..' ||  !stristr($file->getFilename(), 'json')) {
-                continue;
-            }
+        foreach (
+            DataHandler::mergeArray(
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/bundle/", 0, false, [], true),
+                FinderFactory::getElements($this->context->getKernel()->getProjectDir() . "/custom/", 0, false, [], true)
+            ) as $namespace) {
+            $bundleFinder = new Finder();
+            $bundleFinder->directories()->in($namespace->getPathname())->depth(0);
 
-            $components = [];
-
-            foreach (DataHandler::getJsonDecode(DataHandler::getFile($file->getRealPath()), true) as $component) {
-                $bundle = '';
-                $nameSpace = '';
+            foreach ($bundleFinder as $bundle) {
+                $output->writeln('Searching frontend fields in: ' . $namespace->getBasename() . ' => ' . $bundle->getBasename());
                 
-                foreach (DataHandler::explodeArray('/', $file->getPath()) as $partKey => $part) {
-                    if (DataHandler::isStringInString($part, 'Bundle') && $part !== 'bundle') {
-                        $bundle = $part;
-                        $nameSpace = DataHandler::explodeArray('/', $file->getPath())[$partKey - 1];
-                        break;
+                if (DataHandler::proofDir($bundle->getPathname() . '/config')) {
+                    $fieldFinder = new Finder();
+                    $fieldFinder
+                        ->files()
+                        ->in($bundle->getPathname() . '/config')
+                        ->name(['frontendFields.json']);
+
+                    foreach ($fieldFinder as $fieldFile) {
+                        $components = [];
+
+                        foreach (DataHandler::getJsonDecode(DataHandler::getFile($fieldFile->getRealPath()), true) as $component) {
+                            $bundleString = '';
+                            $nameSpace = '';
+                            $type = 'custom';
+                            
+                            foreach (DataHandler::explodeArray('/', $fieldFile->getPath()) as $partKey => $part) {
+                                if ($part === 'bundle') {
+                                    $type = 'bundle';
+                                }
+
+                                if (DataHandler::isStringInString($part, 'Bundle') && $part !== 'bundle') {
+                                    $bundleString = $part;
+                                    $nameSpace = DataHandler::explodeArray('/', $fieldFile->getPath())[$partKey - 1];
+                                    break;
+                                }
+                            }
+
+                            $componentFinder = new Finder();
+                            $componentFinder->files()->in($bundle->getPathname())->name([$component['name'] . '.vue']);
+                            $componentFilePath = '';
+                            
+                            foreach ($componentFinder as $componentFile) {
+                                $componentFilePath = $componentFile->getRelativePath();
+                            }
+
+                            $component['path'] = $type . '/' . $nameSpace . '/' . $bundleString . '/' . $componentFilePath . '/' . $component['name'];
+
+                            $components[] = $component;
+                        }
+                        $assets = DataHandler::mergeArray(
+                            $assets,
+                            $components
+                        );
                     }
                 }
-
-                $componentFinder = new Finder();
-                $componentFinder->files()->in($this->kernel->getProjectDir() . "/bundle/" . $nameSpace . '/' . $bundle)->name([$component['name'] . '.vue']);
-                $componentFilePath = '';
-                
-                foreach ($componentFinder as $componentFile) {
-                    $componentFilePath = $componentFile->getRelativePath();
-                }
-
-                $component['path'] = $nameSpace . '/' . $bundle . '/' . $componentFilePath . '/' . $component['name'];
-
-                $components[] = $component;
             }
-
-            $assets = DataHandler::mergeArray(
-                $assets,
-                $components
-            );
         }
 
         $output->writeln('Done');

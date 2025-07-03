@@ -12,6 +12,9 @@
         "name": "Email"
     },
     {
+        "name": "Markdown"
+    },
+    {
         "name": "Textarea"
     },
     {

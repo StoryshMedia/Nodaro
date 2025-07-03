@@ -6,19 +6,20 @@ use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Frontend\Site\SeoDataLoadedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SeoDataBuilder
 {
-    public static function getSeoData(array $data, ?EventDispatcherInterface $dispatcher = null): array
+    public static function getSeoData(array $data, EntitySerializer $serializer, ?EventDispatcherInterface $dispatcher = null): array
     {
         $site = $data['site'];
-        $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $site->toArray() : $site;
+        $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $serializer->serialize($site) : $site;
 
         $seoData = [
-            'domain' => self::getDomainSeoData($site->__get('domain')),
+            'domain' => self::getDomainSeoData($site->__get('domain'), $serializer),
             'noIndex' => $siteArray['noIndex'],
             'noFollow' => $siteArray['noFollow'],
             'seoData' => DataHandler::getJsonEncode($siteArray['seoData']),
@@ -43,9 +44,9 @@ class SeoDataBuilder
         return $event->getData();
     }
 
-    private static function getDomainSeoData($domain) : array {
+    private static function getDomainSeoData($domain, EntitySerializer $serializer) : array {
         $seoData = $domain->__get('seo');
-        $images = ArrayProvider::getObjectsAsArray($seoData->__get('images'));
+        $images = ArrayProvider::getObjectsAsArray($seoData->__get('images'), $serializer);
         
         return [
             'title' => $seoData->__get('title'),

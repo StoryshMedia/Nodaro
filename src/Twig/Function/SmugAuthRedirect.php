@@ -23,7 +23,7 @@ class SmugAuthRedirect extends AbstractExtension
 
     public function redirectIfNotLoggedIn(string $url, int $statusCode = 302): string|RedirectResponse
     {
-        if (DataHandler::isEmpty($this->context->getUserArray())) {
+        if (DataHandler::isEmpty($this->context->getUser())) {
             header('Location: ' . $url, true, $statusCode);
             die();
         }

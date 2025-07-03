@@ -3,9 +3,12 @@
         {% set imageValue = getImage(image.value, true) %}
         <img
             {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %}
-            class="max-w-full max-h-full mx-auto {{ image.classes }}"
+            class="max-w-full max-h-full mx-auto"
+            srcset="{{ imageValue.src }} 480w, {{ imageValue.src }} 800w"
+            sizes="(max-width: 600px) 480px,
+                    800px"
             src="{{ imageValue.src }}"
-            alt="{{ imageValue.file }}" />
+            alt="{{ imageValue.alternativeText }}" />
     {% else %}
         <img
             {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %}

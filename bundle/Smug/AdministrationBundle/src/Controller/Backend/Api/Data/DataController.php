@@ -23,6 +23,7 @@ use Smug\Core\Events\Backend\Data\DataPreCreatedEvent;
 use Smug\Core\Events\Backend\Data\DataPreUpdatedEvent;
 use Smug\Core\Events\Backend\Data\DataUpdatedEvent;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Throwable;
 
 class DataController extends BaseController
 {
@@ -88,7 +89,7 @@ class DataController extends BaseController
         }
 
         if (!DataHandler::isArray($data['data'])) {
-            $data['data'] = $data['data']->toArray();
+            $data['data'] = $this->serializer->serialize($data['data']);
         }
         
         return $this->prepareReturn($data, $request);
@@ -104,7 +105,12 @@ class DataController extends BaseController
         UpdateBaseService $service
     ): JsonResponse {
         $constants = $this->getConstants($namespace, $bundle, $model);
-        $constantMappings = DataHandler::doesClassExist($constants) ? $constants::MAPPING : [];
+
+        try {
+            $constantMappings = DataHandler::doesClassExist($constants) ? $constants::MAPPING : [];
+        } catch (Throwable $e) {
+            $constantMappings = [];
+        }
 
         $domain = $this->getClass($namespace, $bundle, $model);
         $entityClass = EntityGenerator::getGeneratedEntity($domain);

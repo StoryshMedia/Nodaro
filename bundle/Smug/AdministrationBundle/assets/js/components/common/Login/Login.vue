@@ -1,14 +1,10 @@
 <template>
   <div class="max-w-md w-full rounded-xl p-6 bg-white text-dark">
     <img
-      class="w-24 mx-auto my-4 flex-none"
+      class="w-48 mx-auto my-4 flex-none"
       src="/administration/img/logo/logo-navigation.svg"
       alt=""
     >
-
-    <h1 class="text-3xl font-semibold mb-6 text-center">
-      {{ $t('LOGIN_HEADLINE') }}
-    </h1>
       
     <form 
       class="space-y-4"
@@ -75,7 +71,9 @@ export default {
   },
   methods: {
     performLogin() {
-      this.$store.dispatch("auth/login", this.loginData).catch((err) => {
+      this.$store.dispatch("auth/login", this.loginData).then(result => {
+        window.location.replace("/admin");
+      }).catch((err) => {
         this.hasLoginError = true;
       });
     }

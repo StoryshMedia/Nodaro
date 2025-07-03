@@ -4,7 +4,9 @@
             {{ headline.value }}
         </h2>
     {% endif %}
-    <div class="{{ caption.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
-        {{ caption.value | raw }}
-    </div>
+    {% if caption.classes is not empty or isBackendView() is same as true %}
+        <div class="{{ caption.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
+            {{ caption.value | raw }}
+        </div>
+    {% endif %}
 </article>

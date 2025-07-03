@@ -99,7 +99,7 @@ class DataController extends BaseController
         }
 
         if (!DataHandler::isArray($data['data'])) {
-            $data['data'] = $data['data']->toArray();
+            $data['data'] = $this->serializer->serialize($data['data']);
         }
         
         return $this->prepareReturn($data, $request);

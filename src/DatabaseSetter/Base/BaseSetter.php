@@ -170,6 +170,7 @@ class BaseSetter implements SetterInterface
 		
 		$media->__set('extension', $data['extension']);
 		$media->__set('path', $data['path']);
+		$media->__set('alternativeText', '');
 		$media->__set('file', DataHandler::getReplaceString(' ', '_', $data['file']));
 		$media->__set('size', $data['size']);
 		$media->__set('sizeX', $data['sizeX']);

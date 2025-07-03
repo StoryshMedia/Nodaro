@@ -6,6 +6,7 @@ use Smug\AdministrationBundle\Event\SystemEvents;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Backend\Data\DataCreatedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Domain\Domain;
 use Smug\FrontendBundle\Entity\Seo\Seo;
 use Smug\FrontendBundle\Entity\Site\Site;
@@ -13,6 +14,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DomainAddDataSubscriber implements EventSubscriberInterface
 {
+    public function __construct(protected EntitySerializer $serializer){}
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -59,7 +62,7 @@ class DomainAddDataSubscriber implements EventSubscriberInterface
             $event->getContext()->getEntityManager()->persist($data);
             $event->getContext()->getEntityManager()->flush();
 
-            $event->setData($data->toArray());
+            $event->setData($this->serializer->serialize($data));
         }
     }
 }

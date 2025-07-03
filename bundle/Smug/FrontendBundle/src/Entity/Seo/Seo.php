@@ -25,11 +25,12 @@ class Seo extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected $title;
 
     #[OneToOne(targetEntity: Domain::class, mappedBy: 'seo')]
     #[JoinColumn(name: 'domain_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected $domain;
 
     #[OneToMany(targetEntity: MediaSeoAssociation::class, mappedBy: 'seo')]
@@ -56,6 +57,7 @@ class Seo extends BaseModel
             'bypassId' => true
         ]
     ])]
+    #[Groups(['public'])]
     protected Collection $images;
 
     public function __construct()

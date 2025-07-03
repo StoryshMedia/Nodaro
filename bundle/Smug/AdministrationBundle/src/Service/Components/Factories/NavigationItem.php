@@ -5,10 +5,11 @@ namespace Smug\AdministrationBundle\Service\Components\Factories;
 use Doctrine\Common\Collections\ArrayCollection;
 use Smug\AdministrationBundle\Interface\Navigation\NavigationItemInterface;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class NavigationItem implements NavigationItemInterface
 {
-    public function __construct()
+    public function __construct(protected ?EntitySerializer $serializer = null)
     {
         $this->children = new ArrayCollection();    
     }
@@ -116,7 +117,7 @@ class NavigationItem implements NavigationItemInterface
             'parent' => $this->getParent(),
             'icon' => $this->getIcon(),
             'key' => $this->getKey(),
-            'children' => ArrayProvider::getObjectsAsArray($this->getChildren())
+            'children' => ArrayProvider::getObjectsAsArray($this->getChildren(), $this->serializer)
         ];
     }
 }

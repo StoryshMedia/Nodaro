@@ -21,51 +21,62 @@ use Smug\FrontendBundle\Entity\ModuleTab\ModuleTab;
 class ModuleField extends BaseModel
 {
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $identifier;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $type;
 
     #[Column(type: 'jsonField')]
+    #[Groups(['public'])]
     #[DefaultValue('[]')]
     protected $config;
 
     #[Column(type: 'jsonField')]
+    #[Groups(['public'])]
     #[DefaultValue('[]')]
     protected $settings;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $placeholder;
 
     #[Column(type: 'text')]
+    #[Groups(['public'])]
     protected $defaultValue;
 
     #[Column(type: 'boolean')]
+    #[Groups(['public'])]
     #[DefaultValue(false)]
     protected bool $isPlugin = false;
 
     #[Column(type: 'jsonField')]
+    #[Groups(['public'])]
     #[DefaultValue('[]')]
     protected $classes;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $description;
 
     #[ManyToOne(targetEntity: Module::class, inversedBy: 'fields')]
     #[JoinColumn(name: 'module_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected $module;
 
     #[OneToMany(targetEntity: ModuleField::class, mappedBy: 'parentId')]
+    #[Groups(['public'])]
     protected Collection $children;
 
     #[ManyToOne(targetEntity: ModuleField::class, inversedBy: 'children')]
     #[JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
+    #[Groups(['public'])]
     protected ?ModuleField $parentId;
 
     #[ManyToOne(targetEntity: ModuleTab::class, inversedBy: 'fields')]
     #[JoinColumn(name: 'tab_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected ?ModuleTab $tab = null;
 
     public function __construct() {

@@ -20,7 +20,7 @@ class FeBaseController extends BaseController
 {
     public function sendErrorMail(array $data)
     {
-        $this->sendMail->sendHtmlMail(
+        /*$this->sendHtmlMail(
             '@SmugFrontend/email/error/html/index.html.twig',
             [
                 'from' => $data['from'],
@@ -34,7 +34,7 @@ class FeBaseController extends BaseController
             [
                 'data' => $data
             ]
-        );
+        );*/
     }
 
     public function getSiteContent(Request $request): ?array
@@ -46,17 +46,18 @@ class FeBaseController extends BaseController
             return null;
         }
 
-        $styles = StyleBuilder::getSiteStyles($site);
+        $styles = StyleBuilder::getSiteStyles($site, $this->serializer);
         $contentItems = SiteContentBuilder::getContentItems(
             $site['site'],
             $site['additionalData'],
+            $this->serializer,
             $this->dispatcher,
             $this->context
         );
         
         $siteData = [
-            'seo' => SeoDataBuilder::getSeoData($site, $this->dispatcher),
-            'scripts' => ScriptBuilder::getSiteScripts($site, $this->dispatcher),
+            'seo' => SeoDataBuilder::getSeoData($site, $this->serializer, $this->dispatcher),
+            'scripts' => ScriptBuilder::getSiteScripts($site, $this->serializer, $this->dispatcher),
             'template' => $site['site']->__get('domain')->__get('templateString'),
             'styles' => $styles,
             'baseSlug' => $site['slug'],

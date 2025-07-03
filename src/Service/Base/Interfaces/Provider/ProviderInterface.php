@@ -2,15 +2,9 @@
 
 namespace Smug\Core\Service\Base\Interfaces\Provider;
 
-/**
- * Interface ProviderInterface
- * @package Smug\Core\Service\Base\Interfaces\Provider
- */
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
+
 interface ProviderInterface
 {
-    /**
-     * @param array $config
-     * @return array
-     */
-	public static function provide(array $config): array;
+	public static function provide(array $config, EntitySerializer $serializer): array;
 }

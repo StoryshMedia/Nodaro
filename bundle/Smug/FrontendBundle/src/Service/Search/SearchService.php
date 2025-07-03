@@ -5,10 +5,11 @@ namespace Smug\FrontendBundle\Service\Search;
 use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class SearchService
 {
-    public static function getSearchResults(Context $context): array
+    public static function getSearchResults(Context $context, EntitySerializer $serializer): array
     {
         $builder = $context->getEntityManager()->createQueryBuilder();
         $builder->select('c')
@@ -32,6 +33,6 @@ class SearchService
             return [];
         }
 
-        return ArrayProvider::getObjectsAsArray($entries);
+        return ArrayProvider::getObjectsAsArray($entries, $serializer);
     }
 }

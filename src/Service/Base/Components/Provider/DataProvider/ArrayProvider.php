@@ -4,28 +4,42 @@ namespace Smug\Core\Service\Base\Components\Provider\DataProvider;
 
 use Smug\Core\Entity\Base\BaseModel;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class ArrayProvider
 {
-    public static function getObjectsAsArray($objects, array $disAllowedFields = [], bool $getChildren = true, array $restrictions = []): array
+    public static function getObjectsAsArray($objects, ?EntitySerializer $serializer = null, array $disAllowedFields = [], bool $getChildren = true, array $restrictions = [], array $groups = ['public']): array
     {
         $return = [];
         
         if (DataHandler::isEmpty($objects)) {
             return $return;
         }
-
-        /** @var BaseModel $object */
         foreach ($objects as $object) {
-            $array = $object->toArray($disAllowedFields, $getChildren, $restrictions);
-            if (DataHandler::isEmpty($array)) {
-                continue;
-            }
-            $return[] = $array;
-        }
+                if (DataHandler::doesMethodExist($object, 'toArray')) {
+                    $array = $object->toArray($disAllowedFields, $getChildren, $restrictions);
+                    if (DataHandler::isEmpty($array)) {
+                        continue;
+                    }
+                    $return[] = $array;
+                } else {
+                    if (DataHandler::isEmpty($serializer)) {
+                        continue;
+                    }
+                    
+                    $array = $serializer->serialize($object, $groups);
 
+                    if (DataHandler::isEmpty($array)) {
+                        continue;
+                    }
+                    $return[] = $array;
+                }
+                
+            }
         try {
+            
         } catch (\Throwable $e) {
+            dd($e);
         }
 
         return $return;

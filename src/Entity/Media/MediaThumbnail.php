@@ -15,31 +15,39 @@ use Smug\Core\Entity\Base\BaseModel;
 class MediaThumbnail extends BaseModel
 {
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $file;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $path;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $extension;
 
     #[Column(type: 'integer')]
+    #[Groups(['public'])]
     protected int $size;
 
     #[Column(type: 'integer')]
+    #[Groups(['public'])]
     protected int $sizeX;
 
     #[Column(type: 'integer')]
+    #[Groups(['public'])]
     protected int $sizeY;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $variant;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected string $viewport;
 
     #[ManyToOne(targetEntity: Media::class, inversedBy: 'thumbnails')]
     #[JoinColumn(name: 'media_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected Media $media;
 }

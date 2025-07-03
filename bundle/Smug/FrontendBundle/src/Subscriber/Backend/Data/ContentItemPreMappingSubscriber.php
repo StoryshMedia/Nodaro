@@ -6,6 +6,7 @@ use Smug\AdministrationBundle\Event\SystemEvents;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Backend\Data\DataPreMappingEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\ContentItem\ContentItem;
 use Smug\FrontendBundle\Entity\ContentItemModule\ContentItemModule;
 use Smug\FrontendBundle\Entity\ContentItemModuleField\ContentItemModuleField;
@@ -15,6 +16,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ContentItemPreMappingSubscriber implements EventSubscriberInterface
 {
+    public function __construct(protected EntitySerializer $serializer){}
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -94,7 +97,7 @@ class ContentItemPreMappingSubscriber implements EventSubscriberInterface
                 }
             }
 
-            $requestData['module'] = $module->toArray();
+            $requestData['module'] = $this->serializer->serialize($module);
 
             if ($requestData['rowColumn'] === null) {
                 $requestData['rowColumn'] = 0;

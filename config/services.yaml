@@ -26,6 +26,9 @@ services:
     smug.coookie_authenticator:
         class: Smug\Core\Security\JwtCookieAuthenticator
         parent: lexik_jwt_authentication.security.jwt_authenticator
+    smug.entity.serializer:
+        class: Smug\Core\Service\Base\Components\Serializer\EntitySerializer
+        public: true
     security.token_storage:
         class: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
         public: true
@@ -52,6 +55,10 @@ services:
     Smug\Core\Routing\RouteLoader:
         tags: [routing.loader]
 
+    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
+        arguments:
+            $nameConverter: '@Smug\Core\Service\Base\Components\Serializer\KeyConverter'
+            
     Doctrine\Persistence\ObjectManager: '@doctrine.orm.default_entity_manager'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

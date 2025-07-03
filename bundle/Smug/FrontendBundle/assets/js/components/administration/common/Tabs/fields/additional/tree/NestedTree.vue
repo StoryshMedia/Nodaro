@@ -55,7 +55,7 @@
           </button>
           <vue-collapsible
             class="pt-3"
-            :is-open="expanded === true && el.children.length > 0"
+            :is-open="expanded === true && el.children && el.children.length > 0"
           >
             <NestedTree
               :sites="el.children"

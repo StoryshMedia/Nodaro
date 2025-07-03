@@ -1,0 +1,50 @@
+<div class="grid grid-cols-12 w-full flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md {% if additionalClasses is defined %}{{ additionalClasses }}{% endif %}">
+    <div class="m-0 col-span-3 overflow-hidden rounded-xl rounded-r-none bg-white text-gray-700">
+        {% if image.value is defined and image.value is not empty %}
+            {% set imageValue = getImage(image.value) %}
+            <img
+                {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %}
+                class="h-full w-96 object-cover"
+                srcset="{{ imageValue.desktop.list.src }} 480w, {{ imageValue.desktop.detail.src }} 800w"
+                src="{{ imageValue.desktop.detail.src }}"
+                alt="{{ imageValue.desktop.detail.file }}"
+            />
+        {% else %}
+            <img class="h-full w-full object-cover" {% if isBackendView(_context) %} {{ adminConfig(_context, 'image', id) }} {% endif %} />
+        {% endif %}
+    </div>
+    <div class="p-6 col-span-9">
+        <h6 class="{{ highlight.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'highlight', id) }} {% endif %}>
+            {{ highlight.value }}
+        </h6>
+        <h4 class="{{ headline.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'headline', id) }} {% endif %}>
+            {{ headline.value }}
+        </h4>
+        <p class="{{ caption.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'caption', id) }} {% endif %}>
+            {{ caption.value | raw }}
+        </p>
+        <a
+            href="{{ button.settings.link.value }}"
+            title="{{ button.value }}"
+            class="{{ button.classes }}"
+            {% if isBackendView(_context) %} {{ adminConfig(_context, 'button', id) }} {% endif %}
+        >
+            <span class="flex">{{ button.value }}<span>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                aria-hidden="true"
+                class="h-4 w-4 ml-2"
+            >
+                <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                ></path>
+            </svg>
+        </a>
+    </div>
+</div>

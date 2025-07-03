@@ -23,56 +23,66 @@ class ContentItemModuleField extends BaseModel
 {
     #[ManyToOne(targetEntity: ContentItemModule::class, inversedBy: 'contentFields')]
     #[JoinColumn(name: 'field_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public', 'subData'])]
     protected ?ContentItemModule $module = null;
 
     #[Column(type: 'string')]
+    #[Groups(['public', 'subData'])]
     protected $type;
 
     #[Column(type: 'string')]
+    #[Groups(['public', 'subData'])]
     protected $identifier;
 
     #[Column(type: 'string')]
+    #[Groups(['public', 'subData'])]
     protected $placeholder;
 
     #[Column(type: 'jsonField')]
     #[DefaultValue('[]')]
+    #[Groups(['public', 'subData'])]
     protected $config;
 
     #[Column(type: 'jsonField')]
     #[DefaultValue('[]')]
+    #[Groups(['public', 'subData'])]
     protected $settings;
 
     #[Column(type: 'htmlField')]
     #[DefaultValue('')]
+    #[Groups(['public', 'subData'])]
     protected string $value = '';
 
     #[Column(type: 'boolean')]
     #[DefaultValue(false)]
+    #[Groups(['public', 'subData'])]
     protected bool $isPlugin = false;
 
     #[Column(type: 'jsonField')]
     #[DefaultValue('[]')]
+    #[Groups(['public', 'subData'])]
     protected $classes;
 
     #[Column(type: 'string')]
+    #[Groups(['public', 'subData'])]
     protected $description;
 
     #[OneToMany(targetEntity: MediaContentItemModuleFieldAssociation::class, mappedBy: 'field')]
-    #[Groups(['list'])]
+    #[Groups(['public', 'subData'])]
     protected Collection $files;
 
     #[OneToMany(targetEntity: ContentItemModuleField::class, mappedBy: 'parentId')]
+    #[Groups(['public'])]
     protected Collection $children;
 
     #[ManyToOne(targetEntity: ContentItemModuleField::class, inversedBy: 'children')]
     #[JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public', 'subData'])]
     protected ?ContentItemModuleField $parentId = null;
 
     #[ManyToOne(targetEntity: ContentItemModuleTab::class, inversedBy: 'fields')]
     #[JoinColumn(name: 'tab_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public', 'subData'])]
     protected ?ContentItemModuleTab $tab = null;
 
     public function __construct() {

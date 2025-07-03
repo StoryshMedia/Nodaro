@@ -27,6 +27,6 @@ class ListService extends ListBaseService
         /** @var User $user */
         $user = $this->em->getRepository(User::class)->findOneBy(['username' => $userName]);
 
-        return $user->getEmail();
+        return $user->__get('email');
     }
 }

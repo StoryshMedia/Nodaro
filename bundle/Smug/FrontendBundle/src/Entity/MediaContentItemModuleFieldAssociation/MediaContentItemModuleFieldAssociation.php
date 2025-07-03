@@ -17,10 +17,11 @@ class MediaContentItemModuleFieldAssociation extends BaseModel
 {
     #[ManyToOne(targetEntity: Media::class)]
     #[JoinColumn(name: 'media_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
+    #[Groups(['public'])]
     protected Media $media;
 
     #[ManyToOne(targetEntity: ContentItemModuleField::class, inversedBy: 'files')]
     #[JoinColumn(name: 'field_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected ContentItemModuleField $field;
 }

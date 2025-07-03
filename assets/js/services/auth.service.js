@@ -29,14 +29,19 @@ class AuthService {
           }
         }
       }).catch(error => {
-        console.log(error);
         return false;
       });
   }
-  logout() {
-    window.window.localStorage.removeItem('user-token');
-    window.window.localStorage.removeItem('show-ads');
-    window.window.localStorage.setItem('logged-in', false);
+  logout(user) {
+    const mode = user.mode ?? 'fe';
+    if (mode === 'be') {
+      window.window.localStorage.setItem('be-logged-in', false);
+      document.cookie = "be_jwt_token=; Secure; SameSite=Lax";
+      window.location.replace(window.location.origin + "/admin/login");
+    } else {
+      window.window.localStorage.removeItem('user-token');
+      window.window.localStorage.setItem('logged-in', false);
+    }
   }
   getToken(name) {
     const value = `; ${document.cookie}`;

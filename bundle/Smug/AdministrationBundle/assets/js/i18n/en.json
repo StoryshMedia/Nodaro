@@ -32,6 +32,9 @@
   "ON": "on",
   "CAUTION": "Caution",
 
+  "UPLOAD_IMAGES": "Upload",
+  "STANDARD": "Standard",
+
   "LOGIN_HEADLINE": "Nodaro Login",
   "USER_NAME_OR_EMAIL": "Username or E-Mail",
   "PASSWORD": "Password",
