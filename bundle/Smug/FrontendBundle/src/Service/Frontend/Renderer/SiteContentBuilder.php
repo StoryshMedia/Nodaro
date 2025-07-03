@@ -11,6 +11,7 @@ use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Throwable;
 
 class SiteContentBuilder
@@ -29,7 +30,18 @@ class SiteContentBuilder
     {
         $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $serializer->serialize($site) : $site;
         
-        $siteArray['contentItems'] = DataHandler::getTree($siteArray['contentItems']);
+        if ($context->getMode() === 'fe') {
+            $siteArray['contentItems'] = $context->getCache()
+                ->get(
+                    'smug_frontend_content_element_tree_' . $siteArray['id']
+                , function (ItemInterface $cacheItem) use ($siteArray) {
+                    $cacheItem->expiresAfter(86400); // 1 Woche
+                    return DataHandler::getTree($siteArray['contentItems']);
+                });
+        } else {
+            $siteArray['contentItems'] = DataHandler::getTree($siteArray['contentItems']);
+        }
+
         $siteArray['contentItems'] = self::enrichContentItems($siteArray['contentItems'], $additional, $dispatcher, $context);
         $siteArray['contentItems'] = DataHandler::sortItemsByField($siteArray['contentItems'], 'position');
 
@@ -38,35 +50,45 @@ class SiteContentBuilder
 
     public static function enrichContentItems(array $contentItems, $additional, $dispatcher, $context): array {
         foreach ($contentItems as $contentKey => $contentItem) {
-            $item = $contentItems[$contentKey];
-            $item = self::enrichContentItem($item, $contentItem, $additional, $dispatcher, $context);
-            
-            if (DataHandler::getArrayLength($item['children'] ?? [])) {
-                $columns = DataHandler::groupByField($item['children'], 'rowColumn');
-                $itemColumns = [];
+            if ($context->getMode() === 'fe') {
+                $contentItems[$contentKey] = $context->getCache()
+                    ->get(
+                        'smug_frontend_content_element_' . $contentItem['id']
+                    , function (ItemInterface $cacheItem) use ($contentItem, $additional, $dispatcher, $context){
+                    $cacheItem->expiresAfter(604800); // 1 Woche
 
-                foreach ($columns as $column) {
-                    $column = self::enrichContentItems($column, $additional, $dispatcher, $context);
-                    $column = DataHandler::sortItemsByField($column, 'position');
-                    $itemColumns[] = $column;
+                    $item = self::handleContentItem($contentItem, $additional, $dispatcher, $context);
+
+                    $event = new ContentItemLoadedEvent(
+                        DataHandler::mergeArray($item, ['additionalDataFromRequest' => $additional]),
+                        $context
+                    );
+
+                    if ($dispatcher) {
+                        $dispatcher->dispatch(
+                            $event,
+                            FrontendEvents::FRONTEND_CONTENT_ITEM_LOADED
+                        );
+                    }
+                    return $event->getData();
+                });
+            } else {
+                $contentItems[$contentKey] = self::handleContentItem($contentItem, $additional, $dispatcher, $context);
+                $event = new ContentItemLoadedEvent(
+                    DataHandler::mergeArray($contentItems[$contentKey], ['additionalDataFromRequest' => $additional]),
+                    $context
+                );
+
+                if ($dispatcher) {
+                    $dispatcher->dispatch(
+                        $event,
+                        FrontendEvents::FRONTEND_CONTENT_ITEM_LOADED
+                    );
                 }
 
-                $item['children'] = $itemColumns;
+                $contentItems[$contentKey] = $event->getData();
             }
-
-            $event = new ContentItemLoadedEvent(
-                DataHandler::mergeArray($item, ['additionalDataFromRequest' => $additional]),
-                $context
-            );
-
-            if ($dispatcher) {
-                $dispatcher->dispatch(
-                    $event,
-                    FrontendEvents::FRONTEND_CONTENT_ITEM_LOADED
-                );
-            }
-
-            $contentItems[$contentKey] = $event->getData();
+            
         }
 
         return $contentItems;
@@ -128,6 +150,26 @@ class SiteContentBuilder
         }
         
         $item['variables']['template'] = $contentItem['templateClasses'];
+
+        return $item;
+    }
+
+    protected static function handleContentItem(array $contentItem, array $additional, ?EventDispatcherInterface $dispatcher, Context $context): array
+    {
+        $item = self::enrichContentItem($contentItem, $contentItem, $additional, $dispatcher, $context);
+
+        if (DataHandler::getArrayLength($item['children'] ?? [])) {
+            $columns = DataHandler::groupByField($item['children'], 'rowColumn');
+            $itemColumns = [];
+
+            foreach ($columns as $column) {
+                $column = self::enrichContentItems($column, $additional, $dispatcher, $context);
+                $column = DataHandler::sortItemsByField($column, 'position');
+                $itemColumns[] = $column;
+            }
+
+            $item['children'] = $itemColumns;
+        }
 
         return $item;
     }

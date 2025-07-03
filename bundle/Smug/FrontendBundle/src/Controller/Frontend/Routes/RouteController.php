@@ -23,7 +23,7 @@ class RouteController extends FeBaseController
     public function index(Request $request, Context $context)
     {
         $this->context->setMode('fe');
-        
+
         $siteContent = $this->cache->get('smug_frontend_sites_' . DataHandler::getReplaceString('/', '_', $request->getRequestUri()), function (ItemInterface $item) use ($request) {
             $item->expiresAfter(86400); // 1 Stunde
 

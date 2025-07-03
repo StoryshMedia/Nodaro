@@ -159,7 +159,6 @@ export default {
 
             if (count === result.length - 1) {
               this.domains = items;
-              console.log(this.domains);
               this.isLoading = false;
             }
           }

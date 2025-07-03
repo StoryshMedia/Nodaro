@@ -21,6 +21,7 @@
   ],
   "Smug\\Core\\Context\\Context": [
     "smug.entity.serializer",
+    "cache.app",
     "kernel",
     "doctrine.orm.default_entity_manager"
   ],

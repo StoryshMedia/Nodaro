@@ -30,7 +30,7 @@ class ContentItemModule extends BaseModel
 
     #[OneToOne(targetEntity: ContentItem::class, mappedBy: 'module')]
     #[JoinColumn(name: 'content_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['public', 'subData'])]
+    #[Groups(['subData'])]
     protected ?ContentItem $content = null;
 
     #[OneToMany(targetEntity: ContentItemModuleField::class, mappedBy: 'module')]
