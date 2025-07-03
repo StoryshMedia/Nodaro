@@ -19,6 +19,8 @@ use Smug\SystemBundle\Entity\User\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 final class Context implements ContextInterface
 {
@@ -41,6 +43,7 @@ final class Context implements ContextInterface
 
     public function __construct(
         protected EntitySerializer $serializer,
+        protected CacheInterface $cache,
         KernelInterface $kernel,
         EntityManagerInterface $em
     )
@@ -88,6 +91,11 @@ final class Context implements ContextInterface
     public function getSerializer(): EntitySerializer
     {
         return $this->serializer;
+    }
+
+    public function getCache(): CacheInterface
+    {
+        return $this->cache;
     }
 
     public function getPublicDir(): string
@@ -300,21 +308,76 @@ final class Context implements ContextInterface
 
     public function getAllEntities($repository = 'main'): ?array
     {
+        if ($this->mode === 'fe') {
+            return $this->cache->get('get_all_entities_' . $repository, function (ItemInterface $cacheItem) use ($repository) {
+                $cacheItem->expiresAfter(3600); // 1 hour
+                return $this->em->getRepository($this->repositories[$repository])->findAll();
+            });
+        }
+
         return $this->em->getRepository($this->repositories[$repository])->findAll();
     }
 
     public function getEntityByMultiple(array $criteria, $repository = 'main'): ?BaseModel
     {
+        $cacheString = base64_encode(serialize($criteria) . '_' . $repository);
+
+        if ($this->mode === 'fe') {
+            return $this->cache->get('get_entity_by_multiple_' . $cacheString, function (ItemInterface $cacheItem) use ($repository, $criteria) {
+                $cacheItem->expiresAfter(3600); // 1 hour
+                return $this->em->getRepository($this->repositories[$repository])->findOneBy($criteria);
+            });
+        }
+
         return $this->em->getRepository($this->repositories[$repository])->findOneBy($criteria);
     }
 
     public function getByIdentifier($identifier, $field = 'id', $repository = 'main'): array
     {
+        $cacheString = $identifier . '_' . $repository . '_' . $field;
+
+        if ($this->mode === 'fe') {
+            return $this->cache->get('get_entity_by_identifier_' . $cacheString, function (ItemInterface $cacheItem) use ($repository, $identifier, $field) {
+                $cacheItem->expiresAfter(3600); // 1 hour
+                $this->em->getRepository($this->repositories[$repository])->findBy([$field => $identifier]);
+            });
+        }
+
         return $this->em->getRepository($this->repositories[$repository])->findBy([$field => $identifier]);
     }
 
     public function getByRestrictions(array $restrictions, $repository = 'main'): array
     {
+        $cacheString = base64_encode(serialize($restrictions) . '_' . $repository);
+
+        if ($this->mode === 'fe') {
+            return $this->cache->get('get_entity_by_restricitons_' . $cacheString, function (ItemInterface $cacheItem) use ($repository, $restrictions) {
+                $cacheItem->expiresAfter(3600); // 1 hour
+                
+                $count = 0;
+                $queryBuilder = $this->em->createQueryBuilder();
+
+                $queryBuilder->select('c')
+                    ->from($this->repositories[$repository] ?? 'main', 'c');
+
+                foreach ($restrictions as $restriction) {
+                    if ($count === 0) {
+                        $queryBuilder
+                        ->where('c.' . $restriction['condition'] . ' = :' . $restriction['condition'])
+                        ->setParameter($restriction['condition'], $restriction['value']);
+                    } else {
+                        $queryBuilder
+                        ->andWhere('c.' . $restriction['condition'] . ' = :' . $restriction['condition'])
+                        ->setParameter($restriction['condition'], $restriction['value']);
+                    }
+
+                    $count++;
+                }
+
+                return $queryBuilder->getQuery()->getResult();
+            });
+        }
+
         $count = 0;
         $queryBuilder = $this->em->createQueryBuilder();
 

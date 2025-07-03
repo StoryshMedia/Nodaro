@@ -71,7 +71,9 @@ export default {
   },
   methods: {
     performLogin() {
-      this.$store.dispatch("auth/login", this.loginData).catch((err) => {
+      this.$store.dispatch("auth/login", this.loginData).then(result => {
+        window.location.replace("/admin");
+      }).catch((err) => {
         this.hasLoginError = true;
       });
     }

@@ -1,6 +1,5 @@
 class TreeService {
   buildTree(items, parentId = '') {
-    console.log(items);
     const result = [];
 
     for (const item of items) {

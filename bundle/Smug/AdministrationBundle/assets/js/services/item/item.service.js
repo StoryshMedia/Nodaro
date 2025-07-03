@@ -43,8 +43,6 @@ class ItemService {
   }
   getItemPositionInNestedArray(items, newItem, field = 'id', parentKey = null) {
     return new Promise((resolve) => {
-      console.log(items);
-      console.log(newItem);
       for (let i = 0; i <= Object.keys(items).length - 1; i++) {
         if (items[Object.keys(items)[i]][field] === newItem[field]) {
           resolve({

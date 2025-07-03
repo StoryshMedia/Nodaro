@@ -124,7 +124,6 @@ export default {
         } else {
           this.selectedItems.push(item);
         }
-        console.log(this.selectedItems);
         this.$emit('updateValue', this.selectedItems);
       }
     },
@@ -157,7 +156,6 @@ export default {
       ApiService.get(this.fieldConfig.selections.getCall)
         .then(result =>  {
           this.selections = result;
-          console.log(this.selections);
         })
         .catch(error => {
           this.isLoading = false;

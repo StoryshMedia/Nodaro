@@ -166,6 +166,7 @@
           :edit-allowed="true"
           :base-id="baseId"
           @updateValue="setSettingTabContent($event, tabIndex)"
+          @deleteTab="deleteTab($event, tabIndex)"
         />
       </div>
 
@@ -331,6 +332,14 @@ export default defineComponent({
         this.fieldValue.module.tabs.push(result);
 
         this.$emit('addTab', result);  
+      });
+    },
+    deleteTab(event, index) {
+      ApiService.put(
+        '/be/api/smug/frontend/contentItemModuleTab/delete',
+        {id: event.id}
+      ).then(result => {
+        this.fieldValue.module.tabs.splice(index, 1);
       });
     },
     addColumn() {
