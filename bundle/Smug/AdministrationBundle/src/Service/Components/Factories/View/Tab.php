@@ -7,10 +7,11 @@ use Smug\AdministrationBundle\Interface\View\Items\RowInterface;
 use Smug\AdministrationBundle\Interface\View\Items\TabInterface;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class Tab implements TabInterface
 {
-    public function __construct()
+    public function __construct(protected ?EntitySerializer $serializer = null)
     {
         $this->rows = new ArrayCollection();    
     }
@@ -63,7 +64,7 @@ class Tab implements TabInterface
 
     public function toArray(): array {
         return [
-            'rows' => ArrayProvider::getObjectsAsArray($this->getRows()),
+            'rows' => ArrayProvider::getObjectsAsArray($this->getRows(), $this->serializer),
             'icon' => $this->getIcon(),
             'headline' => $this->getHeadline()
         ];

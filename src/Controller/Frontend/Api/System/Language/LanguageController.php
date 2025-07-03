@@ -18,7 +18,7 @@ class LanguageController extends BaseController
         $context->addRepository('main', Language::class);
 
 	    return $this->prepareReturn(
-            ArrayProvider::getObjectsAsArray($context->getAllEntities())
+            ArrayProvider::getObjectsAsArray($context->getAllEntities(), $this->serializer)
         );
     }
 }

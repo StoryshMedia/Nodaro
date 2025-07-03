@@ -26,7 +26,7 @@
             <div class="{{ caption.classes }}" {% if isBackendView(_context) %} {{ adminConfig(_context, 'caption', id, loop.index) }} {% endif %}>
                 {{ caption.value | raw }}
             </div>
-            {% if button.value is not empty %}
+            {% if button.value is not empty or isBackendView() is same as true %}
                 <a
                     href="{{ button.settings.link.value }}"
                     title="{{ button.value }}"

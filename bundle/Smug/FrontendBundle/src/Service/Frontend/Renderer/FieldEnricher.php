@@ -2,6 +2,9 @@
 
 namespace Smug\FrontendBundle\Service\Frontend\Renderer;
 
+use Smug\Core\Context\Context;
+use Smug\Core\DataAbstractionLayer\EntityGenerator;
+use Smug\Core\Entity\Media\Media;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 
 class FieldEnricher
@@ -34,7 +37,7 @@ class FieldEnricher
         return $result;
     }
 
-    public static function enrichFields(array $module, array $moduleConfigFile): array
+    public static function enrichFields(array $module, array $moduleConfigFile, Context $context): array
     {
         $result = [];
 
@@ -47,6 +50,28 @@ class FieldEnricher
 
             if (!DataHandler::isEmpty($field['files'])) {
                 $value = $field['files'];
+            }
+            if ($field['type'] === 'FileUpload') {
+                $value = $field['files'];
+
+                if (!DataHandler::isEmpty($field['value'])) {
+                    $value = DataHandler::getJsonDecode($field['value'], true);
+
+                    foreach ($value as $key => $media) {
+                        $queryBuilder = $context->getEntityManager()->createQueryBuilder();
+                        $imageData = $queryBuilder
+                            ->select('s')
+                            ->from(EntityGenerator::getGeneratedEntity(Media::class), 's')
+                            ->where('s.id = :id')
+                            ->setParameter('id', $media['media']['id'])
+                            ->getQuery()
+                            ->getSingleResult();
+
+                        $media['media'] = $context->getSerialized($imageData);
+
+                        $value[$key] = $media;
+                    }
+                }
             }
 
             if (DataHandler::isArray($field['classes'])) {
@@ -69,7 +94,7 @@ class FieldEnricher
         return $result;
     }
 
-    public static function enrichPluginFields(array $module): array
+    public static function enrichPluginFields(array $module, Context $context): array
     {
         $result = [];
 
@@ -78,7 +103,28 @@ class FieldEnricher
                 continue;
             }
             
-            $value = $field['value'] ?? $field['defaultValue'] ?? '';
+            if ($field['type'] === 'FileUpload') {
+                $value = DataHandler::getJsonDecode($field['value'], true);
+
+                foreach ($value as $key => $media) {
+                    if (DataHandler::isEmpty($media['media']['alternativeText'] ?? '')) {
+                        $queryBuilder = $context->getEntityManager()->createQueryBuilder();
+                        $imageData = $queryBuilder
+                            ->select('s')
+                            ->from(EntityGenerator::getGeneratedEntity(Media::class), 's')
+                            ->where('s.id = :id')
+                            ->setParameter('id', $media['media']['id'])
+                            ->getQuery()
+                            ->getSingleResult();
+
+                        $media['media'] = $context->getSerialized($imageData);
+
+                        $value[$key] = $media;
+                    }
+                }
+            } else {
+                $value = $field['value'] ?? $field['defaultValue'] ?? '';
+            }
 
             if (DataHandler::isString($field['settings'])) {
                 $field['settings'] = DataHandler::getJsonDecode($field['settings'], true);

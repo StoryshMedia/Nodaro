@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Smug\Core\Entity\Base\Attribute\BackendField;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[Entity]
 #[Table('language')]
@@ -17,6 +18,7 @@ class Language extends BaseModel
         'type' => 'Text',
         'placeholder' => 'TITLE'
     ])]
+    #[Groups(['public'])]
     protected string $title = '';
     
     #[Column(type: 'string')]
@@ -24,6 +26,7 @@ class Language extends BaseModel
         'type' => 'Text',
         'placeholder' => 'LOCALE'
     ])]
+    #[Groups(['public'])]
     protected string $locale = '';
 
     #[Column(type: 'string')]
@@ -31,6 +34,7 @@ class Language extends BaseModel
         'type' => 'Text',
         'placeholder' => 'AREA'
     ])]
+    #[Groups(['public'])]
     protected string $area = '';
     
     #[Column(type: 'boolean')]
@@ -38,5 +42,6 @@ class Language extends BaseModel
         'type' => 'Checkbox',
         'placeholder' => 'TRANSLATION_AVAILABLE'
     ])]
+    #[Groups(['public'])]
     protected bool $translationAvailable = false;
 }

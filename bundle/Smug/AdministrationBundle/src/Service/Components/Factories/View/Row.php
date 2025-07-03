@@ -7,10 +7,11 @@ use Smug\AdministrationBundle\Interface\View\Items\FieldInterface;
 use Smug\AdministrationBundle\Interface\View\Items\RowInterface;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class Row implements RowInterface
 {
-    public function __construct()
+    public function __construct(protected ?EntitySerializer $serializer = null)
     {
         $this->fields = new ArrayCollection();    
     }
@@ -53,7 +54,7 @@ class Row implements RowInterface
 
     public function toArray(): array {
         return [
-            'fields' => ArrayProvider::getObjectsAsArray($this->getFields()),
+            'fields' => ArrayProvider::getObjectsAsArray($this->getFields(), $this->serializer),
             'class' => $this->getClass()
         ];
     }

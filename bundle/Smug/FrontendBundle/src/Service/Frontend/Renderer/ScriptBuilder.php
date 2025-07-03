@@ -4,6 +4,7 @@ namespace Smug\FrontendBundle\Service\Frontend\Renderer;
 
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -13,18 +14,22 @@ class ScriptBuilder
         'headerTop',
         'headerBottom',
         'footerTop',
-        'footerBottom'
+        'footerBottom',
+        'bodyEnd',
+        'bodyStart'
     ];
 
-    public static function getSiteScripts(array $data, EventDispatcherInterface $dispatcher = null): array
+    public static function getSiteScripts(array $data, EntitySerializer $serializer, EventDispatcherInterface $dispatcher = null): array
     {
         $site = $data['site'];
-        $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $site->toArray() : $site;
+        $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $serializer->serialize($site) : $site;
         $siteScripts = [
             'headerTop' => [],
             'headerBottom' => [],
             'footerTop' => [],
-            'footerBottom' => []
+            'footerBottom' => [],
+            'bodyEnd' => [],
+            'bodyStart' => []
         ];
 
         foreach ($siteArray['siteScripts'] as $siteScript) {

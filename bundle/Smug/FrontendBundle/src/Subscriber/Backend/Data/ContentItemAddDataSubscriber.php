@@ -7,6 +7,7 @@ use Smug\AdministrationBundle\Event\SystemEvents;
 use Smug\Core\DataAbstractionLayer\EntityGenerator;
 use Smug\Core\Events\Backend\Data\DataCreatedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\ContentItem\ContentItem;
 use Smug\FrontendBundle\Entity\ContentItemModule\ContentItemModule;
 use Smug\FrontendBundle\Service\Factory\ContentItemPositionFactory;
@@ -17,7 +18,7 @@ class ContentItemAddDataSubscriber implements EventSubscriberInterface
 {
     protected FrontendModuleRenderer $renderer;
 
-    public function __construct(FrontendModuleRenderer $renderer)
+    public function __construct(protected EntitySerializer $serializer, FrontendModuleRenderer $renderer)
     {
         $this->renderer = $renderer;
     }
@@ -69,7 +70,7 @@ class ContentItemAddDataSubscriber implements EventSubscriberInterface
                 $event->getContext()->getEntityManager()->persist($module);
                 $event->getContext()->getEntityManager()->flush();
 
-                $data = $event->getContext()->getEntityByIdentifier($data->getId())->toArray();
+                $data = $this->serializer->serialize($event->getContext()->getEntityByIdentifier($data->getId()));
             
                 ContentItemPositionFactory::renewPositions($event->getContext(), $data, 'site');
 

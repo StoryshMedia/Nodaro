@@ -25,20 +25,20 @@ class ContentItemModule extends BaseModel
 {
     #[ManyToOne(targetEntity: Module::class, inversedBy: 'contentItemModules')]
     #[JoinColumn(name: 'module_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public', 'subData'])]
     protected $module;
 
     #[OneToOne(targetEntity: ContentItem::class, mappedBy: 'module')]
     #[JoinColumn(name: 'content_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['subData'])]
     protected ?ContentItem $content = null;
 
     #[OneToMany(targetEntity: ContentItemModuleField::class, mappedBy: 'module')]
-    #[Groups(['list'])]
+    #[Groups(['public', 'subData'])]
     protected Collection $fields;
 
     #[OneToMany(targetEntity: ContentItemModuleTab::class, mappedBy: 'module')]
-    #[Groups(['list'])]
+    #[Groups(['public', 'subData'])]
     protected Collection $tabs;
 
     public function __construct()

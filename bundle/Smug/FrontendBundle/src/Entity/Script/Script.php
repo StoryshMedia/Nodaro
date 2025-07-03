@@ -18,39 +18,47 @@ use Smug\FrontendBundle\Entity\ScriptField\ScriptField;
 class Script extends BaseModel
 {
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $title;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $identifier;
     
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $configFile;
 
     #[Column(type: 'text')]
+    #[Groups(['public'])]
     protected $description;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $template;
 
     #[Column(type: 'string')]
+    #[Groups(['public'])]
     protected $externalSrc;
 
     #[Column(type: 'scriptField')]
+    #[Groups(['public'])]
     protected $plainScript;
 
     #[Column(type: 'boolean')]
+    #[Groups(['public'])]
     #[DefaultValue(false)]
     protected $installed;
 
     #[Column(type: 'boolean')]
+    #[Groups(['public'])]
     #[DefaultValue(false)]
     protected bool $active;
     
     #[OneToMany(targetEntity: SiteScript::class, mappedBy: 'script')]
-    #[Groups(['minimal'])]
     protected Collection $siteScripts;
 
     #[OneToMany(targetEntity: ScriptField::class, mappedBy: 'script')]
-    #[Groups(['list'])]
+    #[Groups(['public'])]
     protected Collection $fields;
 }

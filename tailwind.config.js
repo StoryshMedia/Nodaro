@@ -1,7 +1,19 @@
 module.exports = {
   purge: {
-    enabled: false,
-    content: ['./templates/frontend/base.html.twig', './assets/**/*.{js,ts,jsx,tsx,vue}']
+    enabled: true,
+    content: [
+      './bundle/**/*.html.twig',
+      './custom/**/*.html.twig',
+      './templates/**/*.html.twig',
+      './bundle/**/*.js',
+      './custom/**/*.js',
+      './assets/**/*.js',
+      './bundle/**/*.vue',
+      './custom/**/*.vue',
+      './src/**/*.vue',
+      './src/**/*.ts',
+    ],
+    safelist: require('./src/Command/Frontend/safelist.json')
   },
   darkMode: false, // or 'media' or 'class'
   content: [
@@ -143,6 +155,9 @@ module.exports = {
               DEFAULT: '#16a085',
               light: '#16a085',
               'dark-light': 'rgba(0,171,85,.15)',
+          },
+          logo: {
+              DEFAULT: '#2957A4'
           },
           danger: {
               DEFAULT: '#c0392b',

@@ -181,6 +181,22 @@ class DataHandler
 	    ];
     }
 
+    public static function getSerializedTree($elements, $parentId = ""): array
+    {
+        $branch = [];
+
+        foreach ($elements as $element) {
+            if ($element->__get('parentId') === $parentId) {
+                $children = self::getSerializedTree($elements, $element->__get('id'));
+                $element->__set('children', $children);
+                $branch[] = $element;
+            }
+        }
+
+        dd($branch);
+        return $branch;
+    }
+
     public static function getTree(array $entries, $parentId = ""): array
     {
         $tree = [];

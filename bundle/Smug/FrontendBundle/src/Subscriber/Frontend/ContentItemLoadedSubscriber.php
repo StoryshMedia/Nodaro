@@ -8,6 +8,7 @@ use Smug\Core\Entity\Base\Restriction\RestrictionBuilder;
 use Smug\Core\Events\Frontend\Site\ContentItemLoadedEvent;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 use Smug\FrontendBundle\Entity\Site\Site;
 use Smug\FrontendBundle\Event\FrontendEvents;
 use Smug\FrontendBundle\Service\Factory\FrontendNavigationFactory;
@@ -18,7 +19,7 @@ class ContentItemLoadedSubscriber extends ContentItemRenderingSubscriber
 
     protected Context $context;
 
-    public function __construct(Context $context)
+    public function __construct(Context $context, protected EntitySerializer $serializer)
     {
         $this->context = $context;
         $this->identifiers = [
@@ -57,7 +58,8 @@ class ContentItemLoadedSubscriber extends ContentItemRenderingSubscriber
                 $siteTree = DataHandler::getTree(
                     ArrayProvider::getObjectsAsArray(
                         $site->__get('domain')->__get('sites'),
-                        ['contentItems'],
+                        $this->serializer,
+                        [],
                         true,
                         $restrictions
                     )
@@ -84,7 +86,7 @@ class ContentItemLoadedSubscriber extends ContentItemRenderingSubscriber
                     ->where('item.id = :id')
                     ->setParameter('id', $itemData['item']);
 
-                $data['variables']['tabs'][$tabKey]['data'] = $queryBuilder->getQuery()->getSingleResult()->toArray();
+                $data['variables']['tabs'][$tabKey]['data'] = $this->serializer->serialize($queryBuilder->getQuery()->getSingleResult());
             }
         }
 

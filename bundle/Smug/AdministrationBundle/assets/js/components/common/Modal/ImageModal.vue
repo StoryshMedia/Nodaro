@@ -31,7 +31,7 @@
             leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95"
           >
-            <DialogPanel class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-sm text-black">
+            <DialogPanel class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-4xl text-black">
               <button
                 type="button"
                 class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 outline-none"
@@ -43,7 +43,20 @@
                 {{ getImageName() }}
               </div>
               <div class="p-5">
-                <img :src="getImageSource()">
+                <img
+                  :src="getImageSource()"
+                  class="mx-auto"
+                >
+                
+                <div class="mt-3">
+                  <field
+                    :field-string="'Text'"
+                    :item-value="getImageAlt()"
+                    :edit-allowed="true"
+                    :field-placeholder="'ALT_TEXT'"
+                    @update-value="setAltText($event)"
+                  />
+                </div>
 
                 <div class="flex justify-end items-center mt-8">
                   <button
@@ -55,8 +68,16 @@
                     {{ $t('DELETE') }}
                   </button>
                   <button
+                    v-if="showDelete === true"
                     type="button"
                     class="btn btn-success ml-4"
+                    @click="saveImage()"
+                  >
+                    {{ $t('SAVE') }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-gray ml-4"
                     @click="emitReaction()"
                   >
                     {{ $t('CLOSE') }}
@@ -85,6 +106,9 @@ import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogOverlay } f
 const Icon = defineAsyncComponent(() =>
   import("@core/js/icons/Icon.vue" /* webpackChunkName: "icon" */)
 );
+const Field = defineAsyncComponent(() =>
+  import("../Tabs/fields/Field.vue" /* webpackChunkName: "administration-field" */)
+);
 const Confirm = defineAsyncComponent(() =>
   import("./Confirm.vue" /* webpackChunkName: "administration-modal-confirm" */)
 );
@@ -95,6 +119,7 @@ export default {
   name: "ImageModal",
   components: {
     Icon,
+    Field,
     TransitionRoot,
     TransitionChild,
     Dialog,
@@ -149,6 +174,19 @@ export default {
         .then(function () {
         });
     },
+    saveImage() {
+      const image = (typeof this.imageData.media !== 'undefined') ? this.imageData.media : this.imageData;
+      ApiService.put('/be/api/smug/core/media/save', image)
+        .then(result =>  {
+          this.showConfirmation = false;
+          this.$emit('reaction', false);
+        })
+        .catch(error => {
+          this.isLoading = false;
+        })
+        .then(function () {
+        });
+    },
     handleConfirmValue(value) {
       if (value === true) {
         this.deleteImage();
@@ -161,6 +199,19 @@ export default {
         return ImageService.getImagePathFromMedia(this.imageData);
       }
       return ImageService.getImagePathFromMedia(this.imageData.media);
+    },
+    getImageAlt() {
+      if (!this.imageData.media) {
+        return this.imageData.alternativeText;
+      }
+      return this.imageData.media.alternativeText;
+    },
+    setAltText(text) {
+      if (!this.imageData.media) {
+        this.imageData.alternativeText = text;
+      } else {
+        this.imageData.media.alternativeText = text;
+      }
     }
   }
 }

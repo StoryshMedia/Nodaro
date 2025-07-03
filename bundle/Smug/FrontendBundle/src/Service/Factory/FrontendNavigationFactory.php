@@ -22,4 +22,21 @@ class FrontendNavigationFactory
         
         return $result;
     }
+
+    public function filterNavigation(array $sites): array
+    {
+        $filtered = [];
+
+        foreach ($sites as $site) {
+            if (!empty($site['children']) && is_array($site['children'])) {
+                $site['children'] = $this->filterNavigation($site['children']);
+            }
+
+            if (empty($site['hidden']) && empty($site['hiddenInMenu'])) {
+                $filtered[] = $site;
+            }
+        }
+
+        return $filtered;
+    }
 }

@@ -7,6 +7,7 @@ use Smug\Core\Http\Foundation\Request;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\FrontendBundle\Controller\Frontend\Api\Base\FeBaseController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class RouteController extends FeBaseController
 {
@@ -21,7 +22,13 @@ class RouteController extends FeBaseController
     ]
     public function index(Request $request, Context $context)
     {
-        $siteContent = $this->getSiteContent($request);
+        $this->context->setMode('fe');
+
+        $siteContent = $this->cache->get('smug_frontend_sites_' . DataHandler::getReplaceString('/', '_', $request->getRequestUri()), function (ItemInterface $item) use ($request) {
+            $item->expiresAfter(86400); // 1 Stunde
+
+            return $this->getSiteContent($request);
+        });
 
         if (DataHandler::isEmpty($siteContent)) {
             return $this->redirect('/', 301);
@@ -31,7 +38,7 @@ class RouteController extends FeBaseController
             $siteContent['template'] = '@SmugFrontend/frontend/index/index.html.twig';
         }
 
-        $siteContent['user'] = ($context->getUser()) ? $context->getUserArray() : null;
+        $siteContent['user'] = ($context->getUser()) ? $this->serializer->serialize($context->getUser()) : null;
 
         return $this->render($siteContent['template'], $siteContent);
     }

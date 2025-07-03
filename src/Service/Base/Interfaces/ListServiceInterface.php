@@ -3,11 +3,8 @@
 namespace Smug\Core\Service\Base\Interfaces;
 
 use Smug\Core\Context\Context;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
-/**
- * Interface ListServiceInterface
- * @package Smug\Core\Service\Base\Interfaces
- */
 interface ListServiceInterface
 {
 	/**
@@ -25,7 +22,7 @@ interface ListServiceInterface
 	 * @param array $params
 	 * @return array
 	 */
-	public function getPaginated(Context $context): array;
+	public function getPaginated(Context $context, EntitySerializer $serializer): array;
 	
 	/**
 	 * @param Context $context

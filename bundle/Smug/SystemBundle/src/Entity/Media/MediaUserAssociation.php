@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
+use Smug\Core\Entity\Base\Attribute\DefaultValue;
 use Smug\SystemBundle\Entity\User\User;
 use Symfony\Component\Serializer\Attribute\Groups;
 
@@ -18,16 +19,19 @@ class MediaUserAssociation extends BaseModel
 {
     #[ManyToOne(targetEntity: Media::class)]
     #[JoinColumn(name: 'media_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
+    #[Groups(['public'])]
     protected Media $media;
 
     #[ManyToOne(targetEntity: User::class, inversedBy: 'images')]
     #[JoinColumn(name: 'user_id', referencedColumnName: 'id', onDelete: 'cascade', nullable: true)]
-    #[Groups(['minimal'])]
+    #[Groups(['public'])]
     protected User $user;
 
     #[Column(type: 'boolean')]
+    #[DefaultValue(false)]
     protected bool $main;
 
     #[Column(type: 'boolean')]
-    protected bool $approved = true;
+    #[DefaultValue(false)]
+    protected bool $approved = false;
 }

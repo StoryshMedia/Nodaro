@@ -45,6 +45,18 @@
             @updateValue="setSettingContent($event, fieldindex)"
           />
         </div>
+
+        <div class="flex-none h-16 mt-3">
+          <div class="flex justify-end items-center pt-2">
+            <button
+              type="button"
+              class="btn btn-danger"
+              @click="deleteTab()"
+            >
+              {{ $t('DELETE') }}
+            </button>
+          </div>
+        </div>
       </div>
     </vue-collapsible>
   </div>
@@ -131,6 +143,9 @@ export default {
     setSettingContent(event, index) {
       this.tab.fields[index].value = event;
       this.$emit('updateValue', this.tab);
+    },
+    deleteTab() {
+      this.$emit('deleteTab', this.tab);
     },
     handleAccordionClick() {
       this.expanded = !this.expanded;

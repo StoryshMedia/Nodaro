@@ -64,6 +64,10 @@
         "value": "@SmugFrontend/frontend/shared/icons/icon-sparkles.html.twig"
     },
     {
+        "title": "EYE",
+        "value": "@SmugFrontend/frontend/shared/icons/icon-eye.html.twig"
+    },
+    {
         "title": "TAG",
         "value": "@SmugFrontend/frontend/shared/icons/icon-tag.html.twig"
     },

@@ -16,6 +16,10 @@ class TextField extends Field
 
         $sanitizer = new HtmlSanitizer();
 
+        if (DataHandler::isArray($data[$key])) {
+            $data[$key] = DataHandler::getSerialize($data[$key]);
+        }
+
         return $sanitizer->sanitize((string) $data[$key], [], false, $key);
     }
     

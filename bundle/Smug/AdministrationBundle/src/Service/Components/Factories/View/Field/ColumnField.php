@@ -6,10 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Smug\AdministrationBundle\Interface\View\Items\FieldInterface;
 use Smug\AdministrationBundle\Service\Components\Factories\View\Field;
 use Smug\Core\Service\Base\Components\Provider\DataProvider\ArrayProvider;
+use Smug\Core\Service\Base\Components\Serializer\EntitySerializer;
 
 class ColumnField extends Field
 {
-    public function __construct()
+    public function __construct(protected EntitySerializer $serializer)
     {
         $this->items = new ArrayCollection();    
     }
@@ -37,7 +38,7 @@ class ColumnField extends Field
 
     public function toArray(): array {
         $array = parent::toArray();
-        $array['items'] = ArrayProvider::getObjectsAsArray($this->getItems());
+        $array['items'] = ArrayProvider::getObjectsAsArray($this->getItems(), $this->serializer);
         
         return $array;
     }

@@ -328,7 +328,6 @@ export default {
       this.$emit('reaction', false);
     },
     getIsSelection() {
-      console.log('DetailFolder: ' + this.isSelection);
       return this.isSelection;
     },
     hideImagePreview() {

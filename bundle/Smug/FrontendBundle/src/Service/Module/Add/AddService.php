@@ -6,6 +6,7 @@ use Smug\Core\Context\Context;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
 use Smug\FrontendBundle\Entity\ContentItemModule\ContentItemModule;
 use Smug\FrontendBundle\Entity\ContentItemModuleField\ContentItemModuleField;
+use Smug\FrontendBundle\Entity\ContentItemModuleTab\ContentItemModuleTab;
 use Smug\FrontendBundle\Entity\Module\Module;
 use Smug\FrontendBundle\Entity\ModuleField\ModuleField;
 use Smug\FrontendBundle\Entity\ModuleTab\ModuleTab;
@@ -84,7 +85,7 @@ class AddService
                 ], $entityIdentifier);
             
                 if (DataHandler::isEmpty($fieldObject)) {
-                    $fieldObject = (DataHandler::isInstanceOf($module, ContentItemModule::class)) ? new ContentItemModuleField: new ModuleField();
+                    $fieldObject = (DataHandler::isInstanceOf($module, ContentItemModule::class)) ? new ContentItemModuleField() : new ModuleField();
                 }
                 
                 $fieldObject->__set('identifier', $field['identifier']);
@@ -101,6 +102,39 @@ class AddService
                 $context->getEntityManager()->persist($fieldObject);
                 $context->getEntityManager()->flush();
             }
+        }
+    }
+
+    public function updateTab(
+        ContentItemModuleTab|ModuleTab $tab,
+        array $tabConfig,
+        Context $context,
+        bool $plugin = false,
+        $entityIdentifier = 'field'
+    ) {
+        foreach ($tabConfig['fields'] as $field) {
+            $fieldObject = $context->getEntityByMultiple([
+                'identifier' => $field['identifier'],
+                'tab' => $tab
+            ], $entityIdentifier);
+
+            if (DataHandler::isEmpty($fieldObject)) {
+                $fieldObject = (DataHandler::isInstanceOf($tab, ContentItemModuleTab::class)) ? new ContentItemModuleField() : new ModuleField();
+            }
+            
+            $fieldObject->__set('identifier', $field['identifier']);
+            $fieldObject->__set('placeholder', $field['placeholder'] ?? '');
+            $fieldObject->__set('description', $field['description'] ?? '');
+            $fieldObject->__set('type', $field['type']);
+            $fieldObject->__set('tab', $tab);
+            $fieldObject->__set('isPlugin', $plugin);
+            $fieldObject->__set('defaultValue', $field['default'] ?? '');
+            $fieldObject->__set('config', DataHandler::getJsonEncode($field['config'] ?? []));
+            $fieldObject->__set('settings', DataHandler::getJsonEncode($field['settings'] ?? []));
+            $fieldObject->__set('classes', DataHandler::getJsonEncode($field['classes'] ?? []));
+
+            $context->getEntityManager()->persist($fieldObject);
+            $context->getEntityManager()->flush();
         }
     }
 }
