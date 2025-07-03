@@ -130,9 +130,6 @@
     "smug/frontend-bundle": {
         "version": "0.1.0"
     },
-    "smug/nodaro-website-bundle": {
-        "version": "0.1.0"
-    },
     "smug/search-bundle": {
         "version": "0.1.0"
     },
