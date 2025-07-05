@@ -99,7 +99,10 @@ class SiteContentBuilder
         $item['module']['module']['template'] = DataHandler::getJsonDecode($item['module']['module']['template'], true);
             
         $configFile = DataHandler::getJsonDecode(
-            DataHandler::getFile(FrontendModuleRenderer::getConfigFile($contentItem)),
+            DataHandler::getFile(
+                $context->getKernel()->getProjectDir() . 
+                FrontendModuleRenderer::getConfigFile($contentItem)
+            ),
             true
         );
 

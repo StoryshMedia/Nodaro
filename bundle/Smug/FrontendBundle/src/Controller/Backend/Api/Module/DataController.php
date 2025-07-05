@@ -109,7 +109,10 @@ class DataController extends FeBaseController
 
                     $newModule = new Module();
                     $newModule->__set('title', $moduleData['title']);
-                    $newModule->__set('configFile', $module->getRealPath());
+                    $newModule->__set(
+                        'configFile',
+                        DataHandler::getReplaceString($this->context->getProjectDir(), '', $module->getRealPath())
+                    );
                     $newModule->__set('identifier', $moduleData['identifier']);
                     $newModule->__set('category', $moduleData['category']);
                     $newModule->__set('type', $moduleData['type'] ?? 'contentElement');
@@ -189,7 +192,7 @@ class DataController extends FeBaseController
 
         $module = $this->context->getMainEntity();
 
-        $configFilePath = $module->__get('configFile');
+        $configFilePath = $this->context->getProjectDir() . $module->__get('configFile');
         $modulePath = DataHandler::getFileLocationPath($configFilePath);
         
         $moduleData = DataHandler::getJsonDecode(
@@ -230,7 +233,7 @@ class DataController extends FeBaseController
             }
         }
 
-        $usedItems = $this->context->getByIdentifier($module, 'module', 'contentItemModule');
+        $usedItems = $this->context->getByIdentifier($module->__get('id'), 'module', 'contentItemModule');
 
         foreach ($usedItems as $usedItem) {
             $addService->installModuleFields($moduleData['settings']['fields'] ?? [], $this->context, $usedItem, false, 'contentItemModuleField');

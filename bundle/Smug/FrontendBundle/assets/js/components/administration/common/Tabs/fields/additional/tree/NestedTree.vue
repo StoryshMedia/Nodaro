@@ -25,9 +25,9 @@
             <icon
               v-if="el.children && el.children.length > 0"
               class="transform transition duration-300 mr-3 text-primary w-4 h-5 flex-none"
-              :class="{ '-rotate-90': !expanded }"
+              :class="{ '-rotate-90': expanded.indexOf(el.id) < 0 }"
               :icon-string="'IconCaretDown'"
-              @click="handleAccordionClick()"
+              @click="handleAccordionClick(el)"
             /> 
             <icon
               v-if="el.children && el.children.length > 0"
@@ -55,12 +55,13 @@
           </button>
           <vue-collapsible
             class="pt-3"
-            :is-open="expanded === true && el.children && el.children.length > 0"
+            :is-open="expanded.indexOf(el.id) >= 0"
           >
             <NestedTree
+              v-if="el.children && el.children.length > 0"
               :sites="el.children"
               :field-config="fieldConfig"
-              class="bg-gray-100 pl-5"
+              class="bg-gray-50 pl-5"
               @orderChanged="saveOrder()"
             />
           </vue-collapsible>
@@ -117,7 +118,7 @@ export default {
     return {
       config: {},
       editSite: {},
-      expanded: false,
+      expanded: [],
       showEditData: false
     };
   },
@@ -182,8 +183,13 @@ export default {
 
       return 'VISIBLE';
     },
-    handleAccordionClick() {
-      this.expanded = !this.expanded;
+    handleAccordionClick(el) {
+      const index = this.expanded.indexOf(el.id);
+      if (index >= 0) {
+        this.expanded.splice(index, 1);
+      } else {
+        this.expanded.push(el.id);
+      }
     },
     saveOrder() {
       this.$emit('orderChanged', true);
@@ -205,9 +211,6 @@ export default {
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
-}
-.list-group {
-  min-height: 20px;
 }
 .list-group-item {
   cursor: move;

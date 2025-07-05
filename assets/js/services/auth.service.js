@@ -4,7 +4,10 @@ class AuthService {
     const mode = user.mode ?? 'fe';
     const API_URL = process.env.apiURL + '/' + mode + '_login';
     return axios
-      .post(API_URL, user)
+      .post(API_URL, {
+        "username": user.username,
+        "password": user.password
+      })
       .then(response => {
         if (response.data.token) {
           if (mode === 'be') {
