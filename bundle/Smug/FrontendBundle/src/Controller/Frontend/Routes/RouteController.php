@@ -2,6 +2,7 @@
 
 namespace Smug\FrontendBundle\Controller\Frontend\Routes;
 
+use Symfony\Component\HttpFoundation\Response;
 use Smug\Core\Context\Context;
 use Smug\Core\Http\Foundation\Request;
 use Smug\Core\Service\Base\Components\Handler\DataHandler;
@@ -40,6 +41,23 @@ class RouteController extends FeBaseController
 
         $siteContent['user'] = ($context->getUser()) ? $this->serializer->serialize($context->getUser()) : null;
 
-        return $this->render($siteContent['template'], $siteContent);
+        $response = $this->render($siteContent['template'], $siteContent);
+
+        return $this->setHeaders($response, $siteContent);
+    }
+
+    private function setHeaders(Response $response, array $siteContent): Response
+    {
+        $robots = '';
+        $noIndex = $siteContent['seo']['noIndex'] ?? true;
+        $noFollow = $siteContent['seo']['noFollow'] ?? true;
+
+        $robots = (!$noIndex) ? 'index' : 'noindex';
+        $robots .= ', ' . (!$noFollow) ? 'follow' : 'nofollor';
+
+
+        $response->headers->set('X-Robots-Tag', $robots);
+
+        return $response;
     }
 }

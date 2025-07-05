@@ -14,6 +14,8 @@ class_exists(InputBag::class);
 class Request extends HttpFoundationRequest
 {
     protected static array $excludedPaths = [
+        '/login/',
+        '/be_login/',
         '/admin/',
         '/be/api/',
         '/fe/api/',

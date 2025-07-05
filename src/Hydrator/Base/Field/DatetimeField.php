@@ -23,6 +23,10 @@ class DatetimeField extends Field
         }
 
         if (DataHandler::isArray($data[$key])) {
+            if (!DataHandler::doesKeyExists('date', $data[$key])) {
+                return TimeHandler::getNewDateObject();
+            }
+
             return TimeHandler::getNewDateObject($data[$key]['date']);    
         }
 

@@ -58,7 +58,7 @@ class User extends UserBaseModel
         'placeholder' => 'EMAIL_CANONICAL'
     ])]
     #[Groups(['public'])]
-	protected string $emailCanonicail;
+	protected string $emailCanonical;
 
     #[Column(type: 'string', nullable: true)]
     #[Groups(['public'])]

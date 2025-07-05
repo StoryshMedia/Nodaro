@@ -3,3 +3,17 @@
     AddOutputFilterByType DEFLATE application/javascript application/json
     AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+RewriteEngine On
+# Wenn es eine existierende Datei oder ein Verzeichnis ist, nichts tun
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

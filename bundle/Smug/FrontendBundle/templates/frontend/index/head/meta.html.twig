@@ -1,11 +1,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
 <meta http-equiv="Cache-control" content="public">
+{% if seo.seoTitle is defined %}
+    <meta name="title" content="{{ seo.seoTitle }}">
+    <meta itemprop="title" content="{{ seo.seoTitle }}">
+    <meta property="og:title" content="{{ seo.seoTitle }}" />
+    <meta name="twitter:title" content="{{ seo.seoTitle }}">
+{% endif %}
 {% if seo.seoKeywords is defined %}
     <meta name="keywords" content="{{ seo.seoKeywords }}">
 {% endif %}
 {% if seo.seoDescription is defined %}
     <meta name="description" content="{{ seo.seoDescription }}">
+    <meta itemprop="description" content="{{ seo.seoDescription }}">
+    <meta property="og:description" content="{{ seo.seoDescription }}" />
+    <meta name="twitter:description" content="{{ seo.seoDescription }}">
 {% endif %}
 {% if seo.noIndex is defined and seo.noIndex is same as(true) %}
     <meta name="robots" content="noindex,{% if seo.noFollow is defined and seo.noFollow is same as(true) %}nofollow{% else %}follow{% endif %}">
@@ -14,9 +23,14 @@
 {% endif %}
 {% if seo.image is defined %}
     <meta itemprop="image" content="{{ seo.image }}" />
+    <meta name="twitter:image" content="{{ seo.image }}" />
+    <meta property="og:image" content="{{ seo.image }}" />
 {% endif %}
 {% if seo.canonicalLink is defined and seo.canonicalLink is not empty %}
     <link rel="canonical" href="{{seo.canonicalLink}}" />
+    <meta name="twitter:url" content="{{seo.canonicalLink}}"/>
+    <meta property="og:url" content="{{seo.canonicalLink}}" />
 {% else %}
     <link rel="canonical" href="{{app.request.uri}}" />
+    <meta property="og:url" content="{{app.request.uri}}" />
 {% endif %}
