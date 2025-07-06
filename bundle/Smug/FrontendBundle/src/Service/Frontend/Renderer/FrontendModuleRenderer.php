@@ -19,7 +19,7 @@ class FrontendModuleRenderer
     public function render(array $module, bool $refresh = false): array
     {
         try {
-            $moduleConfigFile = DataHandler::getJsonDecode(DataHandler::getFile(self::getConfigFile($module)), true);
+            $moduleConfigFile = DataHandler::getJsonDecode(DataHandler::getFile(self::getConfigFile($this->context->getProjectDir(), $module)), true);
         } catch (Exception $e) {
             dd($module);
         }
@@ -98,8 +98,9 @@ class FrontendModuleRenderer
         return $this->twig->render('@SmugAdministration/backend/module/index.html.twig', $data);
     }
 
-    public static function getConfigFile(array $module): string
+    public static function getConfigFile(string $projectDir, array $module): string
     {
-        return $module['configFile'] ?? $module['module']['module']['configFile'];
+        $path = $module['configFile'] ?? $module['module']['module']['configFile'];
+        return $projectDir . $path;
     }
 }

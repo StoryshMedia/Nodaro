@@ -100,8 +100,7 @@ class SiteContentBuilder
             
         $configFile = DataHandler::getJsonDecode(
             DataHandler::getFile(
-                $context->getKernel()->getProjectDir() . 
-                FrontendModuleRenderer::getConfigFile($contentItem)
+                FrontendModuleRenderer::getConfigFile($context->getKernel()->getProjectDir(), $contentItem)
             ),
             true
         );

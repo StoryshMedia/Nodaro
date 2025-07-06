@@ -21,10 +21,11 @@
 {% else %}
     <meta name="robots" content="index,{% if seo.noFollow is defined and seo.noFollow is same as(true) %}nofollow{% else %}follow{% endif %}">
 {% endif %}
-{% if seo.image is defined %}
-    <meta itemprop="image" content="{{ seo.image }}" />
-    <meta name="twitter:image" content="{{ seo.image }}" />
-    <meta property="og:image" content="{{ seo.image }}" />
+{% if seo.seoImage is defined and seo.seoImage is not empty %}
+    {% set imageValue = getImage(seo.seoImage, true) %}
+    <meta itemprop="image" content="{{ app.request.getSchemeAndHttpHost() }}{{ imageValue.src }}" />
+    <meta name="twitter:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ imageValue.src }}" />
+    <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ imageValue.src }}" />
 {% endif %}
 {% if seo.canonicalLink is defined and seo.canonicalLink is not empty %}
     <link rel="canonical" href="{{seo.canonicalLink}}" />

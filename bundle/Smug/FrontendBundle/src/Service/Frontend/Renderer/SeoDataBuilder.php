@@ -17,6 +17,7 @@ class SeoDataBuilder
     {
         $site = $data['site'];
         $siteArray = (DataHandler::isInstanceOf($site, EntityGenerator::getGeneratedEntity(Site::class))) ? $serializer->serialize($site) : $site;
+        $domainImages = $serializer->serialize($site->__get('domain')->__get('seo'))['images'] ?? [];
 
         $seoData = [
             'domain' => self::getDomainSeoData($site->__get('domain'), $serializer),
@@ -25,7 +26,7 @@ class SeoDataBuilder
             'seoData' => DataHandler::getJsonEncode($siteArray['seoData']),
             'seoDescription' => $siteArray['seoDescription'],
             'seoTitle' => $siteArray['seoTitle'],
-            'seoImage' => [],
+            'seoImage' => DataHandler::getFirstArrayElement($domainImages),
             'seoKeywords' => $siteArray['seoKeywords'],
             'canonicalLink' => $siteArray['canonicalLink']
         ];
