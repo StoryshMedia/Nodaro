@@ -274,6 +274,18 @@ class DataController extends FeBaseController
             if ($site->__get('id') === $domainSite->__get('id')) {
                 continue;
             }
+            $existingScript = $this->context->getEntityByMultiple(
+                [
+                    'site' => $domainSite,
+                    'area' => $data->__get('area'),
+                    'script' => $data->__get('script')
+                ]
+            );
+            
+            if (!DataHandler::isEmpty($existingScript)) {
+                continue;
+            }
+
             $position = 0;
 
             foreach ($domainSite->__get('siteScripts') as $siteScript) {

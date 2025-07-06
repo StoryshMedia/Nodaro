@@ -13,13 +13,8 @@ use Smug\Core\DataAbstractionLayer\EntityGenerator;
 
 class BaseSetter implements SetterInterface
 {
-    /** @var EntityManagerInterface $em */
     protected EntityManagerInterface $em;
     
-	/**
-	 * BaseSetter constructor.
-	 * @param EntityManagerInterface $em
-	 */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
